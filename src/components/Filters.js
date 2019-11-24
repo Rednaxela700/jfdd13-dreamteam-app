@@ -60,23 +60,6 @@ class Filters extends Component {
     }, 300)
   };
 
-  handleContinentSelect = (e, { result }) => this.setState({ value: result.title });
-  handleContinentChange = (e, { value }) => {
-    this.setState({ isLoading: true, value })
-
-    setTimeout(() => {
-      if (this.state.value.length < 1) return this.setState(initialState)
-
-      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
-      const isMatch = (result) => re.test(result.text)
-
-      this.setState({
-        isLoading: false,
-        results: _.filter(continents, isMatch),
-      })
-    }, 300)
-  }
-
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
   toggleVisibility = () =>
     this.setState((prevState) => ({ visible: !prevState.visible }));
@@ -102,9 +85,7 @@ class Filters extends Component {
                 results={results}
                 value={value}
                 {...this.props}
-              
               />
-
           </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={2} centered={true}>
