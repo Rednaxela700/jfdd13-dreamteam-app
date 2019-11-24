@@ -43,6 +43,23 @@ class Filters extends Component {
     initialState,
     show: 999
   }
+  handlePlaceSelect = (e, { result }) => this.setState({ value: result.title });
+  handlePlaceChange = (e, { value }) => {
+    this.setState({ isLoading: true, value })
+
+    setTimeout(() => {
+      if (this.state.value.length < 1) return this.setState(initialState)
+
+      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
+      const isMatch = (result) => re.test(result.text)
+
+      this.setState({
+        isLoading: false,
+        results: _.filter(places, isMatch),
+      })
+    }, 300)
+  };
+
   handleContinentSelect = (e, { result }) => this.setState({ value: result.title });
   handleContinentChange = (e, { value }) => {
     this.setState({ isLoading: true, value })
@@ -78,8 +95,8 @@ class Filters extends Component {
                 iconPosition:'left', 
                 placeholder:'Podaj destynację...', 
                 fluid:true}}
-                onResultSelect={this.handleContinentSelect}
-                onSearchChange={_.debounce(this.handleContinentChange, 500, {
+                onResultSelect={this.handlePlaceSelect}
+                onSearchChange={_.debounce(this.handlePlaceChange, 500, {
                   leading: true,
                 })}
                 results={results}
@@ -88,9 +105,6 @@ class Filters extends Component {
               
               />
 
-                {/* <datalist id='places'>
-                  {places.map(v => <option> {v.value}</option>)}
-                </datalist> */}
           </Grid.Column>
           </Grid.Row>
           <Grid.Row columns={2} centered={true}>
