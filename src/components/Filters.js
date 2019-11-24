@@ -35,8 +35,13 @@ const places = [
   {value:'Wiedeń'},
 ];
 
+const initialState = { isLoading: false, results: [], value: '' }
+
 class Filters extends Component {
-  state = {show: 999}
+  state = {
+    initialState,
+    show: 999
+  }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
   toggleVisibility = () =>
