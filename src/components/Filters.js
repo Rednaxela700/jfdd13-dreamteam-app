@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { Grid, Dropdown, Form, Search } from 'semantic-ui-react';
 import TripContainer from './TripContainer';
@@ -42,15 +43,31 @@ class Filters extends Component {
     initialState,
     show: 999
   }
-  handleContinentSelect = (e, { result }) => this.setState({ value: result.title })
+  handleContinentSelect = (e, { result }) => this.setState({ value: result.title });
+  handleContinentChange = (e, { value }) => {
+    this.setState({ isLoading: true, value })
+
+    setTimeout(() => {
+      if (this.state.value.length < 1) return this.setState(initialState)
+
+      const re = new RegExp(_.escapeRegExp(this.state.value), 'i')
+      const isMatch = (result) => re.test(result.text)
+
+      this.setState({
+        isLoading: false,
+        results: _.filter(continents, isMatch),
+      })
+    }, 300)
+  }
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
   toggleVisibility = () =>
     this.setState((prevState) => ({ visible: !prevState.visible }));
 
   render() {
+    const { isLoading, value, results } = this.state;
     const {show} = this.state;
-
+    
     return (
       <div className="search">
         <Grid padded={true}>
@@ -62,6 +79,13 @@ class Filters extends Component {
                 placeholder:'Podaj destynację...', 
                 fluid:true}}
                 onResultSelect={this.handleContinentSelect}
+                onSearchChange={_.debounce(this.handleContinentChange, 500, {
+                  leading: true,
+                })}
+                results={results}
+                value={value}
+                {...this.props}
+              
               />
 
                 {/* <datalist id='places'>
