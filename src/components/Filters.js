@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 import { Grid, Dropdown, Form, Search } from 'semantic-ui-react';
 import TripContainer from './TripContainer';
 
-const continents = [
-  {key: 'afr', value:1, text: "Afryka"},
-  {key: 'apd', value:2, text: "Ameryka Południowa"},
-  {key: 'apn', value:3, text: "Ameryka Północna"},
-  {key: 'ant', value:4, text: "Antarktyda"},
-  {key: 'aus', value:5, text: "Australia i Oceania"},
-  {key: 'azj', value:5, text: "Azja"},
-  {key: 'eur', value:6, text: "Europa"}
-];
+const continents = _.times(5, () => ({
+  key: 'afr', value:1, text: "Afryka",
+  key: 'apd', value:2, text: "Ameryka Południowa",
+  key: 'apn', value:3, text: "Ameryka Północna",
+  key: 'ant', value:4, text: "Antarktyda",
+  key: 'aus', value:5, text: "Australia i Oceania",
+  key: 'azj', value:5, text: "Azja",
+  key: 'eur', value:6, text: "Europa"
+}));
 const places = [
   {value:'Amsterdam'},
   {value:'Bangkok'},
@@ -43,7 +43,7 @@ class Filters extends Component {
     initialState,
     show: 999
   }
-  handlePlaceSelect = (e, { result }) => this.setState({ value: result.title });
+  handlePlaceSelect = (e, { result }) => this.setState({ value: result.text });
   handlePlaceChange = (e, { value }) => {
     this.setState({ isLoading: true, value })
 
@@ -55,7 +55,7 @@ class Filters extends Component {
 
       this.setState({
         isLoading: false,
-        results: _.filter(places, isMatch),
+        results: _.filter(continents, isMatch),
       })
     }, 300)
   };
