@@ -61,6 +61,7 @@ class Filters extends Component {
                 iconPosition:'left', 
                 placeholder:'Podaj destynację...', 
                 fluid:true}}
+                onResultSelect={this.handleContinentSelect}
               />
 
                 {/* <datalist id='places'>
