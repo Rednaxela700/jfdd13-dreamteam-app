@@ -42,6 +42,7 @@ class Filters extends Component {
     initialState,
     show: 999
   }
+  handleContinentSelect = (e, { result }) => this.setState({ value: result.title })
 
   handleChange = (e, { name, value }) => this.setState({ [name]: value });
   toggleVisibility = () =>
