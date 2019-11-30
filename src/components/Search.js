@@ -73,10 +73,11 @@ class Search extends Component {
             return (
                 trip.continent.toLowerCase().includes(continentText.toLowerCase()) &&
                 trip.title.toLowerCase().includes(searchQuery.toLowerCase()) &&
-                    Number(trip.price) < rangeValue ||
+                Number(trip.price) < rangeValue 
+                ||
+                trip.continent.toLowerCase().includes(continentText.toLowerCase()) &&
                 trip.city.toLowerCase().includes(searchQuery.toLowerCase()) &&
-                    Number(trip.price) < rangeValue
-                
+                Number(trip.price) < rangeValue
             )
         })
     }
