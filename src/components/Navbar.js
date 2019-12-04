@@ -1,6 +1,5 @@
 import React from 'react';
 import {NavLink} from 'react-router-dom';
-import Heart from './FavouritesList';
 import { Icon, Menu, Segment, Sidebar} from 'semantic-ui-react'
 
 function Navbar() {
@@ -50,7 +49,7 @@ function Navbar() {
       </NavLink>
       <NavLink to="/heart" exact>
       <Menu.Item>
-        <Heart />
+         <Icon name='heart' />
         Ulubione
       </Menu.Item>
       </NavLink>
