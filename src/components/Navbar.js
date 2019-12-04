@@ -29,7 +29,7 @@ function Navbar() {
         <Icon name='chart line' />
         Statystyki
       </Menu.Item>
-    </NavLink>
+      </NavLink>
       <NavLink to="/search" exact>
       <Menu.Item>
         <Icon name='search' />
@@ -48,9 +48,8 @@ function Navbar() {
         Panel
       </Menu.Item>
       </NavLink>
-      <NavLink to="/panel" exact>
+      <NavLink to="/heart" exact>
       <Menu.Item>
-        {/* <Icon name='heart' /> */}
         <Heart />
         Ulubione
       </Menu.Item>

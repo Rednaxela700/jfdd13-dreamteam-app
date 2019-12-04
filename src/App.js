@@ -12,6 +12,7 @@ import UserPanel from './components/UserPanel';
 import Register from './screens/Register';
 import Login from './screens/Login';
 import LoggedUser from './screens/LoggedUser';
+import Heart from './components/FavouritesList';
 
 function App() {
     return (
@@ -29,6 +30,7 @@ function App() {
                         <Route exact strict path="/login" component={Login}/>
                         <Route exact strict path="/user" component={LoggedUser}/>
                         <Route exact strict path="/form/" component={Form}/>
+                        <Route exact strict path="/heart" component={Heart}/>S
                         <Route component={() => <h1>404 - sadface</h1>}/>
                     </Switch>
                 </main>
