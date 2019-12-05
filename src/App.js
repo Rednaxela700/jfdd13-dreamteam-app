@@ -30,11 +30,7 @@ function App() {
                         <Route exact strict path="/login" component={Login}/>
                         <Route exact strict path="/user" component={LoggedUser}/>
                         <Route exact strict path="/form/" component={Form}/>
-<<<<<<< HEAD
-                        <Route exact strict path="/heart" component={Heart}/>S
-=======
                         <Route exact strict path="/favs" component={Favorites}/>
->>>>>>> dev
                         <Route component={() => <h1>404 - sadface</h1>}/>
                     </Switch>
                 </main>
