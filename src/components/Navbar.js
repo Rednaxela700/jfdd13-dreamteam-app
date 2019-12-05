@@ -48,15 +48,9 @@ function Navbar() {
         Panel
       </Menu.Item>
       </NavLink>
-<<<<<<< HEAD
-      <NavLink to="/heart" exact>
-      <Menu.Item>
-         <Icon name='heart' />
-=======
       <NavLink to="/favs" exact>
       <Menu.Item as={'div'}>
         <Icon name='heart' />
->>>>>>> dev
         Ulubione
       </Menu.Item>
       </NavLink>
