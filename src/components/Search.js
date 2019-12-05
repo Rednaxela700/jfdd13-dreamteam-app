@@ -40,9 +40,9 @@ class Search extends Component {
     handleFavIcon(tripId) {
         const {favourites: prevfavourites} = this.state
         if (prevfavourites.includes(tripId)) {
-            const nextfavourites = prevfavourites.filter(id => id !== tripId);
+            const nextFavourites = prevfavourites.filter(id => id !== tripId);
             this.setState({
-                favourites: nextfavourites
+                favourites: nextFavourites
             }, () => {
                 // 1. get current logged in user (firebase.auth().currentUser)
                 // 2. get his id (currentUser.uid)
@@ -50,9 +50,9 @@ class Search extends Component {
                 localStorage.setItem('favourites', JSON.stringify(this.state.favourites))
             })
         } else {
-            const nextfavourites = [...prevfavourites, tripId];
+            const nextFavourites = [...prevfavourites, tripId];
             this.setState({
-                favourites: nextfavourites
+                favourites: nextFavourites
             }, () => {
                 localStorage.setItem('favourites', JSON.stringify(this.state.favourites))
             })
@@ -84,7 +84,7 @@ class Search extends Component {
                                 className={'iconFavourites'}
                                 size={'large'}
                                 name={this.state.favourites.includes(trip.id) ? 'heart' : 'heart outline'}
-                                color={this.state.favourites.includes(trip.id) ?'red' : 'white'}
+                                color={"red"}
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     this.handleFavIcon(trip.id)
