@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Image } from "semantic-ui-react";
 import { fetchTrips } from "../services/TripService";
+import { prepareFavourites, watchFavourites, unwatchFavourites } from "../services/UserService"
 
 const Favourites = () => {
   const [trips, setTrips] = useState([]);
