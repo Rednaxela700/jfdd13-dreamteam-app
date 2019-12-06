@@ -19,7 +19,7 @@ import firebase from "firebase";
 //     .off();
 // };
 
-export const prepareFavourites = data => {
+const prepareFavourites = data => {
   return Object.entries(data).map(arr => {
     // console.log(arr)
     const [id, data] = arr

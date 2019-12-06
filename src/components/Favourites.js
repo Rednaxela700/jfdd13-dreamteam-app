@@ -1,19 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { Grid, Image } from "semantic-ui-react";
 import { fetchTrips } from "../services/TripService";
-import { prepareFavourites, watchFavourites, unwatchFavourites } from "../services/UserService"
+import { watchFavourites, unwatchFavourites } from "../services/UserService"
 
 const Favourites = () => {
-  const [trips, setTrips] = useState([]);
+  const [favourites, setFavourites] = useState([]);
 
   useEffect (() =>{
-    fetchTrips().then(trips => {
-      setTrips(trips)
-    })
+    watchFavourites(favourites => {
+      setFavourites(favourites);
+    });
+    return () => {
+      unwatchFavourites();
+    }
   },[]);
 
   return (<div>
-      {trips.map(trip => (
+      {favourites.map(trip => (
         <Grid.Column key={trip.city} style={{ padding: "0 2rem" }}>
           <Image
             className="TripImage"
