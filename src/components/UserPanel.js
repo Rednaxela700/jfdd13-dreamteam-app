@@ -1,5 +1,10 @@
-import React from 'react'
+import React from 'react';
 import { Button, Divider, Form, Grid, Segment, Header } from 'semantic-ui-react'
+// import Register from '../screens/Register';
+// import React, { useState } from "react";
+// import { login } from "../services/AuthService";
+
+  
 
 const DividerExampleVerticalForm = () => (
   <Segment placeholder>
@@ -9,21 +14,23 @@ const DividerExampleVerticalForm = () => (
           <Form.Input
             icon='user'
             iconPosition='left'
-            label='Username'
-            placeholder='Username'
+            label='Nazwa użytkownika'
+            placeholder='Imię'
           />
           
           <Form.Input
             icon='lock'
             iconPosition='left'
-            label='Old Password'
+            label='Stare hasło'
+            placeholder='wpisz hasło'
             type='password'
           />
        
           <Form.Input
             icon='lock'
             iconPosition='left'
-            label='New Password'
+            label='Nowe hasło'
+            placeholder='wpisz hasło'
             type='password'
           />
 
@@ -33,11 +40,11 @@ const DividerExampleVerticalForm = () => (
       </Grid.Column>
 
       <Grid.Column verticalAlign='middle'>
-        <Button content='Sign up' icon='signup' size='big' />
+        <Button content='Sign up' icon='signup' size='big'/>
       </Grid.Column>
     </Grid>
 
-    <Divider vertical>Or</Divider>
+    <Divider vertical></Divider>
   </Segment>
 )
 

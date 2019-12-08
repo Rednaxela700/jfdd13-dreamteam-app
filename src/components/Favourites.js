@@ -10,8 +10,9 @@ import {
     Header,
     Button
 } from 'semantic-ui-react'
-import { watchFavourites, unwatchFavourites } from "../services/FavouritesService"
 import {fetchTrips} from "../services/TripService";
+import firebase from "../firebase";
+
 
 const Favourites = () => {
     const [trips, setTrips] = useState([]);
@@ -21,15 +22,15 @@ const Favourites = () => {
     const close = () => setOpen(false);
 
     useEffect (() =>{
-        watchFavourites(favourites => {
-          setFavourites(favourites);
+        watchFavourites(outputfavourites => {
+          setFavourites(outputfavourites);
         });
         return () => {
           unwatchFavourites();
         }
       },[]);
 
-    return (
+      const prepareFavourites = data => { return (
         <Grid container
               style={
                   {
@@ -107,7 +108,26 @@ const Favourites = () => {
             </Grid.Row>
         </Grid>
 
-    )
+    );
+}
+
+const watchFavourites = onSuccess => {
+    return firebase
+      .database()
+      .ref('/favorites')
+      .on('value', dataSnapshot => {
+        const newFavourites = dataSnapshot.val()
+        console.log(newFavourites)
+        onSuccess(prepareFavourites(newFavourites))
+      })
+  }
+  const unwatchFavourites = () => {
+    return firebase
+    .database()
+    .ref('/favorites')
+    .off()
+  }
+
 }
 
 export default Favourites;
