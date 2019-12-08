@@ -12,14 +12,20 @@ import UserPanel from './components/UserPanel';
 import Register from './screens/Register';
 import Login from './screens/Login';
 import LoggedUser from './screens/LoggedUser';
-import Heart from './components/FavouritesList';
-
+import Favicon from 'react-favicon';
 function App() {
     return (
+        <>
+        <Favicon url="../public/favicon.ico" />
         <BrowserRouter>
             <div className="App">
                 <Navbar/>
-                <main className={'main'} style={{marginLeft: (window.screen.width < 501) ? '60px':'150px'}}>
+                <main className={'main'} style={{
+                    marginLeft: (window.screen.width < 501) ? '60px':'150px',
+                    marginTop:'0',
+                    marginBottom: '0'
+                }
+                }>
                     <Appbar/>
                     <Switch>
                         <Route exact strict path="/" component={Dashboard}/>
@@ -37,6 +43,7 @@ function App() {
             </div>
             <Redirect to="/"/>
         </BrowserRouter>
+        </>
     );
 }
 

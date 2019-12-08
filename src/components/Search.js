@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { Grid, Input, Dropdown, Form, Image, Icon, Modal, Header, Button } from 'semantic-ui-react';
 import { data } from '../data'
-import { fetchTrips } from "../services/TripService";
+import { fetchTrips, fetchFromFavorites, handleFavIcon } from "../services/TripService";
 import firebase from "../firebase";
 
 
@@ -30,11 +30,8 @@ class Search extends Component {
         favourites: []
     };
 
-    componentDidMount() {
-        // 1. get user favourites from firebase
-        // 2. set current state to that data
-
-        const favourites = JSON.parse(localStorage.getItem('favourites')) || [];
+    async componentDidMount() {
+        const favourites = await fetchFromFavorites()
         //tu bedzie loader
         this.setState({
             favourites
@@ -53,9 +50,6 @@ class Search extends Component {
             this.setState({
                 favourites: nextFavourites
             }, async () => {
-                // 1. get current logged in user (firebase.auth().currentUser)
-                // 2. get his id (currentUser.uid)
-                // 3. upload favourites to firebase to that user
                 const userId = await firebase.auth().currentUser.uid
                 console.log(userId)
                 await firebase.database().ref(`/favorites/${userId}`).set(
@@ -163,7 +157,7 @@ class Search extends Component {
             <div className="search">
                 <Grid padded={true}>
                     <Grid.Row columns={1} centered={true}>
-                        <Grid.Column width={12} mobile={12}>
+                        <Grid.Column largeScreen={12} mobile={12}>
                             <Input
                                 onChange={this.handleInputChange}
                                 placeholder='Gdzie chesz pojechać?'
@@ -176,7 +170,7 @@ class Search extends Component {
                         </Grid.Column>
                     </Grid.Row>
                     <Grid.Row columns={2} centered={true}>
-                        <Grid.Column width={6} mobile={12}>
+                        <Grid.Column largeScreen={6} mobile={12}>
                             <Dropdown
                                 clearable
                                 fluid
@@ -186,7 +180,7 @@ class Search extends Component {
                                 value={this.state.selectedContinent}
                             />
                         </Grid.Column>
-                        <Grid.Column as={Form} width={6} mobile={12} textAlign={"right"}
+                        <Grid.Column as={Form} largeScreen={6} mobile={12} textAlign={"right"}
                             style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center' }}>
                             <span style={{
                                 display: 'inline-flex',
