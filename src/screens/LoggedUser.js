@@ -23,4 +23,7 @@ const LoggedUser = () => {
   );
 };
 
+
+
+
 export default LoggedUser;

@@ -1,74 +1,44 @@
-import React from 'react';
-import {Header} from "semantic-ui-react";
-import firebase from "../firebase";
+import React from 'react'
+import { Button, Divider, Form, Grid, Segment, Header } from 'semantic-ui-react'
 
-function UserPanel() {
-    return (
-        <div>
-            <Header>dane z firebase dla usera {firebase.auth().currentUser.uid} </Header>
-        </div>
-    )
-};
+const DividerExampleVerticalForm = () => (
+  <Segment placeholder>
+    <Grid columns={2} relaxed='very' stackable>
+      <Grid.Column>
+        <Form>
+          <Form.Input
+            icon='user'
+            iconPosition='left'
+            label='Username'
+            placeholder='Username'
+          />
+          
+          <Form.Input
+            icon='lock'
+            iconPosition='left'
+            label='Old Password'
+            type='password'
+          />
+       
+          <Form.Input
+            icon='lock'
+            iconPosition='left'
+            label='New Password'
+            type='password'
+          />
 
-export default UserPanel;
+          <Button content='Login' primary />
 
-// import React, {useState} from 'react'
-// import { Field, Input, Label, Control, Notification, Delete } from 'bloomer'
-// import { Button } from 'bloomer/lib/elements/Button'
-// import { login } from "../services/AuthService"
+        </Form>
+      </Grid.Column>
 
-// const loginFormContainer = {
-//   maxWidth: '790px',
-//   margin: '0 auto',
-//   height: '100vh', 
-//   display: 'flex',
-//   alignItems: 'center',
-//   justifyContent: 'center'
-// }
+      <Grid.Column verticalAlign='middle'>
+        <Button content='Sign up' icon='signup' size='big' />
+      </Grid.Column>
+    </Grid>
 
-// const Login = props => {
-//   const [email, setEmail] = useState('')
-//   const [password, setPassword] = useState('')
-//   const [hasSomeError, setHasSomeError] = useState(false)
-//   // 1. Create login form that has two fields
-//   // - email
-//   // - password
-//   // 2. form should be v- and h- centered
-//   // 3. there should be a button "login"
-//   // 4. if we press login, then we should fire
-//   // - login function from AuthService
+    <Divider vertical>Or</Divider>
+  </Segment>
+)
 
-//   // DO NOT USE FORMIK HERE!
-//   const handleEmail = event => setEmail(event.target.value)
-//   const handlePassword = event => setPassword(event.target.value)
-
-//   return <div style={loginFormContainer}>
-//     <form style={{ width: '100%' }}>
-//       <Field>
-//         <Label>E-mail</Label>
-//         <Control>
-//             <Input value={email} type="email" placeholder='Email' onChange={handleEmail}/>
-//         </Control>
-//       </Field>
-//       <Field>
-//         <Label>Password</Label>
-//         <Control>
-//             <Input value={password} type="password" placeholder='Password' onChange={handlePassword}/>
-//         </Control>
-//       </Field>
-//       <Button onClick={async () => {
-//         try {
-//           await login(email, password)
-//         } catch {
-//           setHasSomeError(true)
-//         }
-//       }}>Login</Button>
-//       {hasSomeError && <Notification isColor='danger'>
-//         <Delete />
-//         Couldn't login
-//       </Notification>}
-//     </form>
-//   </div>
-// }
-
-// export default Login
+export default DividerExampleVerticalForm

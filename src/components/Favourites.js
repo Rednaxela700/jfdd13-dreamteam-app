@@ -10,6 +10,7 @@ import {
     Header,
     Button
 } from 'semantic-ui-react'
+import { watchFavourites, unwatchFavourites } from "../services/FavouritesService"
 import {fetchTrips} from "../services/TripService";
 
 const Favourites = () => {
@@ -19,11 +20,14 @@ const Favourites = () => {
     const [favourites, setFavourites] = useState(false);
     const close = () => setOpen(false);
 
-    useEffect(() => {
-        fetchTrips().then(trips => {
-            setTrips(trips)
-        })
-    }, []);
+    useEffect (() =>{
+        watchFavourites(favourites => {
+          setFavourites(favourites);
+        });
+        return () => {
+          unwatchFavourites();
+        }
+      },[]);
 
     return (
         <Grid container
