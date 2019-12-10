@@ -7,8 +7,7 @@ import {
     Header,
     Button
 } from 'semantic-ui-react'
-import { fetchTrips, fetchFromFavorites } from "../services/TripService";
-import firebase from "../firebase";
+import { fetchTrips, fetchFromFavorites, toggleFavorite } from "../services/TripService";
 import Loader from "react-loader-spinner";
 
 const defaultImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTDgEOsiQyCYSqiBVVAWAxMkKz8jiz80Qu0U8MuaiGJryGMTVR&s';
@@ -17,44 +16,24 @@ class Favourites2 extends Component {
     state = {
         results: [],
         selectedTrip: null,
-        favourites: [],
+        favourites: {},
         fetched: false
     };
 
     async componentDidMount() {
-        const favTable = await fetchFromFavorites()
         const allTrips = await fetchTrips();
-        const favouritesList = allTrips.filter((trip) => favTable.indexOf(trip.id) !== -1)
-        this.setState({
-            results: favouritesList,
-            favourites: favTable,
-            fetched: true
+        fetchFromFavorites(favourites => {
+            const favouritesList = allTrips.filter((trip) => favourites[trip.id] !== undefined)
+            this.setState({
+                results: favouritesList,
+                favourites,
+                fetched: true
+            })
         })
     }
 
-    handleFavIcon(tripId) {
-        const { favourites: prevfavourites } = this.state
-        if (prevfavourites.includes(tripId)) {
-            const nextFavourites = prevfavourites.filter(id => id !== tripId);
-            this.setState({
-                favourites: nextFavourites
-            }, async () => {
-                const userId = await firebase.auth().currentUser.uid
-                await firebase.database().ref(`/favorites/${userId}`).set(
-                    nextFavourites
-                )
-            })
-        } else {
-            const nextFavourites = [...prevfavourites, tripId];
-            this.setState({
-                favourites: nextFavourites
-            }, async () => {
-                const userId = await firebase.auth().currentUser.uid
-                await firebase.database().ref(`/favorites/${userId}`).set(
-                    nextFavourites
-                )
-            })
-        }
+    async handleFavIcon(tripId) {
+      await toggleFavorite(tripId);
     }
 
     showLoader() {
@@ -104,7 +83,7 @@ class Favourites2 extends Component {
                             className={'iconFavourites'}
                             size={'large'}
                             inverted
-                            name={this.state.favourites.includes(trip.id) ? 'heart' : 'heart outline'}
+                            name={this.state.favourites[trip.id] ? 'heart' : 'heart outline'}
                             onClick={(e) => {
                                 e.stopPropagation();
                                 this.handleFavIcon(trip.id)
@@ -116,8 +95,6 @@ class Favourites2 extends Component {
         ))
         )
     }
-
-    handleChange = (e, { name, value }) => this.setState({ [name]: value });
 
     render() {
         const { selectedTrip } = this.state
@@ -142,6 +119,11 @@ class Favourites2 extends Component {
                 <Modal
                     dimmer={"blurring"}
                     open={this.state.selectedTrip != null}
+                    onClose={() => {
+                        this.setState({
+                            selectedTrip: null
+                        })
+                    }}
                 >
                     {selectedTrip != null && <Fragment>
                         <Modal.Header>{selectedTrip.title}</Modal.Header>
