@@ -72,10 +72,10 @@ const Register = () => {
           <Message error={true}>Podaj poprawny E-mail oraz Hasło</Message>
         )}
         <Message>
-          Jesteś już zarejestrowany? - <Link style={{color: "blue"}} to="/login">Zaloguj się</Link>
+          Jesteś już zarejestrowany? - <Link style={{ color: "blue" }} to="/login">Zaloguj się</Link>
         </Message>
-      <Message info>
-        Tylko jeden krok dzieli Cię od znalezienia <br></br> najlepszej dla
+        <Message info>
+          Tylko jeden krok dzieli Cię od znalezienia <br></br> najlepszej dla
         Ciebie wycieczki. <br></br>Załóż konto lub zaloguj się, jeśli już je
         posiadasz <br></br>i zaplanuj podróż marzeń.
       </Message>

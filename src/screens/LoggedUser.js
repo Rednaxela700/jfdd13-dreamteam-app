@@ -11,11 +11,11 @@ const LoggedUser = () => {
         </Header>
         <Button
           onClick={() => signout()
-        }
+          }
           color="teal"
           fluid
           size="large"
-          >
+        >
           Wyloguj
         </Button>
       </Grid.Column>

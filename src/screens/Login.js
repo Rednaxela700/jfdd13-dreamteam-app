@@ -72,14 +72,14 @@ const Login = () => {
           <Message error={true}>Nieudana próba logowania</Message>
         )}
         <Message>
-          Chcesz się zarejestrować? - <Link style={{color: "blue"}} to="/register">Kliknij</Link>
+          Chcesz się zarejestrować? - <Link style={{ color: "blue" }} to="/register">Kliknij</Link>
         </Message>
         <Message info>
           Tylko jeden krok dzieli Cię od znalezienia <br></br> najlepszej dla
           Ciebie wycieczki. <br></br>Załóż konto lub zaloguj się, jeśli już je
           posiadasz <br></br>i zaplanuj podróż marzeń.
         </Message>
-        
+
       </Grid.Column>
     </Grid>
   );
