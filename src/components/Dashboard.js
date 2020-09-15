@@ -1,5 +1,5 @@
 import React from 'react';
-import PieChartComponent from "./PieChart";
+import {PieChartComponent} from "./PieChart";
 import {Grid} from "semantic-ui-react";
 import {DataBarChart} from "./DataChart";
 
