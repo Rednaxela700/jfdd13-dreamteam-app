@@ -1,12 +1,4 @@
-import React, { Component, Fragment, useState, useEffect } from "react";
-import {
-  Grid,
-  Image,
-  Icon,
-  Modal,
-  Header,
-  Button
-} from 'semantic-ui-react'
+import React, {  useState, useEffect } from "react";
 import {
   FilteredQueryResults,
   // handleFavIcon,
@@ -16,7 +8,6 @@ import {
 import { fetchTrips, fetchFromFavorites, toggleFavorite, stopFetching } from "../services/TripService";
 import { ShowLoader } from "./Loader";
 import TripModal from "./TripModal";
-import { Continents } from "./Continents";
 
 const defaultImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTDgEOsiQyCYSqiBVVAWAxMkKz8jiz80Qu0U8MuaiGJryGMTVR&s';
 const Favourites = () => {
