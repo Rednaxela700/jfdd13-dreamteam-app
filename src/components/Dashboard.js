@@ -2,20 +2,22 @@ import React, { useState, useEffect } from 'react';
 import PieChartComponent from "./PieChart";
 import { Grid, Loader } from "semantic-ui-react";
 import DataBarChart from "./DataChart";
-import { fetchTrips } from "../services/TripService";
+import { fetchTrips, fetchUsers } from "../services/TripService";
 
 function Dashboard() {
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true);
   const [pieChartData, setPieChartData] = useState([]);
+  const [barChartData, setBarchartData] = useState([]);
 
-  useEffect(()=> {
-    setLoading(true)
-    handlePieChartData();
-    setLoading(false)
+  useEffect(() => {
+    setLoading(true);
+    getPieChartData();
+    getBarChartData();
+    setLoading(false);
     // eslint-disable-next-line
   }, [])
 
-  const handlePieChartData = async () => {
+  const getPieChartData = async () => {
     const continentsColors = ['#0088FE', '#00C49F', '#FFBB28', '#d37736', '#FF8042', '#ff3c42', '#764afe'];
 
     const result = await fetchTrips()
@@ -28,7 +30,16 @@ function Dashboard() {
     setPieChartData(continentsWithColors)
   }
 
-  if(loading) return <Loader/>
+
+
+  const getBarChartData = async () => {
+    const result = await fetchUsers()
+    const usersWithDate = result.filter(({ date }) => date)
+    // const usersWithProcessedDate = setUsersDateObject(usersWithDate)
+    setBarchartData(usersWithDate)
+  }
+
+  if (loading) return <Loader />
 
   return (
     <div className="Dashboard">
@@ -40,10 +51,13 @@ function Dashboard() {
         </Grid.Row>
         <Grid.Row>
           <Grid.Column widescreen={8} largeScreen={8} mobile={16}>
-            <PieChartComponent data={pieChartData} loading={loading} />
+            {
+              // pieChartData.length > 0 &&
+              <PieChartComponent data={pieChartData} loading={loading} />
+            }
           </Grid.Column>
           <Grid.Column widescreen={8} largeScreen={8} mobile={16} verticalAlign={'middle'}>
-            <DataBarChart />
+            {barChartData.length > 0 && <DataBarChart data={barChartData} loading={loading} />}
           </Grid.Column>
         </Grid.Row>
         <Grid.Row centered={true}>

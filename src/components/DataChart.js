@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   BarChart,
   Bar,
@@ -8,22 +8,10 @@ import {
   Tooltip,
   Legend,
 } from 'recharts';
-import { fetchUsers } from "../services/TripService";
 
 const windowWidth = window.screen.width;
 
-const DataBarChart = () => {
-  const [barChartData, setBarchartData] = useState([])
-  useEffect(() => {
-    const f = async () => {
-      const result = await fetchUsers()
-      const usersWithDate = result.filter(({date}) => date)
-      const usersWithProcessedDate = setUsersDateObject(usersWithDate)
-      setBarchartData(usersWithProcessedDate)
-    }
-    f()
-    // eslint-disable-next-line
-  }, [])
+const DataBarChart = ({data}) => {
 
   const convertMonth = (num) => {
     const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
@@ -49,10 +37,6 @@ const DataBarChart = () => {
       }
     ]
   }, []))
-
-  if (!barChartData || barChartData.length === 0) {
-    return null
-  }
 
   const getLastYearOrTwo = (users) => {
     if (users.length < 1) return
@@ -127,6 +111,7 @@ const DataBarChart = () => {
     }
   }
 
+  const barChartData = setUsersDateObject(data)
   const dataObj = getLastYearOrTwo(barChartData)
   const chartData = createChartData(dataObj).reverse()
   return (<div>
