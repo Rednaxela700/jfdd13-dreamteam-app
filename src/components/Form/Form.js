@@ -64,7 +64,6 @@ const TripForm = () => {
           setFieldValue,
           isSubmitting,
         }) => {
-          console.log(touched)
           return (
             <Form className={styles.formContainer} onSubmit={handleSubmit}>
               <div className="form__item">
@@ -145,7 +144,7 @@ const TripForm = () => {
                   {Continents.map(continent => (
                     <option
                       key={continent.key}
-                      value={continent.value}
+                      value={continent.text}
                     >
                       {continent.text}
                     </option>
