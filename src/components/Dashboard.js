@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PieChartComponent from "./PieChart";
-import { Grid, Loader } from "semantic-ui-react";
+import { Grid } from "semantic-ui-react";
+import {ShowLoader} from './Loader'
 import DataBarChart from "./DataChart";
 import { fetchTrips, fetchUsers } from "../services/TripService";
 
@@ -34,12 +35,11 @@ function Dashboard() {
   const getBarChartData = async () => {
     const result = await fetchUsers()
     const usersWithDate = result.filter(({ date }) => date)
-    // const usersWithProcessedDate = setUsersDateObject(usersWithDate)
     setBarchartData(usersWithDate)
     setLoading(false);
   }
 
-  if (loading) return <Loader />
+  if (loading) return <ShowLoader />
 
   return (
     <div className="Dashboard">
