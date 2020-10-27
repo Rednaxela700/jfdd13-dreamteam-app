@@ -1,4 +1,13 @@
-This project is currently in progress, check it live here: (http://app.dreamteam.jfdd13.is-academy.pl/) 
+Hi there, this is Way.to - a CRUD trip planner where you can add a trip to a database and make it visible for other users.
+
+The project was made in the group of 4 during junior frontend developer bootcamp in December 2019.
+
+My fork is still in progress, you check it live [here](https://wayto.netlify.app/)
+
+You can check the issues tab to see future fixes and enchancements.
+
+
+- 
 
 
 
