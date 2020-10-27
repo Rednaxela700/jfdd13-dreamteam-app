@@ -8,22 +8,22 @@ import {
 import { fetchTrips } from "../services/TripService";
 
 const windowWidth = window.screen.width;
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#d37736', '#FF8042', '#ff3c42', '#764afe'];
+const continentsColors = ['#0088FE', '#00C49F', '#FFBB28', '#d37736', '#FF8042', '#ff3c42', '#764afe'];
 
 const PieChartComponent = () => {
   const [tripsData, setTripsData] = useState([]);
 
   useEffect(() => {
-    const f = async () => {
+    (async () => {
       const result = await fetchTrips()
       const distribution = result.reduce((result, next) => {
         result[next.continent] = (result[next.continent] || 0) + 1
         return result;
       }, {})
       const trips = Object.entries(distribution).map(([name, value]) => ({ name, value }))
-      setTripsData(trips)
-    }
-    f()
+      const continentsWithColors = trips.map((continent, index) =>  ({...continent, color: continentsColors[index]}))
+      setTripsData(continentsWithColors)
+    })();
     //eslint-disable-next-line
   }, [])
 
@@ -41,7 +41,7 @@ const PieChartComponent = () => {
         label
       >
         {
-          tripsData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+          tripsData.map((entry, index) => <Cell key={`cell-${index}`} fill={entry.color} />)
         }
       </Pie>
       <Tooltip />
