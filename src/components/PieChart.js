@@ -1,47 +1,42 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
   PieChart,
   Pie,
   Cell,
-  Tooltip
+  Tooltip,
 } from 'recharts';
-import { fetchTrips } from "../services/TripService";
 
 const windowWidth = window.screen.width;
-const COLORS = ['#0088FE', '#00C49F', '#FFBB28', '#d37736', '#FF8042', '#ff3c42', '#764afe'];
+const PieChartComponent = ({ data }) => {
 
-const PieChartComponent = () => {
-  const [tripsData, setTripsData] = useState([]);
+  const RADIAN = Math.PI / 180;
 
-  useEffect(() => {
-    const f = async () => {
-      const result = await fetchTrips()
-      const distribution = result.reduce((result, next) => {
-        result[next.continent] = (result[next.continent] || 0) + 1
-        return result;
-      }, {})
-      const trips = Object.entries(distribution).map(([name, value]) => ({ name, value }))
-      setTripsData(trips)
-    }
-    f()
-    //eslint-disable-next-line
-  }, [])
-
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, name }) => {
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5 + 100;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+    return (
+      <text x={x} y={y} fill="#000" textAnchor={x > cx ? 'start' : 'end'} dominantBaseline="central">
+        {`${name}`}
+      </text>
+    );
+  };
   return (<div>
     <PieChart
-      width={windowWidth > 500 ? 500 : 300}
+      width={windowWidth > 500 ? 700 : 300}
       height={windowWidth > 500 ? 350 : 250}
       style={{ margin: '0 auto' }}
     >
       <Pie
-        data={tripsData}
+        data={data}
         labelLine={true}
         fill="#8884d8"
         dataKey="value"
-        label
+        label={renderCustomizedLabel}
       >
         {
-          tripsData.map((entry, index) => <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />)
+          data.map((entry, index) => <Cell key={`cell-${entry.name}`} fill={entry.color} >
+          </Cell>)
         }
       </Pie>
       <Tooltip />
