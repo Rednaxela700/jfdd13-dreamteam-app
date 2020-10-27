@@ -4,7 +4,6 @@ import { Grid, Loader } from "semantic-ui-react";
 import DataBarChart from "./DataChart";
 import { fetchTrips } from "../services/TripService";
 
-
 function Dashboard() {
   const [loading, setLoading] = useState(false)
   const [pieChartData, setPieChartData] = useState([]);
@@ -15,7 +14,6 @@ function Dashboard() {
     setLoading(false)
     // eslint-disable-next-line
   }, [])
-
 
   const handlePieChartData = async () => {
     const continentsColors = ['#0088FE', '#00C49F', '#FFBB28', '#d37736', '#FF8042', '#ff3c42', '#764afe'];
@@ -28,9 +26,10 @@ function Dashboard() {
     const trips = Object.entries(distribution).map(([name, value]) => ({ name, value }))
     const continentsWithColors = trips.map((continent, index) => ({ ...continent, color: continentsColors[index] }))
     setPieChartData(continentsWithColors)
-
   }
+
   if(loading) return <Loader/>
+
   return (
     <div className="Dashboard">
       <Grid padded={true}>
@@ -48,22 +47,6 @@ function Dashboard() {
           </Grid.Column>
         </Grid.Row>
         <Grid.Row centered={true}>
-          <Grid.Column width={8} verticalAlign={'middle'}>
-            <h3>Z WAY.TO pojedziesz do:</h3>
-            <div style={{ display: 'flex', justifyContent: 'center' }}>
-              <ul className={'pieUl'}>
-                <li className={'pieLi pieLi__asia'}>Azji</li>
-                <li className={'pieLi pieLi__europe'}>Europy</li>
-                <li className={'pieLi pieLi__northamerica'}>Północnej Ameryki</li>
-                <li className={'pieLi pieLi__africa'}>Afryki</li>
-              </ul>
-              <ul className={'pieUl'}>
-                <li className={'pieLi pieLi__southamerica'}>Ameryki Południowej</li>
-                <li className={'pieLi pieLi__antarctica'}>Antarktydy</li>
-                <li className={'pieLi pieLi__australia'}>Australii</li>
-              </ul>
-            </div>
-          </Grid.Column>
           <Grid.Column width={8} verticalAlign={'middle'} style={{ height: '100%' }}>
             <h3>Podróż na każdą kieszeń, zawsze.</h3>
             <div>
@@ -71,7 +54,6 @@ function Dashboard() {
                 <li>Wyjdź z domu i poczuj się turystą we własnym mieście</li>
                 <li>Skorzystaj z formularza i dodaj swoją wycieczkę</li>
                 <li>Wracaj do swoich najlepszych lokalizacji z pomocą ulubionych</li>
-
               </ul>
             </div>
           </Grid.Column>

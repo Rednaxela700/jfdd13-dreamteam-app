@@ -25,7 +25,7 @@ const PieChartComponent = ({ data, loading }) => {
   };
   return (<div>
     <PieChart
-      width={windowWidth > 500 ? 500 : 300}
+      width={windowWidth > 500 ? 700 : 300}
       height={windowWidth > 500 ? 350 : 250}
       style={{ margin: '0 auto' }}
     >
