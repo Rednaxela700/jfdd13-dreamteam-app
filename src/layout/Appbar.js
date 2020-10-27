@@ -1,13 +1,15 @@
 import React from 'react';
-import {Icon} from "semantic-ui-react";
+import { Icon } from "semantic-ui-react";
 
-function Appbar () {
+function Appbar() {
 
   return (
     <header className="Appbar">
       <h1 className='AppBarHeader'>
-          <Icon name="paper plane outline"/>
-          WAY.TO
+        <p>
+          <Icon name="paper plane outline" />
+          WHERE.TO
+        </p>
       </h1>
     </header>);
 }
