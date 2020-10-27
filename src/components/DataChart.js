@@ -26,7 +26,7 @@ const DataBarChart = () => {
   }, [])
 
   const convertMonth = (num) => {
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
     if (typeof num === 'string') {
       return months.indexOf(num)
     }
