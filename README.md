@@ -1,17 +1,20 @@
-Hi there, this is Way.to - a CRUD trip planner where you can add a trip to a database and make it visible for other users.
+Hi there, this is where.to - a CRUD trip planner where users can share the best trips of their life.
 
 The project was made in the group of 4 during junior frontend developer bootcamp in December 2019.
 
-My fork is still in progress, you check it live [here](https://wayto.netlify.app/)
+My fork is still in progress, you check it live [here](https://wayto.netlify.app/) :rocket:
 
 You can check the issues tab to see future fixes and enchancements.
 
+## Stack & Tools
+- react
+  - semantic ui
+  - formik
+  - yup
+- firebase & cloud firestore
+- netlify
 
-- 
-
-
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
