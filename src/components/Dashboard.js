@@ -13,7 +13,6 @@ function Dashboard() {
     setLoading(true);
     getPieChartData();
     getBarChartData();
-    setLoading(false);
     // eslint-disable-next-line
   }, [])
 
@@ -37,6 +36,7 @@ function Dashboard() {
     const usersWithDate = result.filter(({ date }) => date)
     // const usersWithProcessedDate = setUsersDateObject(usersWithDate)
     setBarchartData(usersWithDate)
+    setLoading(false);
   }
 
   if (loading) return <Loader />
