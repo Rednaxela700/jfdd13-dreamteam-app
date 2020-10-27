@@ -28,26 +28,28 @@ function Navbar() {
     click: null
   }
   return (
-    <Sidebar.Pushable as={Segment} className={'NavStyles'}>
-      <Sidebar
-        as={Menu}
-        animation='overlay'
-        icon='labeled'
-        inverted
-        vertical
-        visible
-        width={
-          windowWidth < 500 ? 'very thin' : 'thin'
-        }
-      >
-        <MenuItem elText='Statystyki' linkTo='/main' iconName='chart line' elStyle={{ marginTop: '60px' }} />
-        <MenuItem elText='Oferta' linkTo='/search' iconName='search' />
-        <MenuItem elText='Dodaj' linkTo='/form' iconName='add' />
-        <MenuItem elText='Ulubione' linkTo='/favs' iconName='heart' />
-        <MenuItem elText='Panel' linkTo='/panel' iconName='user' />
-        <MenuItem elText='Wyloguj' linkTo='#' iconName='sign out' click={signout} />
-      </Sidebar>
-    </Sidebar.Pushable>
+    <div className="sidebar">
+      <Sidebar.Pushable as={"nav"} className={'NavStyles'}>
+        <Sidebar
+          as={Menu}
+          animation='overlay'
+          icon='labeled'
+          inverted
+          vertical
+          visible
+          width={
+            windowWidth < 500 ? 'very thin' : 'thin'
+          }
+        >
+          <MenuItem elText='Statystyki' linkTo='/main' iconName='chart line' elStyle={{ marginTop: '60px' }} />
+          <MenuItem elText='Oferta' linkTo='/search' iconName='search' />
+          <MenuItem elText='Dodaj' linkTo='/form' iconName='add' />
+          <MenuItem elText='Ulubione' linkTo='/favs' iconName='heart' />
+          <MenuItem elText='Panel' linkTo='/panel' iconName='user' />
+          <MenuItem elText='Wyloguj' linkTo='#' iconName='sign out' click={signout} />
+        </Sidebar>
+      </Sidebar.Pushable>
+    </div>
   )
 }
 
