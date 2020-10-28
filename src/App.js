@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import Navbar from "./layout/Navbar";
@@ -13,7 +13,30 @@ import Register from './screens/Register';
 import Login from './screens/Login';
 import LoggedUser from './screens/LoggedUser';
 import Favicon from 'react-favicon';
+import firebase from 'firebase'
+
 function App() {
+  const [loading, setLoading] = useState(false);
+  const [userData, setUserData] = useState(true);
+  const currentUser = firebase.auth().currentUser.uid;
+
+  useEffect(() => {
+    setLoading(true);
+    fetchUser(currentUser)
+    // eslint-disable-next-line
+  }, [])
+
+  const fetchUser = (user) => {
+    const userId = user
+    return firebase.database().ref('/users/' + userId).once('value')
+      .then(function (snapshot) {
+        var username = (snapshot.val() && snapshot.val()) || 'Anonymous';
+        setUserData(username)
+        setLoading(false);
+      });
+  }
+
+  if (loading) return null
   return (
     <>
       <Favicon url="../public/favicon.ico" />
@@ -26,7 +49,9 @@ function App() {
               <Route exact strict path="/" component={Dashboard} />
               <Route exact strict path="/main" component={Dashboard} />
               <Route exact strict path="/search" component={Search} />
-              <Route exact strict path="/panel" component={UserPanel} />
+              <Route exact strict path="/panel" render={(props)=> (
+                <UserPanel {...props} data={userData}/>
+              )} />
               <Route exact strict path="/register" component={Register} />
               <Route exact strict path="/login" component={Login} />
               <Route exact strict path="/user" component={LoggedUser} />
