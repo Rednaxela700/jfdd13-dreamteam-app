@@ -12,10 +12,16 @@ function UserPanel({ data, avatarUrl, setAvatarUrl }) {
     processedDate = new Date(date).toLocaleDateString()
   }
 
-  const ImageOverlay = ({ children }) => {
-    return <div style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: "100%", display: "flex", justifyContent: "center", alignItems: "center", background: "#00000090" }}>
-      {children}
-    </div>
+  const ImageOverlayStyles = {
+    position: 'absolute',
+    top: '0',
+    left: '0',
+    width: '100%',
+    height: "100%",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    background: "#00000090",
   }
 
   if (!id) {
@@ -32,18 +38,18 @@ function UserPanel({ data, avatarUrl, setAvatarUrl }) {
             onMouseEnter={() => { setChangeAvatarVisible(true) }}
             onMouseLeave={() => {
               if (selectedFile) return
-              setTimeout(()=>{
+              setTimeout(() => {
                 setChangeAvatarVisible(false)
-              },5000)
+              }, 5000)
             }}
           >
             <img
-              src={(()=> avatarUrl || avatar || defaultAvatar)()}
-              style={{maxWidth: '100%'}}
+              src={(() => avatarUrl || avatar || defaultAvatar)()}
+              style={{ maxWidth: '100%' }}
               alt="user profile img"
             />
             {
-              changeAvatarVisible && <ImageOverlay>
+              changeAvatarVisible && <div style={ImageOverlayStyles}>
                 <Input
                   type="file"
                   name="userAvatarUrl"
@@ -62,17 +68,17 @@ function UserPanel({ data, avatarUrl, setAvatarUrl }) {
                         () => { },
                         () => {
                           uploadTask.snapshot.ref.getDownloadURL()
-                          .then((downloadURL) => {
-                            setAvatarUrl(downloadURL)
-                            firebase.database().ref(`/users/${id}/avatar`).set(downloadURL)
-                          }).then(()=> {
-                            setSelectedFile(false)
-                          });
+                            .then((downloadURL) => {
+                              setAvatarUrl(downloadURL)
+                              firebase.database().ref(`/users/${id}/avatar`).set(downloadURL)
+                            }).then(() => {
+                              setSelectedFile(false)
+                            });
                         })
                     }
                   }}
                 />
-              </ImageOverlay>
+              </div>
             }
           </Card.Content>
           <Card.Content header={name} />
