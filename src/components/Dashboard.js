@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PieChartComponent from "./PieChart";
 import { Grid } from "semantic-ui-react";
-import {ShowLoader} from './Loader'
+import { ShowLoader } from './Loader'
 import DataBarChart from "./DataChart";
 import { fetchTrips, fetchUsers } from "../services/TripService";
 
@@ -29,8 +29,6 @@ function Dashboard() {
     const continentsWithColors = trips.map((continent, index) => ({ ...continent, color: continentsColors[index] }))
     setPieChartData(continentsWithColors)
   }
-
-
 
   const getBarChartData = async () => {
     const result = await fetchUsers()
