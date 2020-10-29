@@ -30,8 +30,9 @@ function App() {
     const userId = user
     return firebase.database().ref('/users/' + userId).once('value')
       .then(function (snapshot) {
-        var username = (snapshot.val() && snapshot.val()) || 'Anonymous';
-        setUserData(username)
+        var userObj = (snapshot.val() && snapshot.val()) || 'Anonymous';
+        userObj.id = userId
+        setUserData(userObj)
         setLoading(false);
       });
   }
