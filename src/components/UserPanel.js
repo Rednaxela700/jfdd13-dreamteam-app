@@ -1,13 +1,20 @@
-import React from 'react';
-import { Container, Header, Card, Icon, Image } from "semantic-ui-react";
+import React, { useState } from 'react';
+import { Container, Header, Card, Icon, Image, Input, Button } from "semantic-ui-react";
 import defaultAvatar from '../assets/icon.svg'
+import firebase from 'firebase'
 
 function UserPanel({ data }) {
-
-  const { email, name, date, bio } = data
+  const [changeAvatarVisible, setChangeAvatarVisible] = useState(false)
+  const { email, name, date, bio, avatar } = data
   let processedDate
   if (date) {
     processedDate = new Date(date).toLocaleDateString()
+  }
+
+  const ImageOverlay = ({ children }) => {
+    return <div style={{ position: 'absolute', top: '0', left: '0', width: '100%', height: "100%", display: "flex", justifyContent: "center", alignItems: "center", background: "#00000090" }}>
+      {children}
+    </div>
   }
 
   return (
@@ -15,7 +22,40 @@ function UserPanel({ data }) {
       <Header>Your account</Header>
       <div style={{ display: 'flex', justifyContent: 'center' }}>
         <Card>
-          <Image src={defaultAvatar} wrapped ui={false} style={{}} />
+          <Card.Content
+            style={{ position: 'relative' }}
+            onMouseEnter={() => { setChangeAvatarVisible(true) }}
+            onMouseLeave={() => { setChangeAvatarVisible(false) }}
+          >
+            <Image
+              src={avatar ? avatar : defaultAvatar}
+              wrapped
+              ui={false} style={{}}
+            />
+            {
+              changeAvatarVisible && <ImageOverlay>
+                <Input
+                  type="file"
+                  name="userAvatarUrl"
+                  accept=".jpg, .jpeg, .png"
+                  onChange={event => {
+                    const firstFile = event.target.files[0]
+                    const storageRef = firebase.storage().ref('trips')
+                    const fileName = 'avatar-' + new Date().toISOString()
+                    const fileRef = storageRef.child(fileName + '.jpg')
+                    const uploadTask = fileRef.put(firstFile)
+                    uploadTask.on(
+                      'state_changed',
+                      () => { },
+                      () => { },
+                      () => {
+                        uploadTask.snapshot.ref.getDownloadURL()
+                      })
+                  }}
+                />
+              </ImageOverlay>
+            }
+          </Card.Content>
           <Card.Content header={name} />
           <Card.Content meta={() => (
             <div style={{ color: '#000', cursor: 'pointer' }}>
@@ -23,7 +63,7 @@ function UserPanel({ data }) {
             </div>
           )} />
           {bio &&
-            <Card.Content description="Elliot is a sound engineer living in Nashville who enjoys playing guitar and hanging with his cat." />
+            <Card.Content description={bio} />
           }
           {processedDate && <Card.Content extra>
             <div>
