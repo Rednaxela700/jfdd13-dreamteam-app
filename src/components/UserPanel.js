@@ -3,10 +3,9 @@ import { Container, Header, Card, Icon, Input } from "semantic-ui-react";
 import defaultAvatar from '../assets/icon.svg'
 import firebase from 'firebase'
 
-function UserPanel({ data }) {
+function UserPanel({ data, avatarUrl, setAvatarUrl }) {
   const [changeAvatarVisible, setChangeAvatarVisible] = useState(false)
   const [selectedFile, setSelectedFile] = useState(false)
-  const [avatarUrl, setAvatarUrl]= useState('')
   const { email, name, date, bio, avatar, id } = data
   let processedDate
   if (date) {
@@ -33,11 +32,13 @@ function UserPanel({ data }) {
             onMouseEnter={() => { setChangeAvatarVisible(true) }}
             onMouseLeave={() => {
               if (selectedFile) return
-              setChangeAvatarVisible(false)
+              setTimeout(()=>{
+                setChangeAvatarVisible(false)
+              },5000)
             }}
           >
             <img
-              src={(()=> avatar || avatarUrl || defaultAvatar)()}
+              src={(()=> avatarUrl || avatar || defaultAvatar)()}
               style={{maxWidth: '100%'}}
               alt="user profile img"
             />
@@ -64,7 +65,9 @@ function UserPanel({ data }) {
                           .then((downloadURL) => {
                             setAvatarUrl(downloadURL)
                             firebase.database().ref(`/users/${id}/avatar`).set(downloadURL)
-                          }).then(()=> setSelectedFile(false));
+                          }).then(()=> {
+                            setSelectedFile(false)
+                          });
                         })
                     }
                   }}

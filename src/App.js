@@ -18,11 +18,15 @@ import firebase from 'firebase'
 function App() {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(true);
+  const [avatarUrl, setAvatarUrl] = useState('')
   const currentUser = firebase.auth().currentUser.uid;
 
   useEffect(() => {
-    setLoading(true);
-    fetchUser(currentUser)
+    if (!loading) {
+      setLoading(true);
+      fetchUser(currentUser)
+    }
+    return () => setLoading(false)
     // eslint-disable-next-line
   }, [])
 
@@ -50,8 +54,8 @@ function App() {
               <Route exact strict path="/" component={Dashboard} />
               <Route exact strict path="/main" component={Dashboard} />
               <Route exact strict path="/search" component={Search} />
-              <Route exact strict path="/panel" render={(props)=> (
-                <UserPanel {...props} data={userData}/>
+              <Route exact strict path="/panel" render={(props) => (
+                <UserPanel {...props} data={userData} avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl} />
               )} />
               <Route exact strict path="/register" component={Register} />
               <Route exact strict path="/login" component={Login} />
