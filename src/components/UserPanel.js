@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { Container, Header, Card, Icon, Image, Input, Button } from "semantic-ui-react";
+import { Container, Header, Card, Icon, Input } from "semantic-ui-react";
 import defaultAvatar from '../assets/icon.svg'
 import firebase from 'firebase'
 
 function UserPanel({ data }) {
   const [changeAvatarVisible, setChangeAvatarVisible] = useState(false)
-  const { email, name, date, bio, avatar } = data
+  const [selectedFile, setSelectedFile] = useState(false)
+  const [avatarUrl, setAvatarUrl]= useState('')
+  const { email, name, date, bio, avatar, id } = data
   let processedDate
   if (date) {
     processedDate = new Date(date).toLocaleDateString()
@@ -17,6 +19,10 @@ function UserPanel({ data }) {
     </div>
   }
 
+  if (!id) {
+    return null
+  }
+
   return (
     <Container style={{ marginTop: '50px' }}>
       <Header>Your account</Header>
@@ -25,32 +31,42 @@ function UserPanel({ data }) {
           <Card.Content
             style={{ position: 'relative' }}
             onMouseEnter={() => { setChangeAvatarVisible(true) }}
-            onMouseLeave={() => { setChangeAvatarVisible(false) }}
+            onMouseLeave={() => {
+              if (selectedFile) return
+              setChangeAvatarVisible(false)
+            }}
           >
-            <Image
-              src={avatar ? avatar : defaultAvatar}
-              wrapped
-              ui={false} style={{}}
+            <img
+              src={(()=> avatar || avatarUrl || defaultAvatar)()}
+              style={{maxWidth: '100%'}}
+              alt="user profile img"
             />
             {
               changeAvatarVisible && <ImageOverlay>
                 <Input
                   type="file"
                   name="userAvatarUrl"
-                  accept=".jpg, .jpeg, .png"
+                  accept="image/png, image/jpeg, image/jpg"
                   onChange={event => {
-                    const firstFile = event.target.files[0]
-                    const storageRef = firebase.storage().ref('trips')
-                    const fileName = 'avatar-' + new Date().toISOString()
-                    const fileRef = storageRef.child(fileName + '.jpg')
-                    const uploadTask = fileRef.put(firstFile)
-                    uploadTask.on(
-                      'state_changed',
-                      () => { },
-                      () => { },
-                      () => {
-                        uploadTask.snapshot.ref.getDownloadURL()
-                      })
+                    const file = event.target.files[0];
+                    const fileExtension = file.name.slice(file.name.lastIndexOf("."))
+                    if (file) {
+                      const storageRef = firebase.storage().ref(`/users/${id}`);
+                      const fileName = `avatar-${id}`
+                      const fileRef = storageRef.child(fileName + fileExtension)
+                      const uploadTask = fileRef.put(file)
+                      uploadTask.on(
+                        'state_changed',
+                        () => { },
+                        () => { },
+                        () => {
+                          uploadTask.snapshot.ref.getDownloadURL()
+                          .then((downloadURL) => {
+                            setAvatarUrl(downloadURL)
+                            firebase.database().ref(`/users/${id}/avatar`).set(downloadURL)
+                          }).then(()=> setSelectedFile(false));
+                        })
+                    }
                   }}
                 />
               </ImageOverlay>
