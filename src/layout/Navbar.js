@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Icon, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { Icon, Menu, Sidebar } from 'semantic-ui-react'
 import { signout } from "../services/AuthService";
 
 
