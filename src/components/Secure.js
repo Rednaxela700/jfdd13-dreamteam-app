@@ -4,7 +4,6 @@ import firebase from "firebase";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 import { ShowLoader } from "./Loader";
-import '../styles/index.scss'
 import Main from "./Main";
 
 const Secure = props => {

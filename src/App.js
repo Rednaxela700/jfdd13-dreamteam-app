@@ -7,13 +7,13 @@ import TripForm from "./components/Form/Form";
 import Favorites from "./components/Favourites";
 import Search from "./components/Search";
 import Appbar from "./layout/Appbar";
-import 'semantic-ui-css/semantic.min.css'
 import UserPanel from './components/UserPanel';
 import Register from './screens/Register';
 import Login from './screens/Login';
 import LoggedUser from './screens/LoggedUser';
 import Favicon from 'react-favicon';
 import firebase from 'firebase'
+import './styles/index.scss'
 
 function App() {
   const [loading, setLoading] = useState(false);
