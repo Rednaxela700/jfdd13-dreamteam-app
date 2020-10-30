@@ -8,11 +8,16 @@ export class DemoCarousel extends Component {
   prepareImages(img) {
     // const image = new Image(816,583)
     const image = img
-    console.log(image)
     return (
-      <img src={image}
-        // style={{ maxWidth: image.width, height: image.height }}
-        className="" alt="" />
+      <div className="carousel__slide__wrapper">
+        <img src={image}
+          // style={{ maxWidth: image.width, height: image.height }}
+          className="" alt="" />
+        <div className="carousel__slide__content">
+          <p>New Year's Eve in</p>
+          <h3>Thailand</h3>
+        </div>
+      </div>
     )
   }
   render() {
@@ -24,7 +29,7 @@ export class DemoCarousel extends Component {
         axis="horizontal"
         dynamicHeight={true}
         centerMode={true}
-        centerSlidePercentage={70}
+        centerSlidePercentage={65}
         className="carousel"
         showThumbs={false}
       >
