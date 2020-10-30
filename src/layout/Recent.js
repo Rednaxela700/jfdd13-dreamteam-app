@@ -19,12 +19,12 @@ export class DemoCarousel extends Component {
 
     return (
       <Carousel
-        autoPlay
+        // autoPlay
         infiniteLoop
-        axis="vertical"
-        centerMode
+        axis="horizontal"
         dynamicHeight={true}
-        centerSlidePercentage={('centerSlidePercentage', 60, {}, 'mainGroupId')}
+        centerMode={true}
+        centerSlidePercentage={70}
         className="carousel"
         showThumbs={false}
       >

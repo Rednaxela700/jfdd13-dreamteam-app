@@ -22,6 +22,30 @@
     max-height: 5rem;
     max-width: 5rem;
   }
+  li.slide {
+    background-color: $color-white;
+  }
+  & p.carousel-status {
+    display: none;
+  }
+  & button.control-arrow {
+    width: 50%;
+    &:hover {
+      background: none !important;
+    }
+    &:first-of-type:hover {
+      cursor: w-resize;
+    }
+    &:last-of-type:hover {
+      cursor: e-resize;
+    }
+    &::before {
+      display: none !important;
+    }
+  }
+  ul.control-dots {
+    display: none;
+  }
 }
 
 .slider-container {
