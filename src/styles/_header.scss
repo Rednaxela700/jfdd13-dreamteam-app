@@ -8,9 +8,9 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 4rem;
-    width: calc(100% - 9rem);
-    margin: 2rem 4.5rem 0;
+    width: 100%;
+    padding: 2rem 4.5rem;
+    background: $color-white;
   }
 }
 .logo {
@@ -28,8 +28,6 @@
     display: flex;
     font-size: 24px;
     list-style: none;
-  }
-  &__item {
   }
   &__link {
     color: $color-black;
