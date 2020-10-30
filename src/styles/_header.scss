@@ -1,0 +1,45 @@
+.header {
+  position: relative;
+  height: 6rem;
+  &__container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 4rem;
+    width: calc(100% - 9rem);
+    margin: 2rem 4.5rem 0;
+  }
+}
+.logo {
+  font-size: 36px;
+  font-weight: 700;
+  & p {
+    line-height: 63px;
+  }
+  &--accent {
+    color: $color-accent;
+  }
+}
+.nav {
+  &__container {
+    display: flex;
+    font-size: 24px;
+    list-style: none;
+  }
+  &__item {
+  }
+  &__link {
+    color: $color-black;
+    text-decoration: none;
+    padding: 1rem;
+    &:hover,:focus {
+      color: $color-accent;
+      & > .nav__icon {
+        filter: invert(90%) sepia(77%) saturate(6205%) hue-rotate(313deg) brightness(102%) contrast(96%);
+      }
+    }
+  }
+}
