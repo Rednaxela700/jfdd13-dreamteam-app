@@ -4,7 +4,7 @@ import firebase from "firebase";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 import { ShowLoader } from "./Loader";
-import Main from "./Main";
+import Main from "../layout/Main";
 
 const Secure = props => {
   const [user, setUser] = useState(null);
