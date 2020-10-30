@@ -38,3 +38,10 @@
     text-transform: capitalize;
   }
 }
+
+.recent {
+  margin: 17.5rem 0 12.5rem;
+  &__title {
+    margin: 0 0 5rem;
+  }
+}
