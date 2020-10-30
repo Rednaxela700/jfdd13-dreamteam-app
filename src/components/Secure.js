@@ -4,6 +4,8 @@ import firebase from "firebase";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
 import { ShowLoader } from "./Loader";
+import '../styles/index.scss'
+import Main from "./Main";
 
 const Secure = props => {
   const [user, setUser] = useState(null);
@@ -28,9 +30,10 @@ const Secure = props => {
       <div>
         <BrowserRouter>
           <Switch>
+            <Route exact path="/" component={Main} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
-            <Redirect to="/login" />
+            <Redirect to="/" />
           </Switch>
         </BrowserRouter>
       </div>
