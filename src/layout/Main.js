@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Footer from './Footer'
 import Header from './Header'
 import Hero from './Hero'
 import Info from './Info'
@@ -13,6 +14,7 @@ export default function Main() {
         <Info/>
         <Recent/>
       </main>
+      <Footer/>
     </Fragment>
   )
 }
