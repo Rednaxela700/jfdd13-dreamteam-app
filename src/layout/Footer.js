@@ -8,7 +8,12 @@ export default function Footer() {
       <div className="footer__wrapper wrapper">
         <div className="footer__container">
           <div className="footer__logo logo">
-            <p>where<span>to</span></p>
+            <h3 className="logo__title">
+              where<span>to</span>
+            </h3>
+            <p className="logo__subtitle">
+              Time to rediscover the world.
+            </p>
           </div>
           <nav className="footer__nav">
             <ul className="nav__container">

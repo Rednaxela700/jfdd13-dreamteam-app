@@ -26,7 +26,7 @@ body {
   border: 2px solid $color-accent;
   padding: calc(1.5rem - 1px) 2rem;
   background: $color-accent;
-  border-radius: 2rem;
+  border-radius: .5rem;
   transition: .3s background;
   cursor: pointer;
   &:hover {
