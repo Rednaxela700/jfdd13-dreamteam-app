@@ -1,0 +1,21 @@
+.header {
+  &__container {
+    display: flex;
+    height: 4.5rem;
+  }
+}
+.logo {
+  font-size: 36px;
+  font-weight: 700;
+  line-height: 63px;
+}
+.nav {
+  &__container {
+    display: flex;
+    font-size: 24px;
+    list-style: none;
+  }
+  &__item {
+    margin: 1rem;
+  }
+}
