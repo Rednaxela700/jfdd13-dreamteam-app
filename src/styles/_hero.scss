@@ -1,21 +1,19 @@
-.header {
+.hero {
+  margin: 7.5rem 0;
   &__container {
     display: flex;
-    height: 4.5rem;
+    flex-direction: column;
+    justify-content: center;
+    background: url(../assets/hero.jpg) no-repeat right;
+    height: 34.625rem;
   }
-}
-.logo {
-  font-size: 36px;
-  font-weight: 700;
-  line-height: 63px;
-}
-.nav {
-  &__container {
-    display: flex;
-    font-size: 24px;
-    list-style: none;
+  &__title {
+    font-size: 3.875rem;
   }
-  &__item {
-    margin: 1rem;
+  &__subtitle {
+    margin: 2rem 0 4rem;
+  }
+  &__cta {
+    text-transform: capitalize;
   }
 }

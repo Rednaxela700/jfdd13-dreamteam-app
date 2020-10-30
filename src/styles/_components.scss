@@ -10,3 +10,18 @@ body {
   color: $color-black;
   background: $color-white;
 }
+
+.wrapper {
+  margin: 0 4.5rem;
+}
+
+.cta {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  padding: 1.5rem 2rem;
+  background: $color-accent;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+}
