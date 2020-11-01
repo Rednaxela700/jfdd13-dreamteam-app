@@ -45,10 +45,13 @@ body {
     font-size: 1rem;
     font-weight: normal;
   }
+  & p {
+    color: $color-black;
+  }
   & a {
     text-decoration: none;
     &:visited {
-      color: inherit;
+      color: $color-black;
     }
   }
 }
