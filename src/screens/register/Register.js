@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { register } from "../../services/AuthService";
 import IconGoogle from '../../assets/googleIcon.svg'
 import Logo from "../../layout/Logo";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -76,12 +77,13 @@ const Register = () => {
             </button>
               </div>
             </form>
+            <p>
+              Already have an account? <Link to="/login" className="section__link">Sign in</Link>
+              </p>
           </div>
 
         </section>
-        <div className="login__container login__bg">
-          {/* <img src={RegisterImg} alt="" className="login__bg"/> */}
-        </div>
+        <div className="login__container login__bg"></div>
       </main>
       {registerErrorMsg && (
         <div className="form__error">Podaj poprawny E-mail oraz Hasło</div>

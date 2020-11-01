@@ -15,10 +15,21 @@ body {
   margin: 0 4.5rem;
 }
 
-.section__title {
+.section {
+  &__title {
   font-size: 3rem;
   text-align: center;
   line-height: 4rem;
+  }
+  &__link {
+    font-weight: bold;
+    color: $color-accent;
+    text-decoration: none;
+    &:hover, &:visited {
+      text-decoration: underline;
+      text-decoration-color: $color-black;
+    }
+  }
 }
 
 .logo {
