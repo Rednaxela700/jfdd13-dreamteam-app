@@ -18,7 +18,7 @@
   font-size: 2.25rem;
   font-weight: 700;
   &__title {
-    line-height: 63px;
+    line-height: 4rem;
   }
   &--accent {
     color: $color-accent;
@@ -31,7 +31,7 @@
 .nav {
   &__container {
     display: flex;
-    font-size: 24px;
+    font-size: 1.5rem;
     list-style: none;
   }
   &__link {
