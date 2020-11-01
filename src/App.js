@@ -24,7 +24,7 @@ function App({user}) {
   useEffect(() => {
     if (!loading) {
       setLoading(false);
-      console.log(fetchUser(currentUser))
+      fetchUser(currentUser)
     }
     return () => setLoading(false)
     // eslint-disable-next-line
@@ -33,7 +33,6 @@ function App({user}) {
   const fetchUser = (user) => {
     return firebase.database().ref('/users/' + user).once('value')
       .then(function (snapshot) {
-        console.log(snapshot)
         var userObj = (snapshot.val() && snapshot.val()) || 'Anonymous';
         // userObj.id = userId
         setUserData(userObj)
