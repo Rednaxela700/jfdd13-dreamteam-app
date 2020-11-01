@@ -42,7 +42,7 @@ export const signout = () => {
     });
 };
 
-export const register = (email, password, name, date) => {
+export const register = (email, password) => {
   return firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
@@ -51,16 +51,15 @@ export const register = (email, password, name, date) => {
       const id = user.uid
       user
         .updateProfile({
-          displayName: name
+          displayName: email
         })
         .then(() => {
           firebase
             .database()
             .ref(`/users/${id}`)
             .set({
-              name,
               email,
-              date
+              date: Date.now()
             })
         });
     })

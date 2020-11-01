@@ -5,14 +5,15 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import { ShowLoader } from "./Loader";
 import Main from "../layout/Main";
+import App from "../App";
 
-const Secure = props => {
+const Secure = () => {
   const [user, setUser] = useState(null);
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
       if (user) {
-        setUser(true);
+        setUser(user.uid);
       } else {
         setUser(false);
       }
@@ -39,8 +40,8 @@ const Secure = props => {
     );
   }
 
-  if (user === true) {
-    return props.children;
+  if (user) {
+    return <App user={user}/>
   }
 };
 

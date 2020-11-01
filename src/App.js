@@ -15,27 +15,27 @@ import Favicon from 'react-favicon';
 import firebase from 'firebase'
 import './styles/index.scss'
 
-function App() {
+function App({user}) {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(true);
   const [avatarUrl, setAvatarUrl] = useState('')
-  const currentUser = firebase.auth().currentUser.uid;
+  const currentUser = user 
 
   useEffect(() => {
     if (!loading) {
-      setLoading(true);
-      fetchUser(currentUser)
+      setLoading(false);
+      console.log(fetchUser(currentUser))
     }
     return () => setLoading(false)
     // eslint-disable-next-line
   }, [])
 
   const fetchUser = (user) => {
-    const userId = user
-    return firebase.database().ref('/users/' + userId).once('value')
+    return firebase.database().ref('/users/' + user).once('value')
       .then(function (snapshot) {
+        console.log(snapshot)
         var userObj = (snapshot.val() && snapshot.val()) || 'Anonymous';
-        userObj.id = userId
+        // userObj.id = userId
         setUserData(userObj)
         setLoading(false);
       });
