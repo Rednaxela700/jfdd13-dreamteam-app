@@ -28,6 +28,7 @@ body {
   background: $color-accent;
   border-radius: .5rem;
   transition: .3s background;
+  line-height: 1rem;
   cursor: pointer;
   &:hover {
     background: $color-white;
