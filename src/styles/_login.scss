@@ -1,0 +1,51 @@
+.login {
+  display: flex;
+  justify-content: space-between;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    &:nth-child(2){
+      margin-right: -4.5rem;
+    }
+  }
+  &__bg {
+    height: 100vh;
+    width: calc(60% + 4.5rem);
+    background: url('../assets/register.jpg') no-repeat center;
+    background-size: cover;
+  }
+  &__title {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  &__form {
+    max-width: 25rem;
+  }
+  &__input {
+    display: block;
+    width: 100%;
+    padding: 1.5rem 2rem;
+    margin: 1rem 0;
+    border: 2px solid $color-accent;
+    border-radius: .5rem;
+    line-height: 1.5rem;
+    & [type=text], [type=password] {
+      font-family: 'Montserrat', sans-serif;
+    }
+    
+  }
+  &__submit {
+    margin-top: 2rem;
+  }
+  &__google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    line-height: 160%;
+  }
+  & .login__input:-internal-autofill-selected {
+    background-color: #fff !important;
+  }
+}
