@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import firebase from "firebase";
 import Login from "../screens/Login";
-import Register from "../screens/register/Register";
+import Register from "../screens/Register";
 import { ShowLoader } from "./Loader";
 import Main from "../layout/Main";
 

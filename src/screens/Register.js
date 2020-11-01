@@ -1,14 +1,14 @@
 import React, { Fragment, useState } from "react";
-import { register } from "../../services/AuthService";
-import IconGoogle from '../../assets/googleIcon.svg'
-import Logo from "../../layout/Logo";
+import { register } from "../services/AuthService";
+import IconGoogle from "../assets/googleIcon.svg"
+import Logo from "../layout/Logo";
 import { Link } from "react-router-dom";
 
 const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [registerErrorMsg, setRegisterErrorMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const registerTime = Date.now()
 
@@ -16,7 +16,7 @@ const Register = () => {
     try {
       await register(email, password, name, registerTime);
     } catch (e) {
-      setRegisterErrorMsg(e.code);
+      setErrorMsg(e.code);
     }
   };
 
@@ -36,13 +36,6 @@ const Register = () => {
               onSubmit={(e) => e.preventDefault()}
             >
               <div className="">
-                {/* <input
-                className="form__input login__input"
-                value={name}
-                type="text"
-                onChange={event => setName(event.target.value)}
-                placeholder="Imię"
-              /> */}
                 <div className="">
                   <input
                     className="form__input login__input"
@@ -57,7 +50,7 @@ const Register = () => {
                     className="form__input login__input"
                     value={password}
                     onChange={event => setPassword(event.target.value)}
-                    placeholder="Hasło"
+                    placeholder="Password"
                     type="password"
                   />
                 </div>
@@ -79,7 +72,7 @@ const Register = () => {
             </form>
             <p>
               Already have an account? <Link to="/login" className="section__link">Sign in</Link>
-              </p>
+            </p>
           </div>
           <div className="terms__container">
             <Link to="/" className="terms__link">Privacy Policy</Link>
@@ -89,7 +82,7 @@ const Register = () => {
         </section>
         <div className="login__container login__bg"></div>
       </main>
-      {registerErrorMsg && (
+      {errorMsg && (
         <div className="form__error">Podaj poprawny E-mail oraz Hasło</div>
       )}
     </Fragment>
