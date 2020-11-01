@@ -2,10 +2,9 @@
   display: flex;
   justify-content: space-between;
   &__container {
-    position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     &:nth-child(2){
       margin-right: -4.5rem;
     }
@@ -17,11 +16,6 @@
     background-size: cover;
   }
 
-  &__logo {
-    position: absolute;
-    top: 2rem;
-    left: 0;
-  }
   &__content {
     display: flex;
     flex-direction: column;
@@ -69,6 +63,9 @@
     background-color: #fff !important;
   }
   & .logo {
-    justify-self: flex-start;
+    margin-top: 2rem;
+  }
+  & .terms__container {
+    margin: 2rem 0;
   }
 }

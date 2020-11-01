@@ -69,3 +69,16 @@ body {
     border: 1px solid $color-accent;
   }
 }
+
+.terms__container {
+  font-size: .75rem;
+  color: #A8A8A8;
+
+  & > .terms__link {
+    color: #A8A8A8;
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

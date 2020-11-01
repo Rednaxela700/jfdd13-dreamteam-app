@@ -81,7 +81,11 @@ const Register = () => {
               Already have an account? <Link to="/login" className="section__link">Sign in</Link>
               </p>
           </div>
-
+          <div className="terms__container">
+            <Link to="/" className="terms__link">Privacy Policy</Link>
+            &nbsp;and&nbsp;
+            <Link to="/" className="terms__link">Terms of Service</Link>
+          </div>
         </section>
         <div className="login__container login__bg"></div>
       </main>
