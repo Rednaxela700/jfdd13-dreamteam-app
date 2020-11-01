@@ -15,13 +15,13 @@ export default function Nav() {
               <Link to="/" className="nav__link">Create</Link>
             </li>
             <li className="nav__item">
-              <Link to="/" className="nav__link">Join</Link>
+              <Link to="/register" className="nav__link">Join</Link>
             </li>
             <li className="nav__item">
               <Link to="/" className="nav__link">About</Link>
             </li>
             <li className="nav__item">
-              <Link to="/" className="nav__link">
+              <Link to="/login" className="nav__link">
                 <img className="nav__icon" src={userIcon} alt="user icon" />
               </Link>
             </li>

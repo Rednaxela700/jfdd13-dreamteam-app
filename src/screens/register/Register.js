@@ -1,14 +1,8 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { Fragment, useState } from "react";
 import {
-  Button,
-  Form,
-  Grid,
-  Header,
   Message,
-  Segment
 } from "semantic-ui-react";
-import { register } from "../services/AuthService";
+import { register } from "../../services/AuthService";
 
 const Register = () => {
   const [name, setName] = useState("");
@@ -27,30 +21,31 @@ const Register = () => {
   };
 
   return (
-    <Grid textAlign="center" style={{ height: "100vh" }} verticalAlign="middle">
-      <Grid.Column style={{ maxWidth: 450 }}>
-        <Header as="h2" color="blue" textAlign="center">
+      <Fragment>
+        <h1>
           Utwórz konto
-        </Header>
-        <Form size="large">
-          <Segment stacked>
-            <Form.Input
+        </h1>
+        <form >
+          <div>
+            <input
               value={name}
+              type="text"
               onChange={event => setName(event.target.value)}
               fluid
               icon="user"
               iconPosition="left"
               placeholder="Imię"
             />
-            <Form.Input
+            <input
               value={email}
+              type="text"
               onChange={event => setEmail(event.target.value)}
               fluid
               icon="user"
               iconPosition="left"
               placeholder="E-mail"
             />
-            <Form.Input
+            <input
               value={password}
               onChange={event => setPassword(event.target.value)}
               fluid
@@ -60,29 +55,21 @@ const Register = () => {
               type="password"
             />
 
-            <Button
+            <button
               onClick={() => registerError()}
               color="blue"
               fluid
               size="large"
+              type="submit"
             >
               Zarejestruj się
-            </Button>
-          </Segment>
-        </Form>
+            </button>
+          </div>
+        </form>
         {registerErrorMsg && (
           <Message error={true}>Podaj poprawny E-mail oraz Hasło</Message>
         )}
-        <Message>
-          Jesteś już zarejestrowany? - <Link style={{ color: "blue" }} to="/login">Zaloguj się</Link>
-        </Message>
-        <Message info>
-          Tylko jeden krok dzieli Cię od znalezienia <br></br> najlepszej dla
-        Ciebie wycieczki. <br></br>Załóż konto lub zaloguj się, jeśli już je
-        posiadasz <br></br>i zaplanuj podróż marzeń.
-      </Message>
-      </Grid.Column>
-    </Grid>
+      </Fragment>
   );
 };
 

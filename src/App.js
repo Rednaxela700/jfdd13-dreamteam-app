@@ -8,7 +8,7 @@ import Favorites from "./components/Favourites";
 import Search from "./components/Search";
 import Appbar from "./layout/Appbar";
 import UserPanel from './components/UserPanel';
-import Register from './screens/Register';
+import Register from './screens/register/Register';
 import Login from './screens/Login';
 import LoggedUser from './screens/LoggedUser';
 import Favicon from 'react-favicon';
