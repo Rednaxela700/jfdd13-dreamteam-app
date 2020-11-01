@@ -1,5 +1,5 @@
 import React from "react";
-import { register } from "../services/AuthService";
+import { register, loginWithGoogle } from "../services/AuthService";
 import UserAuth from "../layout/UserAuth";
 
 const Register = () => {
@@ -9,7 +9,7 @@ const Register = () => {
       title="Create an account"
       submitFn={register}
       submitMsg="Sign up"
-      googleFn={""}
+      googleFn={loginWithGoogle}
       googleMsg="Sign up with Google"
       optionMessage="Already have an account?"
       optionLink="/login"
