@@ -14,11 +14,34 @@ body {
 .wrapper {
   margin: 0 4.5rem;
 }
+
 .section__title {
   font-size: 3rem;
   text-align: center;
   line-height: 4rem;
 }
+
+.logo {
+  font-size: 2.25rem;
+  font-weight: 700;
+  &__title {
+    line-height: 4rem;
+  }
+  &--accent {
+    color: $color-accent;
+  }
+  &__subtitle {
+    font-size: 1rem;
+    font-weight: normal;
+  }
+  & a {
+    text-decoration: none;
+    &:visited {
+      color: inherit;
+    }
+  }
+}
+
 .cta {
   font-family: 'Montserrat', sans-serif;
   font-size: 1rem;

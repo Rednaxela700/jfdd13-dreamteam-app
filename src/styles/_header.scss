@@ -14,20 +14,7 @@
     z-index: 2;
   }
 }
-.logo {
-  font-size: 2.25rem;
-  font-weight: 700;
-  &__title {
-    line-height: 4rem;
-  }
-  &--accent {
-    color: $color-accent;
-  }
-  &__subtitle {
-    font-size: 1rem;
-    font-weight: normal;
-  }
-}
+
 .nav {
   &__container {
     display: flex;
