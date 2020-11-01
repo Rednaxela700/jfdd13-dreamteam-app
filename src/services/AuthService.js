@@ -16,7 +16,6 @@ export const passwordReset = email => {
 
 export const loginWithGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
   firebase.auth().languageCode = "pl";
   provider.setCustomParameters({
     login_hint: "user@example.com"
@@ -28,8 +27,20 @@ export const loginWithGoogle = () => {
       const user = result.user;
       const database = firebase.database()
 
-      database.ref(`/users/${user.uid}/name`).set(user.displayName)
-      database.ref(`/users/${user.uid}/email`).set(user.email)
+      database.ref('/users/' + user.id).once('value')
+        .then((snapshot)=> {
+          const response = snapshot.val() || null
+          if(!!response) {
+            const database = firebase.database()
+            database.ref(`/users/${user.uid}/`).set({
+              name: user.displayName,
+              email: user.email,
+              date: Date.now()
+            })
+          } else {
+            return user.id
+          }
+        })
 
     })
 };
@@ -58,6 +69,7 @@ export const register = (email, password) => {
             .database()
             .ref(`/users/${id}`)
             .set({
+              name: "",
               email,
               date: Date.now()
             })
