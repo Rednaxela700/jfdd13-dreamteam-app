@@ -16,7 +16,7 @@ export default function Main({ userData, logged, avatarUrl, setAvatarUrl }) {
         setAvatarUrl={setAvatarUrl}
       />
       <main className="wrapper">
-        {logged && <Search />}
+        {logged && <Search userData={userData} />}
         {!logged && <Fragment>
           <Hero />
           <Info />

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ShowLoader } from "./Loader";
 import { data } from '../data'
-import { fetchTrips, fetchFromFavorites, stopFetching, toggleFavorite } from "../services/TripService";
+import { fetchTrips, fetchFromFavorites, stopFetching, toggleFavorite, stopFetchingFromUser } from "../services/TripService";
 import { Continents } from "./Continents";
 import { SearchInputs, FilteredQueryResult, ResultsGrid, NoQueryResult } from "./SearchItems";
 import TripModal from "./TripModal";
@@ -9,7 +9,7 @@ import TripModal from "./TripModal";
 const initialRange = 1999;
 const defaultImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTDgEOsiQyCYSqiBVVAWAxMkKz8jiz80Qu0U8MuaiGJryGMTVR&s';
 
-const Search = () => {
+const Search = ({userData}) => {
   const [rangeValue, setRangeValue] = useState(initialRange);
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -18,7 +18,6 @@ const Search = () => {
   const [favourites, setFavourites] = useState([]);
   const [fetched, setFetched] = useState(false);
   const [favouriteTrip, setFavouriteTrip] = useState(false);
-
   useEffect(() => {
     (async () => {
       const results = await fetchTrips()
@@ -30,18 +29,16 @@ const Search = () => {
       await fetchFromFavorites(favourites => {
         setFavourites(favourites)
         setFetched(true)
-        stopFetching()
+        // stopFetching()
       })
-    })
-    ()
+    })()
     return () => {
-      setFetched(true)
-      stopFetching()
+      // setFetched(true)
+      // stopFetchingFromUser(userData.id)
     }
-  }
-    , [favouriteTrip])
-
-  if (!fetched) {
+  }, [favouriteTrip])
+  
+  if (!userData) {
     return null;
   }
 
