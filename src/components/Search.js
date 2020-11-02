@@ -20,7 +20,7 @@ const Search = () => {
   const [favouriteTrip, setFavouriteTrip] = useState(false);
 
   useEffect(() => {
-    const f = async () => {
+    (async () => {
       const results = await fetchTrips()
       setResults(results)
       if (favouriteTrip) {
@@ -32,8 +32,8 @@ const Search = () => {
         setFetched(true)
         stopFetching()
       })
-    }
-    f()
+    })
+    ()
     return () => {
       setFetched(true)
       stopFetching()

@@ -80,13 +80,13 @@ export default function Card({ userData, avatarUrl, setAvatarUrl }) {
             <Link to="/" className="nav__link">Your trips</Link>
           </li>
           <li>
-            <Link to="/" className="nav__link">Bio</Link>
+            <Link to="/" className="nav__link">Settings</Link>
           </li>
           <li>
             <button
               onClick={() => signout()}
             >
-              Sign out
+              Log out
               </button>
           </li>
         </ul>

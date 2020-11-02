@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react'
+import Search from '../components/Search'
 import Footer from './Footer'
 import Header from './Header'
 import Hero from './Hero'
@@ -15,9 +16,13 @@ export default function Main({ userData, logged, avatarUrl, setAvatarUrl }) {
         setAvatarUrl={setAvatarUrl}
       />
       <main className="wrapper">
-        <Hero />
-        <Info />
-        <Recent />
+        {logged && <Search />}
+        {!logged && <Fragment>
+          <Hero />
+          <Info />
+          <Recent />
+        </Fragment>
+        }
       </main>
       <Footer />
     </Fragment>

@@ -7,20 +7,19 @@ export const SearchInputs = ({
   handleInputChange, handleSelect, selectedContinent,
   rangeValue, searchQuery, handleRangeSlider
 }) => (
-    <Grid padded={true}>
-      <Grid.Row columns={1} centered={true}>
-        <Grid.Column widescreen={12} largescreen={12} mobile={12}>
-          <Input
+    <div>
+      <div>
+        <div>
+          <input
             onChange={handleInputChange}
             placeholder={'Dokąd chcesz pojechać'}
-            fluid
             value={searchQuery}
           />
           <datalist id={'places'}>
             {data.map(v => <option key={v.id}>{v.city}</option>)}
           </datalist>
-        </Grid.Column>
-      </Grid.Row>
+        </div>
+      </div>
       <Grid.Row columns={2} centered={true}>
         <Grid.Column widescreen={6} largeScreen={6} mobile={12}>
           <Dropdown
@@ -66,7 +65,7 @@ export const SearchInputs = ({
           />
         </GridColumn>
       </Grid.Row>
-    </Grid>
+    </div>
   )
 
 export const FilteredQueryResult = ({
@@ -74,13 +73,13 @@ export const FilteredQueryResult = ({
   setFavouriteTrip, defaultImg
 }) => (
     <div key={trip.id} className={'tripContainer'}>
-      <GridColumn style={{ padding: '0 2rem' }}
+      <div style={{ padding: '0 2rem' }}
         onClick={() => {
           setSelectedTrip(trip)
         }}
       >
         <div style={{ position: 'relative' }}>
-          <Image
+          <img
             className={'TripImage'}
             src={trip.tripImageUrl || defaultImg}
             label={{
@@ -88,11 +87,10 @@ export const FilteredQueryResult = ({
               color: 'blue',
               content: `${trip.city}`
             }}
-            centered={true}
             style={{ cursor: 'pointer' }}
+            alt=""
           />
-          <Icon
-            inverted
+          <p
             className={'iconFavourites'}
             name={favourites[trip.id] !== undefined ? 'heart' : 'heart outline'}
             size={'large'}
@@ -104,19 +102,19 @@ export const FilteredQueryResult = ({
           />
         </div>
         <p>{trip.title}</p>
-      </GridColumn>
+      </div>
     </div>
   )
 
 export const ResultsGrid = ({ queryOutput }) => (
-  <Grid container style={{
+  <div style={{
     display: 'flex',
     justifyContent: 'flex-start',
     flexDirection: 'column',
     height: '100%',
     margin: 'auto !important'
   }}>
-    <Grid.Row
+    <div
       columns={3}
       mobile={1}
       style={{
@@ -125,8 +123,8 @@ export const ResultsGrid = ({ queryOutput }) => (
       }}
     >
       {queryOutput()}
-    </Grid.Row>
-  </Grid>
+    </div>
+  </div>
 )
 
 export const NoQueryResult = ({ message }) => (

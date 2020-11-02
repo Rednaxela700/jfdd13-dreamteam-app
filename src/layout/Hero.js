@@ -9,7 +9,7 @@ export default function Hero() {
           </h1>
         <p className="hero__subtitle">Make a trip that suits you.</p>
         <div className="">
-          <button type="submit" className="cta hero__cta">create your trip</button>
+          <button type="submit" className="cta hero__cta">register now</button>
         </div>
       </div>
     </section>
