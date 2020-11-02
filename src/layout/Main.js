@@ -5,10 +5,15 @@ import Hero from './Hero'
 import Info from './Info'
 import Recent from './Recent'
 
-export default function Main({ userData, logged }) {
+export default function Main({ userData, logged, avatarUrl, setAvatarUrl }) {
   return (
     <Fragment>
-      <Header logged={logged} userData={userData} />
+      <Header
+        logged={logged}
+        userData={userData}
+        avatarUrl={avatarUrl}
+        setAvatarUrl={setAvatarUrl}
+      />
       <main className="wrapper">
         <Hero />
         <Info />

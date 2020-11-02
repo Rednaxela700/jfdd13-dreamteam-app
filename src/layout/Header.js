@@ -4,7 +4,9 @@ import userIcon from '../assets/navIcon.svg'
 import Card from './Card';
 
 
-export default function Nav({ logged, userData }) {
+export default function Header(
+  { logged, userData, avatarUrl, setAvatarUrl }
+  ) {
   const [userOpened, setUserOpened] = useState(false);
   return (
     <header className="header">
@@ -32,7 +34,11 @@ export default function Nav({ logged, userData }) {
                 <img className="nav__icon" src={userIcon} alt="user icon" />
               </button>
               }
-              {userOpened && <Card userData={userData}/>
+              {userOpened && <Card
+                userData={userData}
+                avatarUrl={avatarUrl}
+                setAvatarUrl={setAvatarUrl}
+              />
               }
               {
                 !logged && <Link to="/login" className="nav__link">
