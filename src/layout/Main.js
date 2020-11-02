@@ -5,16 +5,16 @@ import Hero from './Hero'
 import Info from './Info'
 import Recent from './Recent'
 
-export default function Main() {
+export default function Main({ userData, logged }) {
   return (
     <Fragment>
-      <Header />
+      <Header logged={logged} userData={userData} />
       <main className="wrapper">
         <Hero />
-        <Info/>
-        <Recent/>
+        <Info />
+        <Recent />
       </main>
-      <Footer/>
+      <Footer />
     </Fragment>
   )
 }

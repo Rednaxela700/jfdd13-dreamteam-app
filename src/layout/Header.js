@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import userIcon from '../assets/navIcon.svg'
 
-export default function Nav() {
+export default function Nav({ logged, userData }) {
+  const [userOpened, setUserOpened] = useState(false);
   return (
     <header className="header">
       <div className="header__container">
@@ -21,9 +22,21 @@ export default function Nav() {
               <Link to="/" className="nav__link">About</Link>
             </li>
             <li className="nav__item">
-              <Link to="/login" className="nav__link">
+              {logged && <button
+                className="nav__link"
+                onClick={() => setUserOpened(!userOpened)}
+              >
                 <img className="nav__icon" src={userIcon} alt="user icon" />
-              </Link>
+              </button>
+              }
+              {userOpened && <div
+                style={{ position: "absolute", top: "4rem", right: "0"}}
+              >this is user panel</div>}
+              {
+                !logged && <Link to="/login" className="nav__link">
+                  <img className="nav__icon" src={userIcon} alt="user icon" />
+                </Link>
+              }
             </li>
           </ul>
         </nav>
