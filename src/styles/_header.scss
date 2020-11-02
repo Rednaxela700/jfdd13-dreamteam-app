@@ -13,6 +13,11 @@
     background: $color-white;
     z-index: 2;
   }
+  &.logged {
+    & .header__container {
+      background-color: transparent;
+    }
+  }
 }
 
 .nav {
