@@ -72,15 +72,15 @@ export const FilteredQueryResult = ({
   trip, setSelectedTrip, favourites,
   setFavouriteTrip, defaultImg
 }) => (
-    <div key={trip.id} className={'tripContainer'}>
-      <div style={{ padding: '0 2rem' }}
+    <div key={trip.id} className={''}>
+      <div
         onClick={() => {
           setSelectedTrip(trip)
         }}
       >
         <div style={{ position: 'relative' }}>
           <img
-            className={'TripImage'}
+            className={'search__image'}
             src={trip.tripImageUrl || defaultImg}
             label={{
               ribbon: true,
@@ -107,23 +107,11 @@ export const FilteredQueryResult = ({
   )
 
 export const ResultsGrid = ({ queryOutput }) => (
-  <div style={{
-    display: 'flex',
-    justifyContent: 'flex-start',
-    flexDirection: 'column',
-    height: '100%',
-    margin: 'auto !important'
-  }}>
-    <div
-      columns={3}
-      mobile={1}
-      style={{
-        display: 'flex',
-        height: '100%'
-      }}
-    >
-      {queryOutput()}
-    </div>
+  <div
+    className="search__results"
+  >
+
+    {queryOutput()}
   </div>
 )
 
