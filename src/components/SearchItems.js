@@ -1,5 +1,4 @@
 import React from 'react'
-import { Dropdown, Form, Grid, GridColumn, Icon, Image, Input } from "semantic-ui-react";
 import { data } from "../data";
 import { Continents } from "./Continents";
 
@@ -20,28 +19,21 @@ export const SearchInputs = ({
           </datalist>
         </div>
       </div>
-      <Grid.Row columns={2} centered={true}>
-        <Grid.Column widescreen={6} largeScreen={6} mobile={12}>
-          <Dropdown
-            clearable
-            fluid
-            options={Continents}
-            selection
-            placeholder={'Wybierz kontynent'}
-            onChange={handleSelect}
-            value={selectedContinent}
-          />
-        </Grid.Column>
-        <GridColumn
-          as={Form}
-          widescreen={6}
-          largeScreen={6}
-          mobile={12}
-          textAlign={'right'}
+      <div>
+        <div>
+          <select name="selectContinent" id="" onChange={handleSelect}>
+            <option value="Wybierz kontynent">Wybierz kontynent</option>
+            {Continents.map(item => (
+              <option key={item.key} value={item.text}>{item.text}</option>
+            ))}
+          </select>
+        </div>
+        <form
           style={{
             display: 'inline-flex',
             alignItems: 'center',
             justifyContent: 'center',
+            textAlign: 'right'
           }}
         >
           <span
@@ -63,8 +55,8 @@ export const SearchInputs = ({
             value={rangeValue}
             style={{ minHeight: '40px' }}
           />
-        </GridColumn>
-      </Grid.Row>
+        </form>
+      </div>
     </div>
   )
 
