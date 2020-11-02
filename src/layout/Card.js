@@ -44,7 +44,7 @@ export default function Card({ userData, avatarUrl }) {
         </figcaption>
       </figure>
       <p className="card__avatar__name">
-        {userData.name}
+        {userData.name || "Hello there"}
       </p>
       <nav className="nav">
         <ul className="nav__container">

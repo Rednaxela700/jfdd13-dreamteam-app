@@ -3,7 +3,7 @@
   top: 4rem;
   right: 0;
   font-size: 1rem;
-  padding: 2rem 3.5rem 2rem 1.5rem;
+  padding: 2rem 3.5rem;
   background-color: $color-white;
   border: 1px solid $color-black;
   border-radius: .5rem;
@@ -12,7 +12,7 @@
     max-width: 6rem;
     &__name {
       font-size: 1.5rem;
-      margin: 1rem 0 1rem 1rem;
+      margin: 1rem 0;
       text-align: center;
     }
     margin: 0 auto;
@@ -47,11 +47,13 @@
     }
     &__link {
       font-size: 1rem;
+      margin-left: -1rem;
     }
     & button {
       font-family: 'Montserrat';
       font-size: 1rem;
       padding-left: 1rem;
+      margin-left:  -1rem;
       border: none;
       background: transparent;
       cursor: pointer;
