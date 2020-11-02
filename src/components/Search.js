@@ -9,7 +9,7 @@ import TripModal from "./TripModal";
 const initialRange = 1999;
 const defaultImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTDgEOsiQyCYSqiBVVAWAxMkKz8jiz80Qu0U8MuaiGJryGMTVR&s';
 
-const Search = ({userData}) => {
+const Search = ({ userData }) => {
   const [rangeValue, setRangeValue] = useState(initialRange);
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -37,7 +37,7 @@ const Search = ({userData}) => {
       // stopFetchingFromUser(userData.id)
     }
   }, [favouriteTrip])
-  
+
   if (!userData) {
     return null;
   }
@@ -95,7 +95,9 @@ const Search = ({userData}) => {
         rangeValue={rangeValue}
         searchQuery={searchQuery}
       />
-      <ResultsGrid queryOutput={queryOutput} />
+      <div className="search__results">
+        {queryOutput()}
+      </div>
       <TripModal
         selectedTrip={selectedTrip}
         setSelectedTrip={setSelectedTrip}
