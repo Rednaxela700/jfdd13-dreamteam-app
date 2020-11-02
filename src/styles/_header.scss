@@ -13,11 +13,17 @@
     background: $color-white;
     z-index: 2;
   }
-  &.logged {
-    // height: auto;
-    & .header__container {
-      background-color: transparent;
+  &--scrolled{
+    & > div.header__container {
+      background-color: $color-white;
+      transition: .3s background-color ease-in-out;
     }
+  }
+}
+.logged {
+  // height: auto;
+  & .header__container {
+    background-color: transparent;
   }
 }
 

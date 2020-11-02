@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import userIcon from '../assets/navIcon.svg'
 import Card from './Card';
@@ -8,6 +8,17 @@ export default function Header(
   { logged, userData, avatarUrl, setAvatarUrl }
   ) {
   const [userOpened, setUserOpened] = useState(false);
+  useEffect(()=> {
+    window.addEventListener('scroll', handleScroll)
+    return ()=> window.removeEventListener('scroll', handleScroll)
+  },[])
+  const handleScroll = ()=> {
+    if(window.scrollY > 50) {
+      document.querySelector(".header").classList.add("header--scrolled")
+    } else {
+      document.querySelector(".header").classList.remove("header--scrolled")
+    }
+  }
   return (
     <header className={`header${logged? " logged": null}`}>
       <div className="header__container">
