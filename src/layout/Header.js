@@ -9,7 +9,7 @@ export default function Header(
   ) {
   const [userOpened, setUserOpened] = useState(false);
   return (
-    <header className="header">
+    <header className={`header${logged? " logged": null}`}>
       <div className="header__container">
         <div className="logo">
           <p>where<span className="logo--accent">to</span></p>
