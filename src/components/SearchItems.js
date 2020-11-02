@@ -1,27 +1,29 @@
 import React from 'react'
-import { data } from "../data";
 import { Continents } from "./Continents";
+import searchbarIcon from '../assets/searchbarIcon.svg'
 
 export const SearchInputs = ({
-  handleInputChange, handleSelect, selectedContinent,
+  handleInputChange, setSelectedContinent,
   rangeValue, searchQuery, handleRangeSlider
 }) => (
-    <div>
-      <div>
-        <div>
+    <section className="search__queries">
+      <div className="search__hero">
+        <div className="searchbar">
+          <div className="icon__container">
+            <img src={searchbarIcon} alt="" className="icon__item"/>
+        </div>
           <input
+            className="searchbar__input"
             onChange={handleInputChange}
-            placeholder={'Dokąd chcesz pojechać'}
+            placeholder={'Search destination'}
             value={searchQuery}
           />
-          <datalist id={'places'}>
-            {data.map(v => <option key={v.id}>{v.city}</option>)}
-          </datalist>
+          <button type="submit" className="cta">search</button>
         </div>
       </div>
       <div>
-        <div>
-          <select name="selectContinent" id="" onChange={handleSelect}>
+        <div className="search__input">
+          <select name="selectContinent" id="" onChange={(e) => setSelectedContinent(e.target.value)}>
             <option value="Wybierz kontynent">Wybierz kontynent</option>
             {Continents.map(item => (
               <option key={item.key} value={item.text}>{item.text}</option>
@@ -29,6 +31,7 @@ export const SearchInputs = ({
           </select>
         </div>
         <form
+          className="search__input"
           style={{
             display: 'inline-flex',
             alignItems: 'center',
@@ -57,7 +60,7 @@ export const SearchInputs = ({
           />
         </form>
       </div>
-    </div>
+    </section>
   )
 
 export const FilteredQueryResult = ({
