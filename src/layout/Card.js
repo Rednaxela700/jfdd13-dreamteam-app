@@ -1,14 +1,38 @@
-import React, { useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { signout } from "../services/AuthService";
 import defaultAvatar from '../assets/userMock.png'
 import CardIcon from '../assets//cardIcon.svg'
 import { Link } from 'react-router-dom';
+import firebase from 'firebase'
 
 
 
-export default function Card({ userData, avatarUrl }) {
-  const { avatar, date } = userData
-
+export default function Card({ userData, avatarUrl, setAvatarUrl }) {
+  const [selectedFile, setSelectedFile] = useState(false)
+  const { avatar, date, id } = userData
+  const handleAvatarChange = event => {
+    const file = event.target.files[0];
+    const fileExtension = file.name.slice(file.name.lastIndexOf("."))
+    if (file) {
+      const storageRef = firebase.storage().ref(`/users/${id}`);
+      const fileName = `avatar-${id}`
+      const fileRef = storageRef.child(fileName + fileExtension)
+      const uploadTask = fileRef.put(file)
+      uploadTask.on(
+        'state_changed',
+        () => { },
+        () => { },
+        () => {
+          uploadTask.snapshot.ref.getDownloadURL()
+            .then((downloadURL) => {
+              setAvatarUrl(downloadURL)
+              firebase.database().ref(`/users/${id}/avatar`).set(downloadURL)
+            }).then(() => {
+              setSelectedFile(false)
+            });
+        })
+    }
+  }
   const FileUploader = () => {
     const hiddenFileInput = useRef(null);
 
@@ -26,6 +50,7 @@ export default function Card({ userData, avatarUrl }) {
         <input type="file"
           ref={hiddenFileInput}
           className="input--hidden"
+          onChange={handleAvatarChange}
           name="userAvatar"
         />
       </>
