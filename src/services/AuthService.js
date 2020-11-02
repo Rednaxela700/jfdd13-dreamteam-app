@@ -1,3 +1,5 @@
+import React from 'react'
+import { Redirect } from "react-router-dom";
 import firebase from "../firebase";
 
 export async function login(email, password) {
@@ -49,8 +51,7 @@ export const signout = () => {
   return firebase
     .auth()
     .signOut()
-    .then(() => {
-    });
+    .then(() => (<Redirect to="/"/>));
 };
 
 export const register = (email, password) => {
