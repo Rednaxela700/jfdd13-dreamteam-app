@@ -89,7 +89,7 @@ const Search = ({ userData }) => {
     <div className={'search'}>
       <SearchInputs
         handleInputChange={handleInputChange}
-        handleSelect={handleSelect}
+        setSelectedContinent={setSelectedContinent}
         handleRangeSlider={handleRangeSlider}
         selectedContinent={selectedContinent}
         rangeValue={rangeValue}
