@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import userIcon from '../assets/navIcon.svg'
+import { signout } from "../services/AuthService";
+
 
 export default function Nav({ logged, userData }) {
   const [userOpened, setUserOpened] = useState(false);
@@ -16,7 +18,8 @@ export default function Nav({ logged, userData }) {
               <Link to="/" className="nav__link">Create</Link>
             </li>
             <li className="nav__item">
-              <Link to="/register" className="nav__link">Join</Link>
+              {logged && <Link to="/" className="nav__link">Find</Link>}
+              {!logged && <Link to="/register" className="nav__link">Join</Link>}
             </li>
             <li className="nav__item">
               <Link to="/" className="nav__link">About</Link>
@@ -29,9 +32,18 @@ export default function Nav({ logged, userData }) {
                 <img className="nav__icon" src={userIcon} alt="user icon" />
               </button>
               }
-              {userOpened && <div
-                style={{ position: "absolute", top: "4rem", right: "0"}}
-              >this is user panel</div>}
+              {userOpened &&
+                <div
+                  style={{ position: "absolute", top: "4rem", right: "0" }}
+                >this is {userData.email} user panel
+                <div>
+                    <button
+                      onClick={() => signout()}
+                    >sign out
+                  </button>
+                  </div>
+                </div>
+              }
               {
                 !logged && <Link to="/login" className="nav__link">
                   <img className="nav__icon" src={userIcon} alt="user icon" />
