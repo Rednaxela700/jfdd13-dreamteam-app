@@ -15,22 +15,21 @@ function App({ user }) {
   const [loading, setLoading] = useState(false);
   const [userData, setUserData] = useState(true);
   const [avatarUrl, setAvatarUrl] = useState('')
-  const currentUser = user
 
   useEffect(() => {
     if (!loading) {
-      setLoading(false);
-      fetchUser(currentUser)
+      setLoading(true);
+      fetchUser(user)
     }
     return () => setLoading(false)
     // eslint-disable-next-line
-  }, [])
+  }, [user])
 
   const fetchUser = (user) => {
     return firebase.database().ref('/users/' + user).once('value')
       .then(function (snapshot) {
         var userObj = (snapshot.val() && snapshot.val()) || 'Anonymous';
-        // userObj.id = userId
+        userObj.id = user
         setUserData(userObj)
         setLoading(false);
       });
@@ -43,7 +42,12 @@ function App({ user }) {
       <BrowserRouter>
         <Switch>
           <Route exact strict path="/" render={(props) => (
-            <Main {...props} userData={userData} logged={true} />
+            <Main {...props}
+              userData={userData}
+              logged={true}
+              avatarUrl={avatarUrl}
+              setAvatarUrl={setAvatarUrl}
+            />
           )}
           />
           <Route exact strict path="/main" component={Dashboard} />
