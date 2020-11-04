@@ -86,7 +86,11 @@ export const FilteredQueryResult = ({
           setFavouriteTrip(trip.id)
         }}
       />
-      <p className='trip__title'>{trip.title}</p>
+      <div className='trip__overlay'>
+        <p className='trip__title'>
+          {trip.title}
+        </p>
+      </div>
     </div>
   )
 
