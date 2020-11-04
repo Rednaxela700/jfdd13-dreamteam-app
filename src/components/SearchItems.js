@@ -11,8 +11,8 @@ export const SearchInputs = ({
         <h1 className="hero__title search__title">Where to next?</h1>
         <div className="searchbar">
           <div className="icon__container">
-            <img src={searchbarIcon} alt="" className="icon__item"/>
-        </div>
+            <img src={searchbarIcon} alt="" className="icon__item" />
+          </div>
           <input
             className="searchbar__input"
             onChange={handleInputChange}
@@ -75,37 +75,32 @@ export const FilteredQueryResult = ({
   trip, setSelectedTrip, favourites,
   setFavouriteTrip, defaultImg
 }) => (
-    <div key={trip.id} className={''}>
-      <div
-        onClick={() => {
-          setSelectedTrip(trip)
-        }}
-      >
-        <div style={{ position: 'relative' }}>
-          <img
-            className={'search__image'}
-            src={trip.tripImageUrl || defaultImg}
-            label={{
-              ribbon: true,
-              color: 'blue',
-              content: `${trip.city}`
-            }}
-            style={{ cursor: 'pointer' }}
-            alt=""
-          />
-          <p
-            className={'iconFavourites'}
-            name={favourites[trip.id] !== undefined ? 'heart' : 'heart outline'}
-            size={'large'}
-            style={{ cursor: 'pointer' }}
-            onClick={(e) => {
-              e.stopPropagation();
-              setFavouriteTrip(trip.id)
-            }}
-          />
-        </div>
-        <p>{trip.title}</p>
-      </div>
+    <div
+      key={trip.id}
+      className='trip__wrapper'
+      onClick={() => {
+        setSelectedTrip(trip)
+      }}
+    >
+        <img
+          className={'trip__image'}
+          src={trip.tripImageUrl || defaultImg}
+          label={{
+            ribbon: true,
+            color: 'blue',
+            content: `${trip.city}`
+          }}
+          alt=""
+        />
+        <span
+          className={'trip__icon'}
+          name={favourites[trip.id] !== undefined ? 'heart' : 'heart outline'}
+          onClick={(e) => {
+            e.stopPropagation();
+            setFavouriteTrip(trip.id)
+          }}
+        />
+      <p className='trip__title'>{trip.title}</p>
     </div>
   )
 
