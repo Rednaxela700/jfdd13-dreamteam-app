@@ -1,6 +1,7 @@
 import React from 'react'
 import { Continents } from "./Continents";
 import searchbarIcon from '../assets/searchbarIcon.svg'
+import { Link } from 'react-router-dom';
 
 export const SearchInputs = ({
   handleInputChange, setSelectedContinent,
@@ -86,11 +87,11 @@ export const FilteredQueryResult = ({
           setFavouriteTrip(trip.id)
         }}
       />
-      <div className='trip__overlay'>
+      <Link to={`/trip/${trip.id}`} className='trip__overlay'>
         <p className='trip__title'>
           {trip.title}
         </p>
-      </div>
+      </Link>
     </div>
   )
 

@@ -10,6 +10,7 @@ import Favicon from 'react-favicon';
 import firebase from 'firebase'
 import './styles/index.scss'
 import Main from './layout/Main';
+import Trip from './components/Trip';
 
 function App({ user }) {
   const [loading, setLoading] = useState(false);
@@ -55,6 +56,7 @@ function App({ user }) {
           <Route exact strict path="/panel" render={(props) => (
             <UserPanel {...props} data={userData} avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl} />
           )} />
+          <Route exact path="/trip/:tripid" component={Trip}></Route>
           {/* <Route exact strict path="/user" component={LoggedUser} /> */}
           <Route exact strict path="/form" component={TripForm} />
           <Route exact strict path="/favs" component={Favorites} />
