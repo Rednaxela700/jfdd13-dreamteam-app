@@ -8,6 +8,7 @@ export const SearchInputs = ({
 }) => (
     <section className="search__queries">
       <div className="search__hero">
+        <h1 className="hero__title search__title">Where to next?</h1>
         <div className="searchbar">
           <div className="icon__container">
             <img src={searchbarIcon} alt="" className="icon__item"/>
@@ -21,7 +22,7 @@ export const SearchInputs = ({
           <button type="submit" className="cta">search</button>
         </div>
       </div>
-      <div>
+      <div className="search__filters">
         <div className="search__input">
           <select name="selectContinent" id="" onChange={(e) => setSelectedContinent(e.target.value)}>
             <option value="Wybierz kontynent">Wybierz kontynent</option>
@@ -29,6 +30,13 @@ export const SearchInputs = ({
               <option key={item.key} value={item.text}>{item.text}</option>
             ))}
           </select>
+        </div>
+        <div className="filter__container">
+          <button className="filter__btn">All</button>
+          <button className="filter__btn">Popular destinations</button>
+          <button className="filter__btn">European cities</button>
+          <button className="filter__btn">Backpacking</button>
+          <button className="filter__btn">Sightseeing</button>
         </div>
         <form
           className="search__input"
