@@ -3,6 +3,7 @@ import { Continents } from "./Continents";
 import searchbarIcon from '../assets/searchbarIcon.svg'
 import { Link } from 'react-router-dom';
 import Select from 'react-select/';
+import Slider, { Range } from 'rc-slider';
 
 export const SearchInputs = ({
   handleInputChange, setSelectedContinent,
@@ -33,7 +34,7 @@ export const SearchInputs = ({
               menu: provided => ({ ...provided, zIndex: 2, cursor: 'pointer' }),
               control: (provided, state) => ({
                 ...provided,
-                outlineColor: state.isFocused ? '#FAC55C' : null ||  state.isHovered ? '#FAC55C': null,
+                outlineColor: state.isFocused ? '#FAC55C' : null || state.isHovered ? '#FAC55C' : null,
                 borderColor: state.isFocused ? '#FAC55C' : null
 
               }),
