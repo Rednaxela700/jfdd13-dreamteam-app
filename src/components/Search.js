@@ -50,7 +50,7 @@ const Search = ({ userData }) => {
 
   const FilteredResults = () => {
     const continent = Continents.find(continent => continent.value === selectedContinent)
-    const continentText = continent ? continent.text.toLowerCase() : '';
+    const continentText = continent ? continent.label.toLowerCase() : '';
     const userQuery = searchQuery.toLowerCase()
     return results.filter(trip => (
       trip.continent.toLowerCase().includes(continentText) &&

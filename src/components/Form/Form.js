@@ -144,9 +144,9 @@ const TripForm = () => {
                   {Continents.map(continent => (
                     <option
                       key={continent.key}
-                      value={continent.text}
+                      value={continent.label}
                     >
-                      {continent.text}
+                      {continent.label}
                     </option>
                   ))}
                 </Field>
