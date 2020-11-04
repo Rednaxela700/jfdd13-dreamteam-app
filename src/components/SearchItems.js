@@ -38,24 +38,7 @@ export const SearchInputs = ({
           <button className="filter__btn">Backpacking</button>
           <button className="filter__btn">Sightseeing</button>
         </div>
-        <form
-          className="search__input"
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            textAlign: 'right'
-          }}
-        >
-          <span
-            style={{
-              display: 'inline-flex',
-              padding: '0 8px',
-              height: '100%'
-            }}
-          >
-            Maksymalna cena za dobę: {rangeValue || '0'}zł
-                        </span>
+        <div className="search__input filter__slider__container">
           <input
             type={'range'}
             min={0}
@@ -64,9 +47,12 @@ export const SearchInputs = ({
             onChange={handleRangeSlider}
             name={'show'}
             value={rangeValue}
-            style={{ minHeight: '40px' }}
+            className='filter__slider__item'
           />
-        </form>
+          <span className='filter__price'>
+            {rangeValue || '0'}zł
+          </span>
+        </div>
       </div>
     </section>
   )
@@ -82,24 +68,24 @@ export const FilteredQueryResult = ({
         setSelectedTrip(trip)
       }}
     >
-        <img
-          className={'trip__image'}
-          src={trip.tripImageUrl || defaultImg}
-          label={{
-            ribbon: true,
-            color: 'blue',
-            content: `${trip.city}`
-          }}
-          alt=""
-        />
-        <span
-          className={'trip__icon'}
-          name={favourites[trip.id] !== undefined ? 'heart' : 'heart outline'}
-          onClick={(e) => {
-            e.stopPropagation();
-            setFavouriteTrip(trip.id)
-          }}
-        />
+      <img
+        className={'trip__image'}
+        src={trip.tripImageUrl || defaultImg}
+        label={{
+          ribbon: true,
+          color: 'blue',
+          content: `${trip.city}`
+        }}
+        alt=""
+      />
+      <span
+        className={'trip__icon'}
+        name={favourites[trip.id] !== undefined ? 'heart' : 'heart outline'}
+        onClick={(e) => {
+          e.stopPropagation();
+          setFavouriteTrip(trip.id)
+        }}
+      />
       <p className='trip__title'>{trip.title}</p>
     </div>
   )
