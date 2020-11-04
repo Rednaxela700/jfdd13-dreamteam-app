@@ -2,6 +2,7 @@ import React from 'react'
 import { Continents } from "./Continents";
 import searchbarIcon from '../assets/searchbarIcon.svg'
 import { Link } from 'react-router-dom';
+import Select from 'react-select/';
 
 export const SearchInputs = ({
   handleInputChange, setSelectedContinent,
@@ -25,12 +26,22 @@ export const SearchInputs = ({
       </div>
       <div className="search__filters">
         <div className="search__input">
-          <select name="selectContinent" id="" onChange={(e) => setSelectedContinent(e.target.value)}>
-            <option value="Wybierz kontynent">Wybierz kontynent</option>
-            {Continents.map(item => (
-              <option key={item.key} value={item.text}>{item.text}</option>
-            ))}
-          </select>
+          <Select
+            options={Continents}
+            className='filter__select'
+            styles={{
+              menu: provided => ({ ...provided, zIndex: 2, cursor: 'pointer' }),
+              control: (provided, state) => ({
+                ...provided,
+                outlineColor: state.isFocused ? '#FAC55C' : null ||  state.isHovered ? '#FAC55C': null,
+                borderColor: state.isFocused ? '#FAC55C' : null
+
+              }),
+            }}
+            onChange={() => {
+              setSelectedContinent({})
+            }}
+          />
         </div>
         <div className="filter__container">
           <button className="filter__btn">All</button>
@@ -99,7 +110,6 @@ export const ResultsGrid = ({ queryOutput }) => (
   <div
     className="search__results"
   >
-
     {queryOutput()}
   </div>
 )

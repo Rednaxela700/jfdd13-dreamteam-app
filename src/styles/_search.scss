@@ -86,6 +86,13 @@
       outline: none;
     }
   }
+  &__select {
+    min-width: 14rem;
+    &:active, &:focus {
+      outline: 1px solid $color-accent ;
+    }
+  }
+  
   &__slider {
     min-height: 20px;
     &__container {
