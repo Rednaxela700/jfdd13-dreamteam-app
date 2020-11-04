@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { ShowLoader } from "./Loader";
-import { data } from '../data'
 import { fetchTrips, fetchFromFavorites, stopFetching, toggleFavorite, stopFetchingFromUser } from "../services/TripService";
 import { Continents } from "./Continents";
-import { SearchInputs, FilteredQueryResult, ResultsGrid, NoQueryResult } from "./SearchItems";
+import { SearchInputs, FilteredQueryResult, NoQueryResult } from "./SearchItems";
 import TripModal from "./TripModal";
 
 const initialRange = 1999;
@@ -46,8 +45,6 @@ const Search = ({ userData }) => {
     await toggleFavorite(tripId)
   }
   const handleRangeSlider = (e) => setRangeValue(Number(e.target.value))
-
-  const handleSelect = () => setSelectedContinent(data.value)
 
   const handleInputChange = (e) => setSearchQuery(e.target.value)
 
