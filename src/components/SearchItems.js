@@ -3,7 +3,7 @@ import { Continents } from "./Continents";
 import searchbarIcon from '../assets/searchbarIcon.svg'
 import { Link } from 'react-router-dom';
 import Select from 'react-select/';
-import Slider, { Range } from 'rc-slider';
+// import Slider, { Range } from 'rc-slider';
 
 export const SearchInputs = ({
   handleInputChange, setSelectedContinent,
