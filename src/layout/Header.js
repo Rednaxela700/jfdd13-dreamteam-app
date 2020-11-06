@@ -13,10 +13,13 @@ export default function Header(
     return ()=> window.removeEventListener('scroll', handleScroll)
   },[])
   const handleScroll = ()=> {
-    if(window.scrollY > 50) {
-      document.querySelector(".header").classList.add("header--scrolled")
-    } else {
-      document.querySelector(".header").classList.remove("header--scrolled")
+    const domRef = document.querySelector(".header")
+    if(domRef) {
+      if(window.scrollY > 50) {
+        document.querySelector(".header").classList.add("header--scrolled")
+      } else {
+        document.querySelector(".header").classList.remove("header--scrolled")
+      }
     }
   }
   return (
