@@ -22,7 +22,7 @@ function Dashboard() {
 
     const result = await fetchTrips()
     const distribution = result.reduce((result, next) => {
-      result[next.continent] = (result[next.continent] || 0) + 1
+      result[next.name] = (result[next.name] || 0) + 1
       return result;
     }, {})
     const trips = Object.entries(distribution).map(([name, value]) => ({ name, value }))
