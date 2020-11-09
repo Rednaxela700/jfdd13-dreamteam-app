@@ -51,7 +51,7 @@ export const SearchInputs = ({
           <button className="filter__btn">Backpacking</button>
           <button className="filter__btn">Sightseeing</button>
         </div>
-        <div className="search__input filter__slider__container">
+        <div className="search__input filter__slider">
           <input
             type={'range'}
             min={0}
