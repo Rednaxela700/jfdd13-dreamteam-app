@@ -5,6 +5,7 @@ import Login from "../screens/Login";
 import Register from "../screens/Register";
 import { ShowLoader } from "./Loader";
 import Main from "../layout/Main";
+import About from "./pages/About"
 import App from "../App";
 
 const Secure = () => {
@@ -33,6 +34,7 @@ const Secure = () => {
             <Route exact path="/" component={Main} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/register" component={Register} />
+            <Route exact path="/about" component={About} />
             <Redirect to="/" />
           </Switch>
         </BrowserRouter>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
-import Dashboard from "./components/Dashboard";
+import About from "./components/pages/About";
 import TripForm from "./components/Form/Form";
 import Favorites from "./components/Favourites";
 import Search from "./components/Search";
@@ -51,7 +51,7 @@ function App({ user }) {
             />
           )}
           />
-          <Route exact strict path="/main" component={Dashboard} />
+          <Route exact strict path="/about" component={About} />
           <Route exact strict path="/search" component={Search} />
           <Route exact strict path="/panel" render={(props) => (
             <UserPanel {...props} data={userData} avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl} />
