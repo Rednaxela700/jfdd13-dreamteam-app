@@ -9,10 +9,10 @@ export default function About({logged, userData, avatarUrl, setAvatarUrl}) {
   const [pieChartData, setPieChartData] = useState([]);
   const [barChartData, setBarchartData] = useState([]);
 
-  useEffect(()=> {
+  useEffect(() => {
     getPieChartData();
-  },[])
-
+    getBarChartData();
+  }, [])
   const getPieChartData = () => {
     const continentsColors = ['#0088FE', '#00C49F', '#FFBB28', '#d37736', '#FF8042', '#ff3c42', '#764afe'];
 
@@ -43,6 +43,8 @@ export default function About({logged, userData, avatarUrl, setAvatarUrl}) {
     const usersWithDate = fetched.filter(({date}) => date)
     setBarchartData(usersWithDate)
   }
+  if (!barChartData || barChartData.length === 0) return null
+
   return (
     <Fragment>
       <Header
@@ -54,8 +56,8 @@ export default function About({logged, userData, avatarUrl, setAvatarUrl}) {
       <main className="wrapper">
         <div>
           <h1>About Page</h1>
-          {/*<DataBarChart data={barChartData}/>*/}
           <PieChartComponent data={pieChartData}/>
+          <DataBarChart data={barChartData}/>
         </div>
       </main>
     </Fragment>
