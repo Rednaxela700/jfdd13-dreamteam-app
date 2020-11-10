@@ -18,11 +18,15 @@ export default function UserAuth(
 
   }
 ) {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  // const [email, setEmail] = useState("");
+  // const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
-  const [userData, setUserData] = useState({})
+  const [userData, setUserData] = useState({
+    email: '',
+    password: ''
+  })
 
+  const {email, password} = userData
   const registerError = async () => {
     try {
       await submitFn(email, password);
@@ -31,7 +35,7 @@ export default function UserAuth(
     }
   };
 
-  const handleInputs = ({target: {name, value}}) => setUserData({...userData, name: value})
+  const handleInputs = ({target: {name, value}}) => setUserData({...userData, [name]: value})
 
   return (
     <Fragment>
@@ -52,17 +56,19 @@ export default function UserAuth(
                 <div className="">
                   <input
                     className="form__input login__input"
-                    value={email}
+                    name="email"
+                    value={userData.email}
                     type="email"
-                    onChange={event => setEmail(event.target.value)}
+                    onChange={handleInputs}
                     placeholder="E-mail"
                   />
                 </div>
                 <div className="">
                   <input
                     className="form__input login__input"
+                    name="password"
                     value={password}
-                    onChange={event => setPassword(event.target.value)}
+                    onChange={handleInputs}
                     placeholder="Password"
                     type="password"
                   />
@@ -93,7 +99,7 @@ export default function UserAuth(
             <Link to="/" className="terms__link">Terms of Service</Link>
           </div>
         </section>
-        <div className="login__container login__bg" style={customBg ? { backgroundImage: `url(${customBg})` } : null}></div>
+        <div className="login__container login__bg" style={customBg ? {backgroundImage: `url(${customBg})`} : null}/>
       </main>
       {errorMsg && (
         <div className="form__error">Podaj poprawny E-mail oraz Hasło</div>
