@@ -4,7 +4,8 @@ import firebase from "../firebase";
 
 export async function login(email, password) {
   try {
-    await firebase.auth().signInWithEmailAndPassword(email, password)
+    const req = await firebase.auth().signInWithEmailAndPassword(email, password);
+    return req
 
   } catch (error) {
 
