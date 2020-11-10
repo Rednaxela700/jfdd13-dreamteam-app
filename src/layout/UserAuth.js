@@ -21,6 +21,7 @@ export default function UserAuth(
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [userData, setUserData] = useState({})
 
   const registerError = async () => {
     try {
@@ -29,6 +30,8 @@ export default function UserAuth(
       setErrorMsg(e.code);
     }
   };
+
+  const handleInputs = ({target: {name, value}}) => setUserData({...userData, name: value})
 
   return (
     <Fragment>
@@ -50,7 +53,7 @@ export default function UserAuth(
                   <input
                     className="form__input login__input"
                     value={email}
-                    type="text"
+                    type="email"
                     onChange={event => setEmail(event.target.value)}
                     placeholder="E-mail"
                   />

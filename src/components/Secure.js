@@ -1,50 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import firebase from "firebase";
+import React, {useState, useEffect, useContext} from "react";
+import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
-import { ShowLoader } from "./Loader";
+import {ShowLoader} from "./Loader";
 import Main from "../layout/Main";
 import About from "./pages/About"
 import App from "../App";
+import AppState from "../context/app/AppState";
 
 const Secure = () => {
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        setUser(user.uid);
-      } else {
-        setUser(false);
-      }
-    });
-  }, []);
-
-  if (user == null) {
-    return ShowLoader()
-
-  }
-
-  if (user === false) {
-    return (
-      <div>
-        <BrowserRouter>
-          <Switch>
-            <Route exact path="/" component={Main} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/about" component={About} />
-            <Redirect to="/" />
-          </Switch>
-        </BrowserRouter>
-      </div>
-    );
-  }
-
   if (user) {
-    return <App user={user}/>
+    return <AppState><App user={user}/></AppState>
   }
+  return (
+    <AppState>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Main}/>
+          <Route exact path="/login" component={Login}/>
+          <Route exact path="/register" component={Register}/>
+          <Route exact path="/about" component={About}/>
+          <Redirect to="/"/>
+        </Switch>
+      </BrowserRouter>
+    </AppState>
+  );
 };
 
 export default Secure;
