@@ -1,7 +1,7 @@
 import {
   SET_USER_DATA,
   GET_BARCHART_DATA,
-  GET_PIECHART_DATA, FETCH_TRIPS,
+  GET_PIECHART_DATA, FETCH_TRIPS, LOGIN_USER,
 } from '../types'
 
 export default (state, action) => {
@@ -28,6 +28,11 @@ export default (state, action) => {
       return {
         ...state,
         trips: action.payload,
+      }
+    case LOGIN_USER:
+      return {
+        ...state,
+        user: action.payload
       }
     default :
       return state;
