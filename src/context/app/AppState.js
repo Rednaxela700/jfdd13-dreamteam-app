@@ -92,7 +92,7 @@ const AppState = props => {
     const continentsWithColors = arr.map((continent, index) => ({...continent, color: continentsColors[index]}))
     dispatch({
       type: GET_PIECHART_DATA,
-      payload: continentsColors
+      payload: continentsWithColors
     })
 
   }
