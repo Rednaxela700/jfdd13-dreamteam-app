@@ -1,15 +1,17 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useContext } from 'react'
 import { signout } from "../services/AuthService";
 import defaultAvatar from '../assets/userMock.png'
 import CardIcon from '../assets//cardIcon.svg'
 import { Link } from 'react-router-dom';
 import firebase from 'firebase'
+import AppContext from "../context/app/AppContext";
 
+export default function Card() {
+  const [avatarUrl, setAvatarUrl] = useState('');
+  const [selectedFile, setSelectedFile] = useState(false);
+  const appContext = useContext(AppContext);
+  const {id, name, avatar, date} = appContext
 
-
-export default function Card({ userData, avatarUrl, setAvatarUrl }) {
-  const [selectedFile, setSelectedFile] = useState(false)
-  const { avatar, date, id } = userData
   const handleAvatarChange = event => {
     const file = event.target.files[0];
     const fileExtension = file.name.slice(file.name.lastIndexOf("."))
@@ -27,9 +29,11 @@ export default function Card({ userData, avatarUrl, setAvatarUrl }) {
             .then((downloadURL) => {
               setAvatarUrl(downloadURL)
               firebase.database().ref(`/users/${id}/avatar`).set(downloadURL)
-            }).then(() => {
+            })
+            .then(() => {
               setSelectedFile(false)
-            });
+            })
+            .catch(err => console.error(err.message));
         })
     }
   }
@@ -42,7 +46,7 @@ export default function Card({ userData, avatarUrl, setAvatarUrl }) {
     return (
       <>
         <button
-          onClick={handleClick}
+          onClick={(e) => handleClick(e)}
           className="card__avatar--change"
         >
           <img src={CardIcon} alt="" />
@@ -69,7 +73,7 @@ export default function Card({ userData, avatarUrl, setAvatarUrl }) {
         </figcaption>
       </figure>
       <p className="card__avatar__name">
-        {userData.name || "Hello there"}
+        {name || "Hello there"}
       </p>
       <nav className="nav">
         <ul className="nav__container">
