@@ -8,9 +8,8 @@ import {
   FETCH_TRIPS,
   LOGIN_USER,
 } from '../types'
-import {login} from "../../services/AuthService";
 import firebase from "firebase";
-import {pieChart} from "../../mockup";
+import {fetchFromFavorites} from "../../services/TripService";
 
 const AppState = props => {
   const initialState = {
@@ -39,12 +38,9 @@ const AppState = props => {
         })
     }
 
-    const dbRef = await firebase.database().ref('/users/' + await getUserId())
     let userObj
     {
       let user = firebase.auth().currentUser;
-
-      let name, email, photoUrl, uid, emailVerified;
 
       if (user != null) {
         userObj = {
@@ -52,11 +48,13 @@ const AppState = props => {
           email: user.email,
           avatar: user.photoURL,
           emailVerified: user.emailVerified,
+          favourites: [],
           id: user.uid  // The user's ID, unique to the Firebase project. Do NOT use
           // this value to authenticate with your backend server, if
           // you have one. Use User.getToken() instead.}
         }
       }
+      fetchFromFavorites(favourites => userObj.favourites = favourites);
     }
     dispatch({
       type: LOGIN_USER,
@@ -81,6 +79,7 @@ const AppState = props => {
       payload: trips,
     });
   }
+
   const getPieChartData = (trips) => {
     const continentsColors = ['#0088FE', '#00C49F', '#FFBB28', '#d37736', '#FF8042', '#ff3c42', '#764afe'];
 
