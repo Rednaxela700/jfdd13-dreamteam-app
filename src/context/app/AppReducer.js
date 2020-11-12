@@ -16,7 +16,6 @@ export default (state, action) => {
       return {
         ...state,
         pieChartData: action.payload,
-        loading: false
 
       }
     case GET_BARCHART_DATA:

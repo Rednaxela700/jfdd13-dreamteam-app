@@ -1,14 +1,13 @@
 import React, {useReducer} from 'react'
 import PublicReducer from './AppReducer'
 import AppContext from './AppContext'
-import {Redirect} from 'react-router-dom'
 import {
   SET_USER_DATA,
   GET_BARCHART_DATA,
   GET_PIECHART_DATA,
   FETCH_TRIPS,
   SET_ERROR,
-  LOGOUT_USER
+  LOGOUT_USER,
 } from '../types'
 import firebase from "firebase";
 import {signOut} from "../../services/AuthService";
@@ -91,7 +90,6 @@ const AppState = props => {
       }
     })
     dispatch({
-      loading: true,
       type: FETCH_TRIPS,
       payload: trips,
     });
@@ -134,4 +132,3 @@ const AppState = props => {
 }
 
 export default AppState;
-
