@@ -8,7 +8,7 @@ import Recent from './Recent'
 import AppContext from '../context/app/AppContext'
 import {ShowLoader} from "../components/Loader";
 
-export default function Main({ logged, avatarUrl, setAvatarUrl }) {
+export default function Main({ avatarUrl, setAvatarUrl }) {
   const appContext = useContext(AppContext);
   const {loading, fetchTrips,trips, getPieChartData, user, setUserData} = appContext;
   useEffect(()=>{
@@ -24,7 +24,6 @@ export default function Main({ logged, avatarUrl, setAvatarUrl }) {
   return (
     <Fragment>
       <Header
-        logged={logged}
         avatarUrl={avatarUrl}
         setAvatarUrl={setAvatarUrl}
       />

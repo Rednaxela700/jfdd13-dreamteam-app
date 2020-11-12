@@ -1,14 +1,19 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import {Link} from 'react-router-dom'
 import userIcon from '../assets/navIcon.svg'
 import Card from './Card';
+import AppContext from '../context/app/AppContext'
 
-export default function Header({logged}) {
+export default function Header() {
+  const appContext = useContext(AppContext);
   const [userOpened, setUserOpened] = useState(false);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  const {user} = appContext;
+
   const handleScroll = () => {
     const domRef = document.querySelector(".header")
     if (domRef) {
@@ -20,7 +25,7 @@ export default function Header({logged}) {
     }
   }
   return (
-    <header className={`header${logged ? " logged" : null}`}>
+    <header className={`header${user ? " logged" : null}`}>
       <div className="header__container">
         <div className="logo">
           <p>where<span className="logo--accent">to</span></p>
@@ -31,7 +36,7 @@ export default function Header({logged}) {
               <Link to="/" className="nav__link">Create</Link>
             </li>
             <li className="nav__item">
-              {logged ?
+              {user ?
                 <Link to="/" className="nav__link">Find</Link>
                 :
                 <Link to="/register" className="nav__link">Join</Link>
@@ -41,7 +46,7 @@ export default function Header({logged}) {
               <Link to="/about" className="nav__link">About</Link>
             </li>
             <li className="nav__item">
-              {logged && <button
+              {user && <button
                 className="nav__link"
                 onClick={() => setUserOpened(!userOpened)}
               >
@@ -50,7 +55,7 @@ export default function Header({logged}) {
               }
               {userOpened && <Card/>}
               {
-                !logged && <Link to="/login" className="nav__link">
+                !user && <Link to="/login" className="nav__link">
                   <img className="nav__icon" src={userIcon} alt="user icon"/>
                 </Link>
               }
