@@ -1,5 +1,5 @@
 import React, { useState, useRef, useContext } from 'react'
-import { signout } from "../services/AuthService";
+import { signOut } from "../services/AuthService";
 import defaultAvatar from '../assets/userMock.png'
 import CardIcon from '../assets//cardIcon.svg'
 import { Link } from 'react-router-dom';
@@ -8,9 +8,8 @@ import AppContext from "../context/app/AppContext";
 
 export default function Card() {
   const [avatarUrl, setAvatarUrl] = useState('');
-  const [selectedFile, setSelectedFile] = useState(false);
   const appContext = useContext(AppContext);
-  const {id, name, avatar, date} = appContext
+  const {user: {id, name, avatar, date}, clearUser} = appContext
 
   const handleAvatarChange = event => {
     const file = event.target.files[0];
@@ -29,9 +28,6 @@ export default function Card() {
             .then((downloadURL) => {
               setAvatarUrl(downloadURL)
               firebase.database().ref(`/users/${id}/avatar`).set(downloadURL)
-            })
-            .then(() => {
-              setSelectedFile(false)
             })
             .catch(err => console.error(err.message));
         })
@@ -88,7 +84,7 @@ export default function Card() {
           </li>
           <li>
             <button
-              onClick={() => signout()}
+              onClick={() => clearUser()}
             >
               Log out
               </button>
