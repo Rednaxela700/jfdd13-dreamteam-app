@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "./App.css";
 import About from "./components/pages/About";
@@ -11,30 +11,14 @@ import firebase from 'firebase'
 import './styles/index.scss'
 import Main from './layout/Main';
 import Trip from './components/Trip';
+import AppContext from "./context/app/AppContext";
 
-function App({ user }) {
-  const [loading, setLoading] = useState(false);
-  const [userData, setUserData] = useState(true);
-  const [avatarUrl, setAvatarUrl] = useState('')
 
-  useEffect(() => {
-    if (!loading) {
-      setLoading(true);
-      fetchUser(user)
-    }
-    return () => setLoading(false)
-    // eslint-disable-next-line
-  }, [user])
+function App() {
 
-  const fetchUser = (user) => {
-    return firebase.database().ref('/users/' + user).once('value')
-      .then(function (snapshot) {
-        var userObj = (snapshot.val() && snapshot.val()) || 'Anonymous';
-        userObj.id = user
-        setUserData(userObj)
-        setLoading(false);
-      });
-  }
+
+  const appContext = useContext(AppContext);
+  const {loading, user} = appContext;
 
   if (loading) return null
   return (
@@ -44,17 +28,16 @@ function App({ user }) {
         <Switch>
           <Route exact strict path="/" render={(props) => (
             <Main {...props}
-              userData={userData}
               logged={true}
-              avatarUrl={avatarUrl}
-              setAvatarUrl={setAvatarUrl}
+              // avatarUrl={avatarUrl}
+              // setAvatarUrl={setAvatarUrl}
             />
           )}
           />
           <Route exact strict path="/about" component={About} />
           <Route exact strict path="/search" component={Search} />
           <Route exact strict path="/panel" render={(props) => (
-            <UserPanel {...props} data={userData} avatarUrl={avatarUrl} setAvatarUrl={setAvatarUrl} />
+            <UserPanel {...props}  avatarUrl={'avatarUrl'} setAvatarUrl={'setAvatarUrl'} />
           )} />
           <Route exact path="/trip/:tripid" component={Trip}></Route>
           {/* <Route exact strict path="/user" component={LoggedUser} /> */}

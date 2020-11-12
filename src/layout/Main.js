@@ -7,28 +7,28 @@ import Info from './Info'
 import Recent from './Recent'
 import AppContext from '../context/app/AppContext'
 import {ShowLoader} from "../components/Loader";
+import AppState from "../context/app/AppState";
 
-export default function Main({ userData, logged, avatarUrl, setAvatarUrl }) {
+export default function Main({ logged, avatarUrl, setAvatarUrl }) {
   const appContext = useContext(AppContext);
-  const {loading, fetchTrips,trips, getPieChartData} = appContext;
+  const {loading, fetchTrips,trips, getPieChartData, user} = appContext;
   useEffect(()=>{
     fetchTrips()
     if(trips) {
       getPieChartData(trips)
     }
-  },[])
+  },[trips])
   if(loading) return <ShowLoader/>
   return (
     <Fragment>
       <Header
         logged={logged}
-        userData={userData}
         avatarUrl={avatarUrl}
         setAvatarUrl={setAvatarUrl}
       />
       <main className="wrapper">
-        {logged && <Search userData={userData} />}
-        {!logged && <Fragment>
+        {user && <Search />}
+        {!user && <Fragment>
           <Hero />
           <Info />
           <Recent />
