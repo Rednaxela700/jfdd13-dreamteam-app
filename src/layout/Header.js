@@ -3,9 +3,7 @@ import {Link} from 'react-router-dom'
 import userIcon from '../assets/navIcon.svg'
 import Card from './Card';
 
-export default function Header(
-  {logged, userData, avatarUrl, setAvatarUrl}
-) {
+export default function Header({logged}) {
   const [userOpened, setUserOpened] = useState(false);
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
@@ -33,8 +31,11 @@ export default function Header(
               <Link to="/" className="nav__link">Create</Link>
             </li>
             <li className="nav__item">
-              {logged && <Link to="/" className="nav__link">Find</Link>}
-              {!logged && <Link to="/register" className="nav__link">Join</Link>}
+              {logged ?
+                <Link to="/" className="nav__link">Find</Link>
+                :
+                <Link to="/register" className="nav__link">Join</Link>
+              }
             </li>
             <li className="nav__item">
               <Link to="/about" className="nav__link">About</Link>
@@ -47,12 +48,7 @@ export default function Header(
                 <img className="nav__icon" src={userIcon} alt="user icon"/>
               </button>
               }
-              {userOpened && <Card
-                userData={userData}
-                avatarUrl={avatarUrl}
-                setAvatarUrl={setAvatarUrl}
-              />
-              }
+              {userOpened && <Card/>}
               {
                 !logged && <Link to="/login" className="nav__link">
                   <img className="nav__icon" src={userIcon} alt="user icon"/>
