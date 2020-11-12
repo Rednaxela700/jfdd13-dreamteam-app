@@ -18,7 +18,7 @@ const AppState = props => {
     pieChartData: null,
     barChartData: null,
     loading: false,
-    trips: null,
+    trips: [],
     errors: []
   }
   const [state, dispatch] = useReducer(PublicReducer, initialState)
@@ -89,6 +89,7 @@ const AppState = props => {
         ...trip
       }
     })
+    await getPieChartData(trips)
     dispatch({
       type: FETCH_TRIPS,
       payload: trips,
