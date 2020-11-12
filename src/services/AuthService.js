@@ -30,7 +30,7 @@ export const loginWithGoogle = () => {
       const user = result.user;
       const database = firebase.database()
 
-      database.ref('/users/' + user.id).once('value')
+      database.ref('/users/' + user.uid).once('value')
         .then((snapshot)=> {
           const response = snapshot.val() || null
           if(!!response) {
@@ -41,14 +41,14 @@ export const loginWithGoogle = () => {
               date: Date.now()
             })
           } else {
-            return user.id
+            return user.uid
           }
         })
 
     })
 };
 
-export const signout = () => {
+export const signOut = () => {
   return firebase
     .auth()
     .signOut()

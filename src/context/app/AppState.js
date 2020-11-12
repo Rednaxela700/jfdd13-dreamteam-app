@@ -1,15 +1,17 @@
 import React, {useReducer} from 'react'
 import PublicReducer from './AppReducer'
 import AppContext from './AppContext'
+import {Redirect} from 'react-router-dom'
 import {
   SET_USER_DATA,
   GET_BARCHART_DATA,
   GET_PIECHART_DATA,
   FETCH_TRIPS,
-  LOGIN_USER,
+  SET_ERROR,
+  LOGOUT_USER
 } from '../types'
 import firebase from "firebase";
-import {fetchFromFavorites} from "../../services/TripService";
+import {signOut} from "../../services/AuthService";
 
 const AppState = props => {
   const initialState = {
@@ -17,49 +19,64 @@ const AppState = props => {
     pieChartData: null,
     barChartData: null,
     loading: false,
-    trips: null
+    trips: null,
+    errors: []
   }
   const [state, dispatch] = useReducer(PublicReducer, initialState)
 
   //  Actions
-  const setUserData = async (user) => {
-    const loggedUser = await firebase.auth().onAuthStateChanged(user => user);
-    dispatch({
-      type: SET_USER_DATA,
-      payload: loggedUser
-    })
+  const setUserData = async () => {
+    try {
+      await firebase.auth().onAuthStateChanged(user => {
+        if(user){
+          const userData = {
+            name: user.displayName,
+            email: user.email,
+            avatar: user.photoURL,
+            emailVerified: user.emailVerified,
+            favourites: [],
+            id: user.uid
+          }
+          dispatch({
+            type: SET_USER_DATA,
+            payload: userData
+          })
+        }
+      });
+
+    } catch (err) {
+      setError({
+        userData: {
+          msg: "Failed to fetch user data, ",
+          code: err.code
+        }
+      })
+    }
   }
 
-  const loginUser = async (email, password) => {
-    const getUserId = () => {
-      return firebase.auth().signInWithEmailAndPassword(email, password)
-        .then((res) => {
-          return res.user.uid
-        })
-    }
-
-    let userObj
-    {
-      let user = firebase.auth().currentUser;
-
-      if (user != null) {
-        userObj = {
-          name: user.displayName,
-          email: user.email,
-          avatar: user.photoURL,
-          emailVerified: user.emailVerified,
-          favourites: [],
-          id: user.uid  // The user's ID, unique to the Firebase project. Do NOT use
-          // this value to authenticate with your backend server, if
-          // you have one. Use User.getToken() instead.}
+  const loginUser = (email, password) => {
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .catch(err => {
+        if (err.code) {
+          setError({login: {msg: `Login failed! Fix ${err.code}`}})
         }
-      }
-      fetchFromFavorites(favourites => userObj.favourites = favourites);
-    }
+      })
+      .then(()=> setUserData());
+  }
+
+  const setError = (error) => {
     dispatch({
-      type: LOGIN_USER,
-      payload: userObj
-    });
+      type: SET_ERROR,
+      payload: error
+    })
+
+  }
+
+  const clearUser = () => {
+    signOut().catch(err => setError({logout: {msg: err.code}}));
+    dispatch({
+      type: LOGOUT_USER
+    })
   }
 
   const fetchTrips = async () => {
@@ -103,10 +120,12 @@ const AppState = props => {
       barChartData: state.barChartData,
       loading: state.loading,
       trips: state.trips,
+      errors: state.errors,
       setUserData,
       loginUser,
       fetchTrips,
-      getPieChartData
+      getPieChartData,
+      clearUser
     }}
   >
     {props.children}
