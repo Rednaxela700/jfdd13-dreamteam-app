@@ -50,7 +50,7 @@ const AppState = props => {
         userObj = {
           name: user.displayName,
           email: user.email,
-          photoUrl: user.photoURL,
+          avatar: user.photoURL,
           emailVerified: user.emailVerified,
           id: user.uid  // The user's ID, unique to the Firebase project. Do NOT use
           // this value to authenticate with your backend server, if
