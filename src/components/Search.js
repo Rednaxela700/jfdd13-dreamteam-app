@@ -1,14 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { ShowLoader } from "./Loader";
-import { fetchTrips, fetchFromFavorites, stopFetching, toggleFavorite, stopFetchingFromUser } from "../services/TripService";
-import { Continents } from "./Continents";
-import { SearchInputs, FilteredQueryResult, NoQueryResult } from "./SearchItems";
+import React, {useState, useEffect} from 'react';
+import {
+  fetchTrips,
+  fetchFromFavorites,
+  stopFetching,
+  toggleFavorite,
+  stopFetchingFromUser
+} from "../services/TripService";
+import {Continents} from "./Continents";
+import {SearchInputs, FilteredQueryResult, NoQueryResult} from "./SearchItems";
 import TripModal from "./TripModal";
 
 const initialRange = 1999;
 const defaultImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTDgEOsiQyCYSqiBVVAWAxMkKz8jiz80Qu0U8MuaiGJryGMTVR&s';
 
-const Search = ({ userData }) => {
+const Search = () => {
   const [rangeValue, setRangeValue] = useState(initialRange);
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState([]);
@@ -37,10 +42,6 @@ const Search = ({ userData }) => {
     }
   }, [favouriteTrip])
 
-  if (!userData) {
-    return null;
-  }
-
   const handleFavIcon = async (tripId) => {
     await toggleFavorite(tripId)
   }
@@ -53,10 +54,10 @@ const Search = ({ userData }) => {
     const continentText = continent ? continent.label.toLowerCase() : '';
     const userQuery = searchQuery.toLowerCase()
     return results.filter(trip => (
-      trip.continent.toLowerCase().includes(continentText) &&
-      trip.title.toLowerCase().includes(userQuery) &&
-      Number(trip.price) < rangeValue
-    ) ||
+        trip.continent.toLowerCase().includes(continentText) &&
+        trip.title.toLowerCase().includes(userQuery) &&
+        Number(trip.price) < rangeValue
+      ) ||
       (
         trip.city.toLowerCase().includes(userQuery) &&
         trip.continent.toLowerCase().includes(continentText) &&
@@ -64,21 +65,19 @@ const Search = ({ userData }) => {
       ))
   }
   const queryOutput = () => {
-    if (!fetched) {
-      return ShowLoader()
-    } else if (FilteredResults().length === 0) {
+    if (FilteredResults().length === 0) {
       return (
-        <NoQueryResult />
+        <NoQueryResult/>
       )
     }
     return FilteredResults().map(trip => (<FilteredQueryResult
-      trip={trip}
-      key={trip.id}
-      setFavouriteTrip={setFavouriteTrip}
-      setSelectedTrip={setSelectedTrip}
-      favourites={favourites}
-      defaultImg={defaultImg}
-    />
+        trip={trip}
+        key={trip.id}
+        setFavouriteTrip={setFavouriteTrip}
+        setSelectedTrip={setSelectedTrip}
+        favourites={favourites}
+        defaultImg={defaultImg}
+      />
     ))
   }
 
