@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import "./App.css";
 import About from "./components/pages/About";
 import TripForm from "./components/Form/Form";
 import Favorites from "./components/Favourites";
