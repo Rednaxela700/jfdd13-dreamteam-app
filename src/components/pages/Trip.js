@@ -38,7 +38,7 @@ export default function Trip({match}) {
               <figure className="icon__container"><img src={iconCalendar} alt="" className="icon__item"/>
                 <figcaption className='icon__description'>{date}</figcaption>
               </figure>
-              <figure className="icon__container"><img src={iconCash} alt="" className="icon__item"/>
+              <figure className="icon__container"><img src={iconCompass} alt="" className="icon__item"/>
                 <figcaption className='icon__description'>From 60EUR</figcaption>
               </figure>
             </div>
