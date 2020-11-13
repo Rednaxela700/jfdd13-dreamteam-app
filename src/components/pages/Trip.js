@@ -15,8 +15,8 @@ export default function Trip({match}) {
   const {trips} = appContext;
   useEffect(() => {
     setCurrent(trips.find(el => el.id === match.params.tripid))
-    //eslint-disable-next-line
     return () => setCurrent(null)
+    //eslint-disable-next-line
   }, [])
   if (!current) return null
   const {city, price, title, description, date, tripImageUrl} = current
