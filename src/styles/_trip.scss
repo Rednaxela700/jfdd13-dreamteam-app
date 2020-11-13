@@ -37,8 +37,10 @@
         justify-content: normal;
       }
       &__item {
+        display: flex;
+        justify-content: center;
         width: 40px;
-        object-position: center;
+
       }
       &__description {
         margin: 0 0 0 2rem;

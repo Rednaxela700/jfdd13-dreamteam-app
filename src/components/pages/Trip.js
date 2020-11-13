@@ -16,7 +16,7 @@ export default function Trip({match}) {
   useEffect(() => {
     setCurrent(trips.find(el => el.id === match.params.tripid))
     //eslint-disable-next-line
-    return ()=> setCurrent(null)
+    return () => setCurrent(null)
   }, [])
   if (!current) return null
   const {city, price, title, description, date, tripImageUrl} = current
@@ -41,18 +41,27 @@ export default function Trip({match}) {
           </header>
           <div className="site-details__container">
             <div className="site-details__categories">
-              <figure className="icon__container"><img src={iconCash} alt="" className="icon__item"/>
+              <figure className="icon__container">
+                <div className="icon__item">
+                  <img src={iconCash} alt=""/>
+                </div>
                 <figcaption className='icon__description'>From {price} EUR</figcaption>
               </figure>
-              <figure className="icon__container"><img src={iconCalendar} alt="" className="icon__item"/>
+              <figure className="icon__container">
+                <div className="icon__item">
+                  <img src={iconCalendar} alt=""/>
+                </div>
                 <figcaption className='icon__description'>{monthName}</figcaption>
               </figure>
-              <figure className="icon__container"><img src={iconCompass} alt="" className="icon__item"/>
+              <figure className="icon__container">
+                <div className="icon__item">
+                  <img src={iconCompass} alt=""/>
+                </div>
                 <figcaption className='icon__description'>{city}</figcaption>
               </figure>
             </div>
             <p className="site-details__text">{description}</p>
-            
+
           </div>
         </section>
       </main>
