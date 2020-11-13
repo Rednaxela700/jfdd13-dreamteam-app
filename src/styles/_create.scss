@@ -1,0 +1,60 @@
+.create-form {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+  }
+  &__column {
+    flex-basis: calc(50% - 1rem)
+  }
+
+  .input {
+    &__container {
+      position: relative;
+      margin: 1rem 0 2rem;
+    }
+
+    &__label {
+      position: absolute;
+      top: -.5rem;
+      left: 0;
+      height: 1.5rem;
+      background: $color-white;
+      padding: 0 1rem;
+      margin: 0 1.5rem;
+      font-size: 14px;
+      line-height: 160%;
+    }
+    &__field {
+      font-family: $font;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      border-radius: .5rem;
+      background: $color-white;
+      border: 1px solid $color-black;
+      &--hidden {
+        display: none;
+      }
+    }
+    &__faked {
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      height: 10rem;
+      border: 1px solid $color-black;
+      border-radius: .5rem;
+      &__img {
+        display: block;
+        margin: 0 0 1rem;
+      }
+      &__placeholder {
+        text-align: center;
+      }
+    }
+    &--description {
+      height: 10rem;
+    }
+    &__placeholder {
+      text-align: center;
+    }
+  }
+}
