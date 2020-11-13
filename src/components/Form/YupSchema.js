@@ -2,28 +2,28 @@ import * as Yup from "yup";
 
 export const accountFormSchema = Yup.object().shape({
   title: Yup.string()
-    .max(40, 'Tytuł za długi, skróć do 40 znaków.')
-    .required("Pole wymagane.")
-    .matches(new RegExp(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s]+$/), "Używaj wyłącznie liter i spacji."),
+    .max(40, 'Title can be set up to 40 characters')
+    .required("This field is mandatory")
+    .matches(new RegExp(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s]+$/), "This field can contain only letters"),
   date: Yup.string()
-    .required("Pole wymagane."),
+    .required("This field is mandatory"),
   price: Yup.number()
-    .moreThan(20, "Minimalna cena za dobę to 20 zł.")
-    .lessThan(2001, "Maksymalna cena za dobę to 2000 zł.")
-    .positive("Cena musi być liczbą dodatnią")
-    .required("Pole wymagane."),
+    .moreThan(20, "Minimum price per night is 2000 EUR")
+    .lessThan(2001, "Maximum price per night is 2000 EUR")
+    .positive("Price must be a positive number")
+    .required("This field is mandatory"),
   city: Yup.string()
-    .matches(new RegExp(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s]+$/), "Używaj wyłącznie liter i spacji.")
-    .required("Pole wymagane."),
+    .matches(new RegExp(/^[A-Za-zżźćńółęąśŻŹĆĄŚĘŁÓŃ\s]+$/), "This field can contain only letters")
+    .required("This field is mandatory"),
   continent: Yup.string()
-    .required("Pole wymagane."),
+    .required("This field is mandatory"),
   description: Yup.string()
-    .max(400, "Opis za długi, skróć tekst do 400 znaków."),
+    .max(400, "Description can be set up to 400 characters"),
   email: Yup.string()
-    .required("Pole wymagane.")
-    .matches(new RegExp(/^\S+@\S+\.\S+$/), 'Nieprawidłowy format e-maila.'),
+    .required("This field is mandatory")
+    .matches(new RegExp(/^\S+@\S+\.\S+$/), 'Unrecognized email'),
   terms: Yup.boolean()
-    .oneOf([true], 'Zaznacz pole powyżej.'),
+    .oneOf([true], 'This field must be marked.'),
   tripImageUrl: Yup.string()
-    .required("Zdjęcie wycieczki jest wymagane")
+    .required("Photo is mandatory")
 });
