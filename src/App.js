@@ -8,7 +8,7 @@ import UserPanel from './components/UserPanel';
 import Favicon from 'react-favicon';
 import './styles/index.scss'
 import Main from './layout/Main';
-import Trip from './components/Trip';
+import Trip from './components/pages/Trip';
 import AppContext from "./context/app/AppContext";
 
 
