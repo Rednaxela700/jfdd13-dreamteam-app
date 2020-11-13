@@ -11,15 +11,18 @@ import {
 
 const windowWidth = window.screen.width;
 
+export const convertMonth = (num) => {
+  const months = ["January","February","March","April","May","June","July",
+    "August","September","October","November","December"];
+  if (typeof num === 'string') {
+    return months.indexOf(num)
+  }
+  return months[num]
+}
+
 const DataBarChart = ({data}) => {
 
-  const convertMonth = (num) => {
-    const months = ["Styczeń", "Luty", "Marzec", "Kwiecień", "Maj", "Czerwiec", "Lipiec", "Sierpień", "Wrzesień", "Październik", "Listopad", "Grudzień"];
-    if (typeof num === 'string') {
-      return months.indexOf(num)
-    }
-    return months[num]
-  }
+
 
   const setUsersDateObject = (user) => (user.reduce((acc, current) => {
     const dateFromTimestamp = new Date(current.date)
