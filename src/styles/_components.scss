@@ -33,8 +33,10 @@ body {
 }
 
 .logo {
+  display: block;
   font-size: 2.25rem;
   font-weight: 700;
+  text-decoration: none;
   &__title {
     line-height: 4rem;
   }
