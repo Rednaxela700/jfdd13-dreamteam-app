@@ -64,6 +64,26 @@ const TripForm = () => {
             setFieldValue,
             isSubmitting,
           }) => {
+
+          const handleImgUpload = (e) => {
+            const firstFile = e.target.files[0]
+            const storageRef = firebase.storage().ref('trips')
+            const fileName = 'trip-' + new Date().toISOString()
+            const fileRef = storageRef.child(fileName + '.jpg')
+            const uploadTask = fileRef.put(firstFile)
+            uploadTask.on(
+              'state_changed',
+              () => {
+              },
+              () => {
+              },
+              () => {
+                uploadTask.snapshot.ref.getDownloadURL()
+                  .then((downloadURL) => setFieldValue('tripImageUrl', downloadURL));
+              })
+          }
+
+
           return (
             <Form className='create-form' onSubmit={handleSubmit}>
               <div className="create-form__container">
@@ -200,23 +220,7 @@ const TripForm = () => {
                         type="file"
                         name="tripImageUrl"
                         accept=".jpg, .jpeg, .png"
-                        onChange={event => {
-                          const firstFile = event.target.files[0]
-                          const storageRef = firebase.storage().ref('trips')
-                          const fileName = 'trip-' + new Date().toISOString()
-                          const fileRef = storageRef.child(fileName + '.jpg')
-                          const uploadTask = fileRef.put(firstFile)
-                          uploadTask.on(
-                            'state_changed',
-                            () => {
-                            },
-                            () => {
-                            },
-                            () => {
-                              uploadTask.snapshot.ref.getDownloadURL()
-                                .then((downloadURL) => setFieldValue('tripImageUrl', downloadURL));
-                            })
-                        }}
+                        onChange={handleImgUpload}
                       />
                       <div className="input__faked">
                         <img src={iconUpload} className='input__faked__img' alt=""/>
