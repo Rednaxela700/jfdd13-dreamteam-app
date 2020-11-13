@@ -33,7 +33,7 @@ export default function Header() {
         <nav className="nav">
           <ul className="nav__container">
             <li className="nav__item">
-              <Link to="/" className="nav__link">Create</Link>
+              <Link to="/create" className="nav__link">Create</Link>
             </li>
             <li className="nav__item">
               {user ?
