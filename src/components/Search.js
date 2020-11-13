@@ -47,7 +47,7 @@ const Search = () => {
 
   const handleInputChange = (e) => setSearchQuery(e.target.value)
 
-  const FilteredResults = () => {
+  const filterResults = () => {
     const continent = Continents.find(continent => continent.value === selectedContinent)
     const continentText = continent ? continent.label.toLowerCase() : '';
     const userQuery = searchQuery.toLowerCase()
@@ -62,22 +62,7 @@ const Search = () => {
         Number(trip.price < rangeValue)
       ))
   }
-  const queryOutput = () => {
-    if (FilteredResults().length === 0) {
-      return (
-        <NoQueryResult/>
-      )
-    }
-    return FilteredResults().map(trip => (<FilteredQueryResult
-        trip={trip}
-        key={trip.id}
-        setFavouriteTrip={setFavouriteTrip}
-        setSelectedTrip={setSelectedTrip}
-        favourites={favourites}
-        defaultImg={defaultImg}
-      />
-    ))
-  }
+  const filteredResults = filterResults();
 
   return (
     <div className={'search'}>
@@ -90,7 +75,21 @@ const Search = () => {
         searchQuery={searchQuery}
       />
       <div className="search__results">
-        {queryOutput()}
+        {
+          filteredResults.length === 0 ?
+            <NoQueryResult/>
+            :
+            filteredResults.map(trip => (
+              <FilteredQueryResult
+                trip={trip}
+                key={trip.id}
+                setFavouriteTrip={setFavouriteTrip}
+                setSelectedTrip={setSelectedTrip}
+                favourites={favourites}
+                defaultImg={defaultImg}
+              />
+            ))
+        }
       </div>
       <TripModal
         selectedTrip={selectedTrip}
