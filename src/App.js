@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import About from "./components/pages/About";
-import TripForm from "./components/Form/Form";
 import Favorites from "./components/Favourites";
 import Search from "./components/Search";
 import UserPanel from './components/UserPanel';
@@ -10,6 +9,7 @@ import './styles/index.scss'
 import Main from './layout/Main';
 import Trip from './components/pages/Trip';
 import AppContext from "./context/app/AppContext";
+import Create from "./components/pages/Create";
 
 
 function App() {
@@ -30,8 +30,7 @@ function App() {
             <UserPanel {...props}  avatarUrl={'avatarUrl'} setAvatarUrl={'setAvatarUrl'} />
           )} />
           <Route exact path="/trip/:tripid" component={Trip}/>
-          {/* <Route exact strict path="/user" component={LoggedUser} /> */}
-          <Route exact strict path="/form" component={TripForm} />
+          <Route exact strict path="/create" component={Create} />
           <Route exact strict path="/favs" component={Favorites} />
           <Route component={() => <h1>404 -
                 <span role="img" aria-label="error emoji">🧐</span>
