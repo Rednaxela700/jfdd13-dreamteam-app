@@ -4,6 +4,8 @@ import Header from "../../layout/Header";
 import iconCalendar from '../../assets/iconCalendar.svg'
 import iconCash from '../../assets/iconCash.svg'
 import iconCompass from '../../assets/iconCompass.svg'
+import Footer from "../../layout/Footer";
+import {convertMonth} from "../DataChart";
 
 export default function Trip({match}) {
   const [current, setCurrent] = useState(null);
@@ -19,6 +21,7 @@ export default function Trip({match}) {
   const heroBg = {
     background: `url(${tripImageUrl}) no-repeat center`,
   }
+  const monthName = convertMonth(new Date(date).getMonth())
   return (
     <Fragment>
       <Header/>
@@ -33,13 +36,13 @@ export default function Trip({match}) {
           <div className="site-details__container">
             <div className="site-details__categories">
               <figure className="icon__container"><img src={iconCash} alt="" className="icon__item"/>
-                <figcaption className='icon__description'>From 60EUR</figcaption>
+                <figcaption className='icon__description'>From {price} EUR</figcaption>
               </figure>
               <figure className="icon__container"><img src={iconCalendar} alt="" className="icon__item"/>
-                <figcaption className='icon__description'>{date}</figcaption>
+                <figcaption className='icon__description'>{monthName}</figcaption>
               </figure>
               <figure className="icon__container"><img src={iconCompass} alt="" className="icon__item"/>
-                <figcaption className='icon__description'>From 60EUR</figcaption>
+                <figcaption className='icon__description'>{city}</figcaption>
               </figure>
             </div>
             <p className="site-details__text">{description}</p>
@@ -47,6 +50,7 @@ export default function Trip({match}) {
           </div>
         </section>
       </main>
+      <Footer/>
     </Fragment>
   )
 }
