@@ -16,6 +16,7 @@ export default (state, action) => {
       return {
         ...state,
         pieChartData: action.payload,
+        continents: action.payload.map(continent => continent.name)
 
       }
     case GET_BARCHART_DATA:
