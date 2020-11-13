@@ -7,15 +7,26 @@ export default function Trip({match}) {
   const appContext = useContext(AppContext);
   const {trips} = appContext;
   useEffect(() => {
-    setCurrent(trips.find(el => el.id = match.params))
+    setCurrent(trips.find(el => el.id = match.params.tripid))
     //eslint-disable-next-line
+    return ()=> setCurrent(null)
   }, [])
+  if (!current) return null
+  const {city, price, title, description, date, tripImageUrl} = current
+  const heroBg = {backgroundImage: `url(${tripImageUrl})`}
   return (
     <Fragment>
       <Header/>
-      <div>
+      <main className="wrapper">
+        <section className="site-trip">
+          <header
+            className="site-hero"
+            style={heroBg}
+          >
 
-      </div>
+          </header>
+        </section>
+      </main>
     </Fragment>
   )
 }
