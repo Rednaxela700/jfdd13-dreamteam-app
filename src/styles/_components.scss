@@ -107,3 +107,11 @@ body {
   min-height: 33rem;
   background-size: cover;
 }
+
+.icon {
+  &__container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
