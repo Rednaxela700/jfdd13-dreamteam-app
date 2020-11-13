@@ -10,7 +10,7 @@ export const SearchInputs = ({
   rangeValue, searchQuery, handleRangeSlider
 }) => (
     <section className="search__queries">
-      <div className="search__hero">
+      <div className="site-hero">
         <h1 className="hero__title search__title">Where to next?</h1>
         <div className="searchbar">
           <div className="icon__container">
