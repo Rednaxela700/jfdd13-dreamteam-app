@@ -1,13 +1,21 @@
-import React, { useEffect } from 'react'
+import React, {useState, useEffect, useContext, Fragment} from 'react'
+import AppContext from '../../context/app/AppContext'
+import Header from "../../layout/Header";
 
-export default function Trip({ match }) {
+export default function Trip({match}) {
+  const [current, setCurrent] = useState(null);
+  const appContext = useContext(AppContext);
+  const {trips} = appContext;
   useEffect(() => {
-    console.log(match.params)
+    setCurrent(trips.find(el => el.id = match.params))
     //eslint-disable-next-line
   }, [])
   return (
-    <div>
+    <Fragment>
+      <Header/>
+      <div>
 
-    </div>
+      </div>
+    </Fragment>
   )
 }
