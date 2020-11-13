@@ -49,7 +49,7 @@ const TripForm = () => {
 
   return (
     <Fragment>
-      <h1> Formularz dodawania wycieczki</h1>
+      <h1> Add a your trip in few single steps</h1>
       <Formik
         initialValues={formikInitialValues}
         validationSchema={accountFormSchema}
@@ -65,11 +65,12 @@ const TripForm = () => {
           isSubmitting,
         }) => {
           return (
-            <Form className={styles.formContainer} onSubmit={handleSubmit}>
-              <div className="form__item">
-                <label>Tytuł wycieczki</label>
+            <Form className='create__form' onSubmit={handleSubmit}>
+              <div className="input__container">
+                <label className='input__label'>Title of the trip</label>
                 <Field
-                  placeholder='Wpisz zaproponowany tytuł wycieczki'
+                  className='input__field'
+                  placeholder='E.g New Years Eve in Thailand'
                   type="text"
                   name="title"
                   onChange={handleChange}
@@ -82,8 +83,9 @@ const TripForm = () => {
                 </div>
               </div>
               <div className="form__item">
-                <label>Data wyjazdu</label>
+                <label className='input__label'>Data wyjazdu</label>
                 <Field
+                  className='input__field'
                   type="date"
                   name="date"
                   min="2019-12-01"
@@ -98,9 +100,10 @@ const TripForm = () => {
                 </div>
               </div>
               <div className="form__item">
-                <label>Cena w złotówkach za dobę</label>
+                <label className='input__label'>Estimated price per day</label>
                 <Field
-                  placeholder='Wpisz cenę za dobę'
+                  className='input__field'
+                  placeholder='E.g 50 EUR'
                   type="number"
                   name="price"
                   onChange={(e) => {
@@ -117,9 +120,10 @@ const TripForm = () => {
                 </div>
               </div>
               <div className="form__item">
-                <label>Lokalizacja</label>
+                <label className='input__label'>Country</label>
                 <Field
-                  placeholder='Wpisz miasto'
+                  className='input__field'
+                  placeholder='Enter country'
                   type="text"
                   name="city"
                   onChange={handleChange}
@@ -133,8 +137,9 @@ const TripForm = () => {
                 </div>
               </div>
               <div className="form__item">
-                <label>Kontynent</label>
+                <label className='input__label'>Continent</label>
                 <Field
+                  className='input__field select__field'
                   as="select"
                   name="continent"
                   onChange={handleChange}
@@ -152,8 +157,9 @@ const TripForm = () => {
                 </Field>
               </div>
               <div className="form__item">
-                <label>Opis wycieczki</label>
+                <label className='input__label'>Opis wycieczki</label>
                 <Field
+                  className='input__field'
                   as="textarea"
                   name="description"
                   placeholder='Opisz wycieczkę w kilku zdaniach, uwzględniając średni budzet oraz ciekawe miejsca, które warto odwiedzić.'
@@ -166,8 +172,9 @@ const TripForm = () => {
                 </div>
               </div>
               <div className="form__item">
-                <label>Twój e-mail</label>
+                <label className='input__label'>Twój e-mail</label>
                 <Field
+                  className='input__field'
                   placeholder='Wpisz e-mail'
                   type="email"
                   name="email"
@@ -182,8 +189,9 @@ const TripForm = () => {
               </div>
               {/* TODO: change this input to Formik field */}
               <Form.Field>
-                <label>Zdjęcie wycieczki</label>
+                <label className='input__label'>Trip's main picture</label>
                 <Input
+                  className='input__field'
                   type="file"
                   name="tripImageUrl"
                   accept=".jpg, .jpeg, .png"
