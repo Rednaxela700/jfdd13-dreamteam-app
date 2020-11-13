@@ -98,3 +98,12 @@ body {
     z-index: -1;
   }
 }
+
+.site-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: -6rem -4.5rem 2rem;
+  min-height: 33rem;
+  background-size: cover;
+}
