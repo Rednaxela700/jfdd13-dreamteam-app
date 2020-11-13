@@ -1,0 +1,31 @@
+.site-hero {
+  position: relative;
+}
+.site-details {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+
+    & .icon {
+      &__container {
+        margin: 0 0 2.5rem;
+        justify-content: normal;
+      }
+      &__item {
+        width: 40px;
+        object-position: center;
+      }
+      &__description {
+        margin: 0 0 0 2rem;
+      }
+    }
+  }
+
+  &__text {
+    font-size: 24px;
+    max-width: 50rem;
+    line-height: 159.2%;
+  }
+
+
+}
