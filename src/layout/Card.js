@@ -1,7 +1,6 @@
 import React, { useState, useRef, useContext } from 'react'
-import { signOut } from "../services/AuthService";
 import defaultAvatar from '../assets/userMock.png'
-import CardIcon from '../assets//cardIcon.svg'
+import CardIcon from '../assets/cardIcon.svg'
 import { Link } from 'react-router-dom';
 import firebase from 'firebase'
 import AppContext from "../context/app/AppContext";
@@ -9,7 +8,7 @@ import AppContext from "../context/app/AppContext";
 export default function Card() {
   const [avatarUrl, setAvatarUrl] = useState('');
   const appContext = useContext(AppContext);
-  const {user: {id, name, avatar, date}, clearUser} = appContext
+  const {user: {id, name, avatar}, clearUser} = appContext
 
   const handleAvatarChange = event => {
     const file = event.target.files[0];

@@ -1,8 +1,7 @@
-import React, {useState, useEffect, useContext} from "react";
+import React from "react";
 import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
-import {ShowLoader} from "./Loader";
 import Main from "../layout/Main";
 import About from "./pages/About"
 import AppState from "../context/app/AppState";

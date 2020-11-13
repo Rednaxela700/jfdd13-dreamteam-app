@@ -11,7 +11,7 @@ import {ShowLoader} from "../components/Loader";
 export default function Main() {
   const [fetched, setFetched] = useState(false)
   const appContext = useContext(AppContext);
-  const {loading, fetchTrips, trips, getPieChartData, user, setUserData} = appContext;
+  const {fetchTrips, user, setUserData} = appContext;
   useEffect(() => {
     let timer;
     if (!fetched) {
@@ -26,6 +26,7 @@ export default function Main() {
         clearTimeout(timer)
       }
     }
+  //  eslint-disable-next-line
   }, [])
   if (!fetched) return <ShowLoader/>
   return (

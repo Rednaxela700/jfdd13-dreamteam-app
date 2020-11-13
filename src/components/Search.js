@@ -2,9 +2,7 @@ import React, {useState, useEffect} from 'react';
 import {
   fetchTrips,
   fetchFromFavorites,
-  stopFetching,
   toggleFavorite,
-  stopFetchingFromUser
 } from "../services/TripService";
 import {Continents} from "./Continents";
 import {SearchInputs, FilteredQueryResult, NoQueryResult} from "./SearchItems";
