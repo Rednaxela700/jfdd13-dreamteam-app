@@ -151,7 +151,7 @@ const TripForm = () => {
                           key={idx}
                           value={continent}
                         >
-                          {continent.label}
+                          {continent}
                         </option>
                       ))}
                     </Field>
