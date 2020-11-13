@@ -4,6 +4,8 @@ import Header from "../../layout/Header";
 import iconCalendar from '../../assets/iconCalendar.svg'
 import iconCash from '../../assets/iconCash.svg'
 import iconCompass from '../../assets/iconCompass.svg'
+import btnAdd from '../../assets/btnAdd.svg'
+import btnHeart from '../../assets/btnHeart.svg'
 import Footer from "../../layout/Footer";
 import {convertMonth} from "../DataChart";
 
@@ -32,6 +34,10 @@ export default function Trip({match}) {
             style={heroBg}
           >
             <h1 className='site-trip__title'>{title}</h1>
+            <div className="site-trip__container">
+              <button className="site-trip__cta"><img src={btnAdd} alt=""/></button>
+              <button className="site-trip__cta"><img src={btnHeart} alt=""/></button>
+            </div>
           </header>
           <div className="site-details__container">
             <div className="site-details__categories">
