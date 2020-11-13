@@ -28,7 +28,7 @@ export default function Trip({match}) {
             className="site-hero"
             style={heroBg}
           >
-
+            <h1 className='site-trip__title'>{title}</h1>
           </header>
           <div className="site-details__container">
             <div className="site-details__categories">
