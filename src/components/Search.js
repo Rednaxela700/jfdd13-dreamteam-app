@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   fetchTrips,
   fetchFromFavorites,
   toggleFavorite,
 } from "../services/TripService";
-import {Continents} from "./Continents";
 import {SearchInputs, FilteredQueryResult, NoQueryResult} from "./SearchItems";
 import TripModal from "./TripModal";
+import AppContext from '../context/app/AppContext'
+
 
 const initialRange = 1999;
 const defaultImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTDgEOsiQyCYSqiBVVAWAxMkKz8jiz80Qu0U8MuaiGJryGMTVR&s';
@@ -40,6 +41,9 @@ const Search = () => {
     }
   }, [favouriteTrip])
 
+  const appContext = useContext(AppContext);
+  const {continents} = appContext;
+
   const handleFavIcon = async (tripId) => {
     await toggleFavorite(tripId)
   }
@@ -48,7 +52,7 @@ const Search = () => {
   const handleInputChange = (e) => setSearchQuery(e.target.value)
 
   const filterResults = () => {
-    const continent = Continents.find(continent => continent.value === selectedContinent)
+    const continent = continents.find(continent => continent.value === selectedContinent)
     const continentText = continent ? continent.label.toLowerCase() : '';
     const userQuery = searchQuery.toLowerCase()
     return results.filter(trip => (
@@ -67,6 +71,7 @@ const Search = () => {
   return (
     <div className={'search'}>
       <SearchInputs
+        continents={continents}
         handleInputChange={handleInputChange}
         setSelectedContinent={setSelectedContinent}
         handleRangeSlider={handleRangeSlider}

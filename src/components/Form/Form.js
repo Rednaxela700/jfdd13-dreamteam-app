@@ -1,10 +1,10 @@
-import React, {Fragment, useState} from 'react';
+import React, {Fragment, useState, useContext} from 'react';
 import firebase from "../../firebase";
 import {Form, Input, Button, Checkbox} from 'semantic-ui-react';
 import {Formik, Field} from "formik";
-import {Continents} from "../Continents";
 import {accountFormSchema} from "./YupSchema"
 import iconUpload from '../../assets/iconUpload.svg'
+import AppContext from '../../context/app/AppContext'
 
 const truncateDecimals = (value, digits) => {
   const number = parseFloat(value)
@@ -15,7 +15,9 @@ const truncateDecimals = (value, digits) => {
 };
 
 const TripForm = () => {
-  const [tYVisible, setTYVisible] = useState(false)
+  const [tYVisible, setTYVisible] = useState(false);
+  const appContext = useContext(AppContext);
+  const {continents} = appContext;
 
   const formikInitialValues = {
     title: "",
@@ -27,11 +29,10 @@ const TripForm = () => {
     email: "",
     terms: false,
     tripImageUrl: ""
-  }
-
+  };
   const handleThankYouVisible = () => {
     setTYVisible(!tYVisible)
-  }
+  };
 
   const handleFormSubmit = (values, actions) => {
     fetch('https://dreamteam-app.firebaseio.com/trips.json', {
@@ -145,10 +146,10 @@ const TripForm = () => {
                       onBlur={handleBlur}
                     >
                       <option defaultValue/>
-                      {Continents.map(continent => (
+                      {continents.map((continent, idx) => (
                         <option
-                          key={continent.key}
-                          value={continent.label}
+                          key={idx}
+                          value={continent}
                         >
                           {continent.label}
                         </option>
