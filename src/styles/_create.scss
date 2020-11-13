@@ -1,8 +1,16 @@
+.create__title {
+  margin: 3rem 0;
+  text-align: center;
+}
+
 .create-form {
+  margin: 0 0 12.5rem;
+
   &__container {
     display: flex;
     justify-content: space-between;
   }
+
   &__column {
     flex-basis: calc(50% - 1rem)
   }
@@ -24,6 +32,7 @@
       font-size: 14px;
       line-height: 160%;
     }
+
     &__field {
       font-family: $font;
       width: 100%;
@@ -31,10 +40,12 @@
       border-radius: .5rem;
       background: $color-white;
       border: 1px solid $color-black;
+
       &--hidden {
         display: none;
       }
     }
+
     &__faked {
       display: flex;
       justify-content: center;
@@ -42,19 +53,42 @@
       height: 10rem;
       border: 1px solid $color-black;
       border-radius: .5rem;
+
       &__img {
         display: block;
         margin: 0 0 1rem;
       }
+
       &__placeholder {
         text-align: center;
       }
     }
+
     &--description {
       height: 10rem;
     }
+
     &__placeholder {
       text-align: center;
+    }
+  }
+
+  .error__container {
+    position: absolute;
+    bottom: .1rem;
+    right: 1rem;
+    font-size: 14px;
+  }
+
+  .submit {
+    &__container {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      margin: 4.5rem 0 0;
+    }
+    &__checkbox {
+      margin: 0 1rem 0 0;
     }
   }
 }

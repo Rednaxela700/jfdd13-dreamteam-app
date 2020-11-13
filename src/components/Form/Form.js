@@ -49,7 +49,7 @@ const TripForm = () => {
 
   return (
     <Fragment>
-      <h1> Add a your trip in few single steps</h1>
+      <h1 className='create__title'> Add your trip in few single steps</h1>
       <Formik
         initialValues={formikInitialValues}
         validationSchema={accountFormSchema}
@@ -229,18 +229,20 @@ const TripForm = () => {
                   </div>
                 </div>
               </div>
-              <Form.Field>
-                <Checkbox
-                  checked={values.terms}
-                  onChange={() => setFieldValue('terms', !values.terms)}
-                  label='I agree with the terms'
-                  name="terms"
-                />
-                <div className='error__container'>
-                  {errors.terms && touched.terms && errors.terms}
-                </div>
-              </Form.Field>
-              <Button type='submit' disabled={isSubmitting}>Dodaj</Button>
+              <div className="submit__container">
+                <Form.Field className='submit__checkbox'>
+                  <Checkbox
+                    checked={values.terms}
+                    onChange={() => setFieldValue('terms', !values.terms)}
+                    label=' I agree with the terms'
+                    name="terms"
+                  />
+                  <div className='error__container'>
+                    {errors.terms && touched.terms && errors.terms}
+                  </div>
+                </Form.Field>
+                <Button type='submit' disabled={isSubmitting} className='cta'>Create</Button>
+              </div>
               <p className={tYVisible ? 'form__ty' : 'form__ty--visible'}>Dziękujemy za przesłanie wycieczki.</p>
             </Form>
           )
