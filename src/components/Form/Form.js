@@ -83,7 +83,6 @@ const TripForm = () => {
               })
           }
 
-
           return (
             <Form className='create-form' onSubmit={handleSubmit}>
               <div className="create-form__container">
@@ -214,21 +213,22 @@ const TripForm = () => {
                   {/* TODO: change this input to Formik field */}
                   <div className="input__container">
                     <Form.Field>
-                      <label className='input__label'>Trip's main picture</label>
-                      <Input
-                        className='input__field--hidden'
-                        type="file"
-                        name="tripImageUrl"
-                        accept=".jpg, .jpeg, .png"
-                        onChange={handleImgUpload}
-                      />
-                      <div className="input__faked">
-                        <img src={iconUpload} className='input__faked__img' alt=""/>
-                        <p className='input__faked__placeholder'>Choose a photo of your trip</p>
-                      </div>
-                      <div className='error__container'>
-                        {errors.tripImageUrl}
-                      </div>
+                      <label><span className='input__label'>Trip's main picture</span>
+                        <Input
+                          className='input__field--hidden'
+                          type="file"
+                          name="tripImageUrl"
+                          accept=".jpg, .jpeg, .png"
+                          onChange={handleImgUpload}
+                        />
+                        <div className="input__faked">
+                          <img src={iconUpload} className='input__faked__img' alt=""/>
+                          <p className='input__faked__placeholder'>Choose a photo of your trip</p>
+                        </div>
+                        <div className='error__container'>
+                          {errors.tripImageUrl}
+                        </div>
+                      </label>
                     </Form.Field>
                   </div>
                 </div>
