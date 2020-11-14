@@ -3,7 +3,6 @@ import PublicReducer from './AppReducer'
 import AppContext from './AppContext'
 import {
   SET_USER_DATA,
-  GET_BARCHART_DATA,
   GET_PIECHART_DATA,
   FETCH_TRIPS,
   SET_ERROR,

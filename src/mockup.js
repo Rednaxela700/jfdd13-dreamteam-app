@@ -499,18 +499,3 @@ export const pieChart = [
   { "name": "Australia i Oceania", "value": 2, "color": "#ff3c42" }
 ]
 
-const barChart = [
-  { "a": "0PrNaoo5feSDjWOjof1oFh0iKlt1", "date": 1604096528258, "email": "ohlegasd@wp.pl", "name": "Asdsdf" },
-  { "a": "4qeUoEWmtyVSJfvwf7KKj4K6qB43", "avatar": "https://firebasestorage.googleapis.com/v0/b/dreamteam-app.appspot.com/o/users%2F4qeUoEWmtyVSJfvwf7KKj4K6qB43%2Favatar-4qeUoEWmtyVSJfvwf7KKj4K6qB43.png?alt=media&token=30fe0d81-1ccd-48b9-b969-a8af894326a4", "date": 1601836038157, "email": "super@super.super", "name": "KontoZPazdziernika" },
-  { "a": "8RzG0eEoDeg2OdSy1iCh4XfHrws2", "date": 1604264071394, "email": "nowyuser@user.pl" },
-  { "a": "9T8Z3KBDEUdCAWRHYJZiouKdGch2", "date": 1604269457596, "email": "userzlistopada123@gmail.com" }, 
-  { "a": "DdZ2thNLukOGif0Y2FjK65ueFdC2", "date": 1603830352450, "email": "qwer@polska.pl", "name": "Bogdan" },
-  { "a": "N0dYoexgQENChWSUiS7HHZgkHuF3", "date": 1603958544575, "email": "malwikx@gmail.com", "name": "mmm" },
-  { "a": "RuRsCuV5uRbpHp6zX71xJ8OMcTH2", "date": 1601836038157, "email": "czas@logowania.pl", "name": "dodalem" },
-  { "a": "SdNRcjNI3vV0PihZUIH3k6cLnH93", "date": 1602434972048, "email": "lukzerom@gmail.com", "name": "Łukasz Żeromski" },
-  { "a": "eBmUYOLVqXVc5Pg09HKknCyn49e2", "date": 1604273454591, "email": "awalczuk@infoshare.pl", "name": "Aleksander Walczuk" },
-  { "a": "hhF7sZWxATZixwwKrth9XlCeDV02", "avatar": "https://firebasestorage.googleapis.com/v0/b/dreamteam-app.appspot.com/o/users%2FhhF7sZWxATZixwwKrth9XlCeDV02%2Favatar-hhF7sZWxATZixwwKrth9XlCeDV02e?alt=media&token=abc6a8ad-ac2d-49f0-88d6-8b8e17d95532", "date": 1604268257252, "email": "userzlistopada@gmail.com" },
-  { "a": "m1yFfiUmXbcWmZLdR9wvoYN7LtP2", "date": 1602319463349, "email": "a@a.aa", "name": "hpPazdziernik" },
-  { "a": "sXMqKPaCIiT2uFxLJjzMeU2L0Nm2", "date": 1599646998000, "email": "czas@logowania2.pl", "name": "QQQQQQQQQQQQ" }, { "a": "xzEaTWg7TSPU0dcQ8B2MeWTxmmB2", "date": 1604264172465, "email": "jeszczejeden@asdw.pl" }, { "a": "zH5x6p2Z5aTz8uHf1dTdYDYucxx2", "date": 1602619048515, "email": "asd@asd.as", "name": "fds" },
-  { "a": "zPGSgGpakKNNxxA29wY0NQ9ZisS2", "date": 1603796573040, "email": "aaa@aa.pl", "name": "aaa" }
-]

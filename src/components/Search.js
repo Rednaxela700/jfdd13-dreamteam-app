@@ -19,6 +19,7 @@ const Search = () => {
   const [selectedContinent, setSelectedContinent] = useState('');
   const [selectedTrip, setSelectedTrip] = useState(null);
   const [favourites, setFavourites] = useState([]);
+  // eslint-disable-next-line
   const [fetched, setFetched] = useState(false);
   const [favouriteTrip, setFavouriteTrip] = useState(false);
   useEffect(() => {
