@@ -19,7 +19,8 @@ const AppState = props => {
     barChartData: null,
     loading: false,
     trips: [],
-    errors: []
+    errors: [],
+    continents: []
   }
   const [state, dispatch] = useReducer(PublicReducer, initialState)
 
@@ -120,6 +121,7 @@ const AppState = props => {
       loading: state.loading,
       trips: state.trips,
       errors: state.errors,
+      continents: state.continents,
       setUserData,
       loginUser,
       fetchTrips,

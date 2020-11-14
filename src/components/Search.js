@@ -1,12 +1,13 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import {
   fetchTrips,
   fetchFromFavorites,
   toggleFavorite,
 } from "../services/TripService";
-import {Continents} from "./Continents";
 import {SearchInputs, FilteredQueryResult, NoQueryResult} from "./SearchItems";
 import TripModal from "./TripModal";
+import AppContext from '../context/app/AppContext'
+
 
 const initialRange = 1999;
 const defaultImg = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSTDgEOsiQyCYSqiBVVAWAxMkKz8jiz80Qu0U8MuaiGJryGMTVR&s';
@@ -40,57 +41,63 @@ const Search = () => {
     }
   }, [favouriteTrip])
 
+  const appContext = useContext(AppContext);
+  const {continents} = appContext;
+
+  const handleSelect = (e) => setSelectedContinent(e.value)
+
   const handleFavIcon = async (tripId) => {
     await toggleFavorite(tripId)
   }
   const handleRangeSlider = (e) => setRangeValue(Number(e.target.value))
 
-  const handleInputChange = (e) => setSearchQuery(e.target.value)
+  const handleInputChange = (e) => {
+    console.log(e.target)
+    setSearchQuery(e.target.value)
+  }
 
-  const FilteredResults = () => {
-    const continent = Continents.find(continent => continent.value === selectedContinent)
-    const continentText = continent ? continent.label.toLowerCase() : '';
+  const filterResults = () => {
     const userQuery = searchQuery.toLowerCase()
     return results.filter(trip => (
-        trip.continent.toLowerCase().includes(continentText) &&
+        trip.continent.toLowerCase().includes(selectedContinent.toLowerCase()) &&
         trip.title.toLowerCase().includes(userQuery) &&
         Number(trip.price) < rangeValue
       ) ||
       (
         trip.city.toLowerCase().includes(userQuery) &&
-        trip.continent.toLowerCase().includes(continentText) &&
+        trip.continent.toLowerCase().includes(selectedContinent.toLowerCase()) &&
         Number(trip.price < rangeValue)
       ))
   }
-  const queryOutput = () => {
-    if (FilteredResults().length === 0) {
-      return (
-        <NoQueryResult/>
-      )
-    }
-    return FilteredResults().map(trip => (<FilteredQueryResult
-        trip={trip}
-        key={trip.id}
-        setFavouriteTrip={setFavouriteTrip}
-        setSelectedTrip={setSelectedTrip}
-        favourites={favourites}
-        defaultImg={defaultImg}
-      />
-    ))
-  }
+  const filteredResults = filterResults();
 
   return (
     <div className={'search'}>
       <SearchInputs
+        continents={continents}
         handleInputChange={handleInputChange}
-        setSelectedContinent={setSelectedContinent}
+        setSelectedContinent={handleSelect}
         handleRangeSlider={handleRangeSlider}
         selectedContinent={selectedContinent}
         rangeValue={rangeValue}
         searchQuery={searchQuery}
       />
       <div className="search__results">
-        {queryOutput()}
+        {
+          filteredResults.length === 0 ?
+            <NoQueryResult/>
+            :
+            filteredResults.map(trip => (
+              <FilteredQueryResult
+                trip={trip}
+                key={trip.id}
+                setFavouriteTrip={setFavouriteTrip}
+                setSelectedTrip={setSelectedTrip}
+                favourites={favourites}
+                defaultImg={defaultImg}
+              />
+            ))
+        }
       </div>
       <TripModal
         selectedTrip={selectedTrip}

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Continents } from "./Continents";
 import searchbarIcon from '../assets/searchbarIcon.svg'
 import { Link } from 'react-router-dom';
 import Select from 'react-select/';
@@ -7,14 +6,21 @@ import Select from 'react-select/';
 
 export const SearchInputs = ({
   handleInputChange, setSelectedContinent,
-  rangeValue, searchQuery, handleRangeSlider
-}) => (
+  rangeValue, searchQuery, handleRangeSlider, continents
+}) => {
+  const selectOptions = continents.map(el => {
+    const obj = Object.create({});
+    obj.value = el
+    obj.label = el
+    return obj
+  })
+  return (
     <section className="search__queries">
-      <div className="search__hero">
+      <div className="site-hero">
         <h1 className="hero__title search__title">Where to next?</h1>
         <div className="searchbar">
           <div className="icon__container">
-            <img src={searchbarIcon} alt="" className="icon__item" />
+            <img src={searchbarIcon} alt="" className="icon__item"/>
           </div>
           <input
             className="searchbar__input"
@@ -28,10 +34,10 @@ export const SearchInputs = ({
       <div className="search__filters">
         <div className="search__input">
           <Select
-            options={Continents}
+            options={selectOptions}
             className='filter__select'
             styles={{
-              menu: provided => ({ ...provided, zIndex: 2, cursor: 'pointer' }),
+              menu: provided => ({...provided, zIndex: 2, cursor: 'pointer'}),
               control: (provided, state) => ({
                 ...provided,
                 outlineColor: state.isFocused ? '#FAC55C' : null || state.isHovered ? '#FAC55C' : null,
@@ -39,9 +45,7 @@ export const SearchInputs = ({
 
               }),
             }}
-            onChange={() => {
-              setSelectedContinent({})
-            }}
+            onChange={setSelectedContinent}
           />
         </div>
         <div className="filter__container">
@@ -69,6 +73,7 @@ export const SearchInputs = ({
       </div>
     </section>
   )
+}
 
 export const FilteredQueryResult = ({
   trip, setSelectedTrip, favourites,
@@ -106,14 +111,6 @@ export const FilteredQueryResult = ({
       </Link>
     </div>
   )
-
-export const ResultsGrid = ({ queryOutput }) => (
-  <div
-    className="search__results"
-  >
-    {queryOutput()}
-  </div>
-)
 
 export const NoQueryResult = ({ message }) => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>

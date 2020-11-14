@@ -71,7 +71,8 @@ const Favourites = () => {
 
   return (
     <div className="search">
-      <ResultsGrid queryOutput={queryOutput} />
+      <div className="search__results">
+      </div>
       <TripModal setSelectedTrip={setSelectedTrip} selectedTrip={selectedTrip} />
 
     </div>
