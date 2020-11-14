@@ -1,45 +1,29 @@
-import React, { useState, useEffect } from "react";
-import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import firebase from "firebase";
+import React from "react";
+import {BrowserRouter, Route, Switch, Redirect} from "react-router-dom";
 import Login from "../screens/Login";
 import Register from "../screens/Register";
-import { ShowLoader } from "./Loader";
+import Main from "../layout/Main";
+import About from "./pages/About"
+import AppState from "../context/app/AppState";
+import Gate from "./Gate";
 
-const Secure = props => {
-  const [user, setUser] = useState(null);
+const Secure = () => {
 
-  useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
-      if (user) {
-        setUser(true);
-      } else {
-        setUser(false);
-      }
-    });
-  }, []);
-
-  if (user == null) {
-    return ShowLoader()
-
-  }
-
-  if (user === false) {
-    return (
-      <div>
+  return (
+    <AppState>
+      <Gate>
         <BrowserRouter>
           <Switch>
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
-            <Redirect to="/login" />
+            <Route exact path="/" component={Main}/>
+            <Route exact path="/login" component={Login}/>
+            <Route exact path="/register" component={Register}/>
+            <Route exact path="/about" component={About}/>
+            <Redirect to="/"/>
           </Switch>
         </BrowserRouter>
-      </div>
-    );
-  }
-
-  if (user === true) {
-    return props.children;
-  }
+      </Gate>
+    </AppState>
+  );
 };
 
 export default Secure;

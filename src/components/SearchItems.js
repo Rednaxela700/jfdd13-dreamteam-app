@@ -1,59 +1,61 @@
 import React from 'react'
-import { Dropdown, Form, Grid, GridColumn, Icon, Image, Input } from "semantic-ui-react";
-import { data } from "../data";
-import { Continents } from "./Continents";
+import searchbarIcon from '../assets/searchbarIcon.svg'
+import { Link } from 'react-router-dom';
+import Select from 'react-select/';
+// import Slider, { Range } from 'rc-slider';
 
 export const SearchInputs = ({
-  handleInputChange, handleSelect, selectedContinent,
-  rangeValue, searchQuery, handleRangeSlider
-}) => (
-    <Grid padded={true}>
-      <Grid.Row columns={1} centered={true}>
-        <Grid.Column widescreen={12} largescreen={12} mobile={12}>
-          <Input
+  handleInputChange, setSelectedContinent,
+  rangeValue, searchQuery, handleRangeSlider, continents
+}) => {
+  const selectOptions = continents.map(el => {
+    const obj = Object.create({});
+    obj.value = el
+    obj.label = el
+    return obj
+  })
+  return (
+    <section className="search__queries">
+      <div className="site-hero">
+        <h1 className="hero__title search__title">Where to next?</h1>
+        <div className="searchbar">
+          <div className="icon__container">
+            <img src={searchbarIcon} alt="" className="icon__item"/>
+          </div>
+          <input
+            className="searchbar__input"
             onChange={handleInputChange}
-            placeholder={'Dokąd chcesz pojechać'}
-            fluid
+            placeholder={'Search destination'}
             value={searchQuery}
           />
-          <datalist id={'places'}>
-            {data.map(v => <option key={v.id}>{v.city}</option>)}
-          </datalist>
-        </Grid.Column>
-      </Grid.Row>
-      <Grid.Row columns={2} centered={true}>
-        <Grid.Column widescreen={6} largeScreen={6} mobile={12}>
-          <Dropdown
-            clearable
-            fluid
-            options={Continents}
-            selection
-            placeholder={'Wybierz kontynent'}
-            onChange={handleSelect}
-            value={selectedContinent}
-          />
-        </Grid.Column>
-        <GridColumn
-          as={Form}
-          widescreen={6}
-          largeScreen={6}
-          mobile={12}
-          textAlign={'right'}
-          style={{
-            display: 'inline-flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <span
-            style={{
-              display: 'inline-flex',
-              padding: '0 8px',
-              height: '100%'
+          <button type="submit" className="cta">search</button>
+        </div>
+      </div>
+      <div className="search__filters">
+        <div className="search__input">
+          <Select
+            options={selectOptions}
+            className='filter__select'
+            styles={{
+              menu: provided => ({...provided, zIndex: 2, cursor: 'pointer'}),
+              control: (provided, state) => ({
+                ...provided,
+                outlineColor: state.isFocused ? '#FAC55C' : null || state.isHovered ? '#FAC55C' : null,
+                borderColor: state.isFocused ? '#FAC55C' : null
+
+              }),
             }}
-          >
-            Maksymalna cena za dobę: {rangeValue || '0'}zł
-                        </span>
+            onChange={setSelectedContinent}
+          />
+        </div>
+        <div className="filter__container">
+          <button className="filter__btn">All</button>
+          <button className="filter__btn">Popular destinations</button>
+          <button className="filter__btn">European cities</button>
+          <button className="filter__btn">Backpacking</button>
+          <button className="filter__btn">Sightseeing</button>
+        </div>
+        <div className="search__input filter__slider">
           <input
             type={'range'}
             min={0}
@@ -62,72 +64,53 @@ export const SearchInputs = ({
             onChange={handleRangeSlider}
             name={'show'}
             value={rangeValue}
-            style={{ minHeight: '40px' }}
+            className='filter__slider__item'
           />
-        </GridColumn>
-      </Grid.Row>
-    </Grid>
+          <span className='filter__price'>
+            {rangeValue || '0'}zł
+          </span>
+        </div>
+      </div>
+    </section>
   )
+}
 
 export const FilteredQueryResult = ({
   trip, setSelectedTrip, favourites,
   setFavouriteTrip, defaultImg
 }) => (
-    <div key={trip.id} className={'tripContainer'}>
-      <GridColumn style={{ padding: '0 2rem' }}
-        onClick={() => {
-          setSelectedTrip(trip)
-        }}
-      >
-        <div style={{ position: 'relative' }}>
-          <Image
-            className={'TripImage'}
-            src={trip.tripImageUrl || defaultImg}
-            label={{
-              ribbon: true,
-              color: 'blue',
-              content: `${trip.city}`
-            }}
-            centered={true}
-            style={{ cursor: 'pointer' }}
-          />
-          <Icon
-            inverted
-            className={'iconFavourites'}
-            name={favourites[trip.id] !== undefined ? 'heart' : 'heart outline'}
-            size={'large'}
-            style={{ cursor: 'pointer' }}
-            onClick={(e) => {
-              e.stopPropagation();
-              setFavouriteTrip(trip.id)
-            }}
-          />
-        </div>
-        <p>{trip.title}</p>
-      </GridColumn>
-    </div>
-  )
-
-export const ResultsGrid = ({ queryOutput }) => (
-  <Grid container style={{
-    display: 'flex',
-    justifyContent: 'flex-start',
-    flexDirection: 'column',
-    height: '100%',
-    margin: 'auto !important'
-  }}>
-    <Grid.Row
-      columns={3}
-      mobile={1}
-      style={{
-        display: 'flex',
-        height: '100%'
+    <div
+      key={trip.id}
+      className='trip__wrapper'
+      onClick={() => {
+        setSelectedTrip(trip)
       }}
     >
-      {queryOutput()}
-    </Grid.Row>
-  </Grid>
-)
+      <img
+        className={'trip__image'}
+        src={trip.tripImageUrl || defaultImg}
+        label={{
+          ribbon: true,
+          color: 'blue',
+          content: `${trip.city}`
+        }}
+        alt=""
+      />
+      <span
+        className={'trip__icon'}
+        name={favourites[trip.id] !== undefined ? 'heart' : 'heart outline'}
+        onClick={(e) => {
+          e.stopPropagation();
+          setFavouriteTrip(trip.id)
+        }}
+      />
+      <Link to={`/trip/${trip.id}`} className='trip__overlay'>
+        <p className='trip__title'>
+          {trip.title}
+        </p>
+      </Link>
+    </div>
+  )
 
 export const NoQueryResult = ({ message }) => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>

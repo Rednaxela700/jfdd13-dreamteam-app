@@ -1,0 +1,70 @@
+.card {
+  position: absolute;
+  top: 4rem;
+  right: 0;
+  font-size: 1rem;
+  padding: 2rem 3.5rem;
+  background-color: $color-white;
+  border: 1px solid $color-black;
+  border-radius: .5rem;
+  &__avatar {
+    position: relative;
+    max-width: 6rem;
+    &__name {
+      font-size: 1.5rem;
+      margin: 1rem 0;
+      text-align: center;
+    }
+    margin: 0 auto;
+    & img {
+      width: 6rem;
+      height: 6rem;
+      border-radius: 50%;
+    }
+    &--change {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 2rem;
+      height: 2rem;
+      border-radius: 50%;
+      border: none;
+      cursor: pointer;
+      &:active, &:focus {
+        outline-color: $color-accent;
+      }
+      & img {
+        max-width: 2rem;
+        max-height: 2rem;
+      }
+    }
+  }
+  & .nav {
+    &__container {
+      display:  block;
+      padding: 0;
+    }
+    &__link {
+      font-size: 1rem;
+      margin-left: -1rem;
+    }
+    & button {
+      font-family: 'Montserrat';
+      font-size: 1rem;
+      padding-left: 1rem;
+      margin-left:  -1rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      &:hover,:focus {
+        color: $color-accent;
+        & > .nav__icon {
+          filter: invert(90%) sepia(77%) saturate(6205%) hue-rotate(313deg) brightness(102%) contrast(96%);
+        }
+      }
+    }
+  }
+}

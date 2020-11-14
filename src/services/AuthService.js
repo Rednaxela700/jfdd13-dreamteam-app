@@ -1,8 +1,11 @@
+import React from 'react'
+import { Redirect } from "react-router-dom";
 import firebase from "../firebase";
 
 export async function login(email, password) {
   try {
-    await firebase.auth().signInWithEmailAndPassword(email, password)
+    const req = await firebase.auth().signInWithEmailAndPassword(email, password);
+    return req
 
   } catch (error) {
 
@@ -16,7 +19,6 @@ export const passwordReset = email => {
 
 export const loginWithGoogle = () => {
   const provider = new firebase.auth.GoogleAuthProvider();
-  provider.addScope("https://www.googleapis.com/auth/contacts.readonly");
   firebase.auth().languageCode = "pl";
   provider.setCustomParameters({
     login_hint: "user@example.com"
@@ -28,21 +30,32 @@ export const loginWithGoogle = () => {
       const user = result.user;
       const database = firebase.database()
 
-      database.ref(`/users/${user.uid}/name`).set(user.displayName)
-      database.ref(`/users/${user.uid}/email`).set(user.email)
+      database.ref('/users/' + user.uid).once('value')
+        .then((snapshot)=> {
+          const response = snapshot.val() || null
+          if(!!response) {
+            const database = firebase.database()
+            database.ref(`/users/${user.uid}/`).set({
+              name: user.displayName,
+              email: user.email,
+              date: Date.now()
+            })
+          } else {
+            return user.uid
+          }
+        })
 
     })
 };
 
-export const signout = () => {
+export const signOut = () => {
   return firebase
     .auth()
     .signOut()
-    .then(() => {
-    });
+    .then(() => (<Redirect to="/"/>));
 };
 
-export const register = (email, password, name, date) => {
+export const register = (email, password) => {
   return firebase
     .auth()
     .createUserWithEmailAndPassword(email, password)
@@ -51,16 +64,16 @@ export const register = (email, password, name, date) => {
       const id = user.uid
       user
         .updateProfile({
-          displayName: name
+          displayName: email
         })
         .then(() => {
           firebase
             .database()
             .ref(`/users/${id}`)
             .set({
-              name,
+              name: "",
               email,
-              date
+              date: Date.now()
             })
         });
     })

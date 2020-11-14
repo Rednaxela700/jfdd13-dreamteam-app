@@ -1,0 +1,39 @@
+.footer {
+  background-color: $color-accent;
+  &__wrapper {
+    padding: 2rem 0;
+  }
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    &:first-child {
+      margin: 0 0 3rem;
+    }
+  }
+  &__logo {
+    span {
+      color: $color-white;
+    }
+  }
+  &__subtitle {
+    font-weight: bold;
+    font-size: 1rem;
+  }
+  &__nav {
+    display: flex;
+    & .nav__container {
+      flex-direction: column;
+      align-items: start;
+      font-size: 1rem;
+      margin: 0 1rem;
+    }
+  }
+  &__link {
+    display: block;
+    padding: 0;
+    margin: .5rem .5rem .5rem 0;
+    &:hover {
+      color: $color-white;
+    }
+  }
+}

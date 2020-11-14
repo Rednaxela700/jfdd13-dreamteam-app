@@ -33,6 +33,9 @@ export function stopFetching() {
   const userUid = firebase.auth().currentUser.uid
   firebase.database().ref(favRefName).child(userUid).off('value')
 }
+export function stopFetchingFromUser(user) {
+  firebase.database().ref(favRefName).child(user).off('value')
+}
 
 export async function fetchUsers() {
   const dataSnapshot = await firebase.database().ref('/users').once('value')

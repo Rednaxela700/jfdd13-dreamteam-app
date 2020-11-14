@@ -1,13 +1,17 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {
   PieChart,
   Pie,
   Cell,
   Tooltip,
 } from 'recharts';
+import AppContext from "../context/app/AppContext";
+
 
 const windowWidth = window.screen.width;
-const PieChartComponent = ({ data }) => {
+const PieChartComponent = () => {
+  const appContext = useContext(AppContext);
+  const {pieChartData: data} = appContext
 
   const RADIAN = Math.PI / 180;
 

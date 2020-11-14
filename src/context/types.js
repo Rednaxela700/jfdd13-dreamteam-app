@@ -1,0 +1,10 @@
+export const SET_USER_DATA = 'SET_USER_DATA';
+export const CREATE_USER = 'CREATE_USER';
+export const LOGOUT_USER = 'LOGOUT_USER';
+export const LOGIN_USER = 'LOGIN_USER';
+export const FETCH_TRIPS = 'FETCH_TRIPS';
+export const FETCH_FAVOURITES = 'FETCH_FAVOURITES';
+export const GET_BARCHART_DATA = 'GET_BARCHART_DATA';
+export const GET_PIECHART_DATA = 'GET_PIECHART_DATA';
+export const SET_FAVOURITE = 'SET_FAVOURITE';
+export const SET_ERROR = 'SET_ERROR';

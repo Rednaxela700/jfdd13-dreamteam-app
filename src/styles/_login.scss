@@ -1,0 +1,71 @@
+.login {
+  display: flex;
+  justify-content: space-between;
+  &__container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    &:nth-child(2){
+      margin-right: -4.5rem;
+    }
+  }
+  &__bg {
+    height: 100vh;
+    width: calc(60% + 4.5rem);
+    background: url('../assets/register.jpg') no-repeat center;
+    background-size: cover;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  &__title {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+  &__form {
+    max-width: 25rem;
+  }
+  &__input {
+    display: block;
+    width: 100%;
+    padding: 1rem 2rem;
+    margin: 1rem 0;
+    border: 1px solid $color-black;
+    border-radius: .5rem;
+    line-height: 1.5rem;
+    & [type=text], [type=password] {
+      font-family: 'Montserrat', sans-serif;
+    }
+    &:hover, &:focus{
+      outline-color: $color-accent;
+      border: 1px solid $color-accent;
+    }
+    
+  }
+  &--submit {
+    margin-top: 2rem;
+    &:first-of-type {
+      border-color: $color-accent;
+    }
+  }
+  &__google {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    line-height: 160%;
+    margin-top: 1rem;
+  }
+  & .login__input:-internal-autofill-selected {
+    background-color: #fff !important;
+  }
+  & .logo {
+    margin-top: 2rem;
+  }
+  & .terms__container {
+    margin: 2rem 0;
+  }
+}
