@@ -59,6 +59,8 @@
     line-height: 160%;
     margin-top: 1rem;
   }
+
+  //noinspection CssInvalidPseudoSelector
   & .login__input:-internal-autofill-selected {
     background-color: #fff !important;
   }
