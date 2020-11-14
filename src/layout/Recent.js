@@ -15,7 +15,7 @@ const FunctionalCarousel = () => {
         <img src={props.image}
           // style={{ maxWidth: image.width, height: image.height }}
              className="" alt=""/>
-        <div className="carousel__slide__overlay"></div>
+        <div className="carousel__slide__overlay"/>
         <div className="carousel__slide__content">
           <p>{props.title}</p>
           <h3>{props.city}</h3>
