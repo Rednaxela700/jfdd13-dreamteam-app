@@ -1,19 +1,22 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import { Carousel } from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import img1 from '../assets/Bergen.jpg'
 import img2 from '../assets/Madrid.jpg'
 import img3 from '../assets/Thailand.jpg'
+import AppContext from '../context/app/AppContext'
 
 const FunctionalCarousel = ()=> {
+  const appContext = useContext(AppContext);
+  const {trips} = appContext
   const SingleImage = (props)=> (
     <div className="carousel__slide__wrapper">
       <img src={props.image}
         // style={{ maxWidth: image.width, height: image.height }}
            className="" alt="" />
       <div className="carousel__slide__content">
-        <p>New Year's Eve in</p>
-        <h3>Thailand</h3>
+        <p>{props.title}</p>
+        <h3>{props.city}</h3>
       </div>
     </div>
   )
@@ -31,7 +34,7 @@ const FunctionalCarousel = ()=> {
       className="carousel"
       showThumbs={false}
     >
-      {mockImgs.map((image, idx) => (<SingleImage key={idx} image={image}/>))}
+      {trips.slice(0, 5).map(({city, title, tripImageUrl}, idx) => (<SingleImage key={idx} title={title} city={city} image={tripImageUrl}/>))}
     </Carousel>
   );
 }
