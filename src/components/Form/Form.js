@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useContext} from 'react';
+import React, {Fragment, useState, useEffect, useContext} from 'react';
 import firebase from "../../firebase";
 import {Form, Input, Button, Checkbox} from 'semantic-ui-react';
 import {Formik, Field} from "formik";
@@ -12,6 +12,10 @@ const truncateDecimals = (value, digits) => {
     adjustedNum = number * multiplier,
     truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'floor'](adjustedNum);
   return truncatedNum / multiplier;
+};
+const resetErrors = (setErrors, errors, ...current) => {
+  const timeout = setTimeout(() => setErrors({...errors, current: ''}), 3000);
+
 };
 
 const TripForm = () => {
@@ -64,6 +68,7 @@ const TripForm = () => {
             handleSubmit,
             setFieldValue,
             isSubmitting,
+            setErrors
           }) => {
 
           const handleImgUpload = (e) => {
@@ -100,9 +105,9 @@ const TripForm = () => {
                       value={values.title}
                       touched={touched}
                     />
-                    <div className='error__container'>
-                      {errors.title && touched.title && errors.title}
-                    </div>
+                    {errors.title && touched.title && <div className='error__container'>
+                      {errors.title}
+                    </div>}
                   </div>
                   <div className="input__container">
                     <label className='input__label'>Short description of the trip</label>
@@ -115,9 +120,10 @@ const TripForm = () => {
                       onBlur={handleBlur}
                       value={values.description}
                     />
+                    {touched.description && errors.description &&
                     <div className='error__container'>
-                      {errors.description && touched.description && errors.description}
-                    </div>
+                      {errors.description}
+                    </div>}
                   </div>
                   <div className="input__container">
                     <label className='input__label'>Country</label>
@@ -132,9 +138,9 @@ const TripForm = () => {
                       touched={touched}
                       errors={errors}
                     />
-                    <div className='error__container'>
-                      {errors.city && touched.city && errors.city}
-                    </div>
+                    {touched.city && errors.city && <div className='error__container'>
+                      {errors.city}
+                    </div>}
                   </div>
                   <div className="input__container">
                     <label className='input__label'>Continent</label>
@@ -145,7 +151,7 @@ const TripForm = () => {
                       onChange={handleChange}
                       onBlur={handleBlur}
                     >
-                      <option defaultValue/>
+                      <option label='Select continent'/>
                       {continents.map((continent, idx) => (
                         <option
                           key={idx}
@@ -191,9 +197,9 @@ const TripForm = () => {
                       value={values.date}
                       touched={touched}
                     />
-                    <div className='error__container'>
-                      {errors.date && touched.date && errors.date}
-                    </div>
+                    {errors.date && touched.date && <div className={'error__container '}>
+                      {errors.date}
+                    </div>}
                   </div>
                   <div className="input__container">
                     <label className='input__label'>Twój e-mail</label>
@@ -207,9 +213,10 @@ const TripForm = () => {
                       value={values.email}
                       touched={touched}
                     />
+                    {touched.email && errors.email &&
                     <div className='error__container'>
-                      {errors.email && touched.email && errors.email}
-                    </div>
+                      {errors.email}
+                    </div>}
                   </div>
                   {/* TODO: change this input to Formik field */}
                   <div className="input__container">
@@ -226,9 +233,9 @@ const TripForm = () => {
                           <img src={iconUpload} className='input__faked__img' alt=""/>
                           <p className='input__faked__placeholder'>Choose a photo of your trip</p>
                         </div>
-                        <div className='error__container'>
+                        {errors.tripImageUrl && <div className='error__container'>
                           {errors.tripImageUrl}
-                        </div>
+                        </div>}
                       </label>
                     </Form.Field>
                   </div>

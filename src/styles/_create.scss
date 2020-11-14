@@ -74,11 +74,13 @@
     }
   }
 
-  .error__container {
-    position: absolute;
-    bottom: .1rem;
-    right: 1rem;
-    font-size: 14px;
+  .error {
+    &__container {
+      position: absolute;
+      bottom: .1rem;
+      right: 1rem;
+      font-size: 14px;
+    }
   }
 
   .submit {
@@ -88,6 +90,7 @@
       align-items: center;
       margin: 4.5rem 0 0;
     }
+
     &__checkbox {
       margin: 0 1rem 0 0;
     }
