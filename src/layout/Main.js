@@ -7,7 +7,7 @@ import Info from './Info'
 import Recent from './Recent'
 import AppContext from '../context/app/AppContext'
 import {ShowLoader} from "../components/Loader";
-import {getUserByUID, getUserData} from "../services/AuthService";
+import {getUserData} from "../services/AuthService";
 
 export default function Main() {
   const [fetched, setFetched] = useState(false)
