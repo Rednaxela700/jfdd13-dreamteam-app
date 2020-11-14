@@ -16,13 +16,13 @@ export default (state, action) => {
         ...state,
         user: action.payload,
         logged: !!action.payload,
-        loading: false
+        // loading: false
       }
     case SET_USER_DATA:
       return {
         ...state,
         user: {...state.user, ...action.payload},
-        loading: false
+        // loading: false
       }
     case GET_PIECHART_DATA:
       return {

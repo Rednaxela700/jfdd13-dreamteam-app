@@ -3,8 +3,15 @@ import Loader from "react-loader-spinner";
 
 
 export const ShowLoader = () => {
+  const loaderStyles = {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: '100%',
+    minHeight: '100vh'
+  }
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%', height: '100%' }}>
+    <div style={loaderStyles}>
       <Loader
         type="TailSpin"
         color="#00BFFF"
