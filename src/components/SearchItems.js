@@ -45,9 +45,7 @@ export const SearchInputs = ({
 
               }),
             }}
-            onChange={() => {
-              setSelectedContinent({})
-            }}
+            onChange={setSelectedContinent}
           />
         </div>
         <div className="filter__container">
@@ -113,14 +111,6 @@ export const FilteredQueryResult = ({
       </Link>
     </div>
   )
-
-export const ResultsGrid = ({ queryOutput }) => (
-  <div
-    className="search__results"
-  >
-    {queryOutput()}
-  </div>
-)
 
 export const NoQueryResult = ({ message }) => (
   <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>

@@ -44,25 +44,28 @@ const Search = () => {
   const appContext = useContext(AppContext);
   const {continents} = appContext;
 
+  const handleSelect = (e) => setSelectedContinent(e.value)
+
   const handleFavIcon = async (tripId) => {
     await toggleFavorite(tripId)
   }
   const handleRangeSlider = (e) => setRangeValue(Number(e.target.value))
 
-  const handleInputChange = (e) => setSearchQuery(e.target.value)
+  const handleInputChange = (e) => {
+    console.log(e.target)
+    setSearchQuery(e.target.value)
+  }
 
   const filterResults = () => {
-    const continent = continents.find(continent => continent.value === selectedContinent)
-    const continentText = continent ? continent.label.toLowerCase() : '';
     const userQuery = searchQuery.toLowerCase()
     return results.filter(trip => (
-        trip.continent.toLowerCase().includes(continentText) &&
+        trip.continent.toLowerCase().includes(selectedContinent.toLowerCase()) &&
         trip.title.toLowerCase().includes(userQuery) &&
         Number(trip.price) < rangeValue
       ) ||
       (
         trip.city.toLowerCase().includes(userQuery) &&
-        trip.continent.toLowerCase().includes(continentText) &&
+        trip.continent.toLowerCase().includes(selectedContinent.toLowerCase()) &&
         Number(trip.price < rangeValue)
       ))
   }
@@ -73,7 +76,7 @@ const Search = () => {
       <SearchInputs
         continents={continents}
         handleInputChange={handleInputChange}
-        setSelectedContinent={setSelectedContinent}
+        setSelectedContinent={handleSelect}
         handleRangeSlider={handleRangeSlider}
         selectedContinent={selectedContinent}
         rangeValue={rangeValue}
