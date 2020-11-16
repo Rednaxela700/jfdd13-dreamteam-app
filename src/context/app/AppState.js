@@ -2,6 +2,7 @@ import React, {useReducer} from 'react'
 import PublicReducer from './AppReducer'
 import AppContext from './AppContext'
 import {
+  SET_USER_AUTH,
   SET_USER_DATA,
   GET_PIECHART_DATA,
   FETCH_TRIPS,
@@ -13,6 +14,7 @@ import {signOut} from "../../services/AuthService";
 
 const AppState = props => {
   const initialState = {
+    logged: false,
     user: null,
     pieChartData: null,
     barChartData: null,
@@ -24,10 +26,10 @@ const AppState = props => {
   const [state, dispatch] = useReducer(PublicReducer, initialState)
 
   //  Actions
-  const setUserData = async () => {
+  const setUserAuth = async () => {
     try {
       await firebase.auth().onAuthStateChanged(user => {
-        if(user){
+        if (user) {
           const userData = {
             name: user.displayName,
             email: user.email,
@@ -37,8 +39,8 @@ const AppState = props => {
             id: user.uid
           }
           dispatch({
-            type: SET_USER_DATA,
-            payload: userData
+            type: SET_USER_AUTH,
+            payload: userData,
           })
         }
       });
@@ -53,6 +55,14 @@ const AppState = props => {
     }
   }
 
+  const setUserData = (data) => {
+    dispatch({
+      type: SET_USER_DATA,
+      payload: data
+    })
+  }
+
+
   const loginUser = (email, password) => {
     firebase.auth().signInWithEmailAndPassword(email, password)
       .catch(err => {
@@ -60,7 +70,7 @@ const AppState = props => {
           setError({login: {msg: `Login failed! Fix ${err.code}`}})
         }
       })
-      .then(()=> setUserData());
+      .then(() => setUserAuth());
   }
 
   const setError = (error) => {
@@ -114,6 +124,7 @@ const AppState = props => {
 
   return <AppContext.Provider
     value={{
+      logged: state.logged,
       user: state.user,
       pieChartData: state.pieChartData,
       barChartData: state.barChartData,
@@ -122,6 +133,7 @@ const AppState = props => {
       errors: state.errors,
       continents: state.continents,
       setUserData,
+      setUserAuth,
       loginUser,
       fetchTrips,
       getPieChartData,

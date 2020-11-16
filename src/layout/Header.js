@@ -4,6 +4,66 @@ import userIcon from '../assets/navIcon.svg'
 import Card from './Card';
 import AppContext from '../context/app/AppContext'
 
+const AuthHeader = ({userOpened, setUserOpened}) => (
+  <header className={`header logged`}>
+    <div className="header__container">
+      <Link to='/' className="logo">
+        <p>where<span className="logo--accent">to</span></p>
+      </Link>
+      <nav className="nav">
+        <ul className="nav__container">
+          <li className="nav__item">
+            <Link to="/create" className="nav__link">Create</Link>
+          </li>
+          <li className="nav__item">
+            <Link to="/" className="nav__link">Find</Link>
+          </li>
+          <li className="nav__item">
+            <Link to="/about" className="nav__link">About</Link>
+          </li>
+          <li className="nav__item">
+            <button
+              className="nav__link"
+              onClick={() => setUserOpened(!userOpened)}
+            >
+              <img className="nav__icon" src={userIcon} alt="user icon"/>
+            </button>
+            {userOpened && <Card/>}
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+)
+const NonAuthHeader = () => (
+  <header className={`header`}>
+    <div className="header__container">
+      <Link to='/' className="logo">
+        <p>where<span className="logo--accent">to</span></p>
+      </Link>
+      <nav className="nav">
+        <ul className="nav__container">
+          <li className="nav__item">
+            <Link to="/create" className="nav__link">Create</Link>
+          </li>
+          <li className="nav__item">
+            <Link to="/register" className="nav__link">Join</Link>
+          </li>
+          <li className="nav__item">
+            <Link to="/about" className="nav__link">About</Link>
+          </li>
+          <li className="nav__item">
+            <Link to="/login" className="nav__link">
+              <img className="nav__icon" src={userIcon} alt="user icon"/>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+)
+
+
 export default function Header() {
   const appContext = useContext(AppContext);
   const [userOpened, setUserOpened] = useState(false);
@@ -12,7 +72,7 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const {user} = appContext;
+  const {logged} = appContext;
 
   const handleScroll = () => {
     const domRef = document.querySelector(".header")
@@ -24,45 +84,8 @@ export default function Header() {
       }
     }
   }
-  return (
-    <header className={`header${user ? " logged" : null}`}>
-      <div className="header__container">
-        <Link to='/' className="logo">
-          <p>where<span className="logo--accent">to</span></p>
-        </Link>
-        <nav className="nav">
-          <ul className="nav__container">
-            <li className="nav__item">
-              <Link to="/create" className="nav__link">Create</Link>
-            </li>
-            <li className="nav__item">
-              {user ?
-                <Link to="/" className="nav__link">Find</Link>
-                :
-                <Link to="/register" className="nav__link">Join</Link>
-              }
-            </li>
-            <li className="nav__item">
-              <Link to="/about" className="nav__link">About</Link>
-            </li>
-            <li className="nav__item">
-              {user && <button
-                className="nav__link"
-                onClick={() => setUserOpened(!userOpened)}
-              >
-                <img className="nav__icon" src={userIcon} alt="user icon"/>
-              </button>
-              }
-              {userOpened && <Card/>}
-              {
-                !user && <Link to="/login" className="nav__link">
-                  <img className="nav__icon" src={userIcon} alt="user icon"/>
-                </Link>
-              }
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-  )
+  return logged ?
+    <AuthHeader setUserOpened={setUserOpened} userOpened={userOpened}/>
+    :
+    <NonAuthHeader/>
 }

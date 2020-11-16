@@ -1,16 +1,28 @@
 import {
   SET_USER_DATA,
   GET_BARCHART_DATA,
-  GET_PIECHART_DATA, FETCH_TRIPS, LOGIN_USER, SET_ERROR, LOGOUT_USER,
+  GET_PIECHART_DATA,
+  FETCH_TRIPS,
+  LOGIN_USER,
+  SET_ERROR,
+  LOGOUT_USER,
+  SET_USER_AUTH
 } from '../types'
 
 export default (state, action) => {
   switch (action.type) {
-    case SET_USER_DATA:
+    case SET_USER_AUTH:
       return {
         ...state,
         user: action.payload,
-        loading: false
+        logged: !!action.payload,
+        // loading: false
+      }
+    case SET_USER_DATA:
+      return {
+        ...state,
+        user: {...state.user, ...action.payload},
+        // loading: false
       }
     case GET_PIECHART_DATA:
       return {
@@ -37,7 +49,8 @@ export default (state, action) => {
     case LOGOUT_USER:
       return {
         ...state,
-        user: null
+        user: null,
+        logged: false
       }
     case SET_ERROR:
       return {

@@ -1,5 +1,6 @@
 .hero {
   margin: 7.5rem -4.5rem 7rem 0;
+
   &__container {
     display: flex;
     flex-direction: column;
@@ -7,31 +8,64 @@
     background: url(../assets/hero.jpg) no-repeat right;
     height: 34.625rem;
   }
+
   &__title {
     font-size: 3.875rem;
   }
+
   &__subtitle {
     margin: 2rem 0 4rem;
   }
+
   &__cta {
     text-transform: capitalize;
+    text-decoration: none;
+    color: $color-black;
   }
 }
 
 .info {
   margin: 14rem 0;
   text-align: center;
+
   &__title {
     margin: 0 0 10rem;
   }
+
   &__container {
     display: flex;
     justify-content: space-between;
   }
+
   &__item {
     max-width: 23.5rem;
     line-height: 160%;
   }
+
+  &__img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 12.5rem;
+    height: 12.5rem;
+    background: rgba(250, 197, 92, 0.13);
+    margin: 0 auto;
+    border-radius: 50%;
+
+    & .icon {
+      &__share {
+        max-width: 4.5rem;
+      }
+      &__discover {
+        max-width: 5.5rem;
+      }
+    }
+  }
+
+  &__icon {
+    max-width: 80px;
+  }
+
   &__subtitle {
     font-size: 1.5rem;
     margin: 5.75rem 0 1.5rem;

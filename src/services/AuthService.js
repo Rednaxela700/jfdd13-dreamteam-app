@@ -47,6 +47,14 @@ export const loginWithGoogle = () => {
 
     })
 };
+export async function getUserByUID(uid) {
+  return await firebase.database().ref().child(`/users/${uid}`).once('value');
+}
+
+export const getUserData = async (id) => {
+  const req = await getUserByUID(id)
+  return req.val();
+}
 
 export const signOut = () => {
   return firebase

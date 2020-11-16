@@ -7,17 +7,27 @@ import Info from './Info'
 import Recent from './Recent'
 import AppContext from '../context/app/AppContext'
 import {ShowLoader} from "../components/Loader";
+import {getUserData} from "../services/AuthService";
 
 export default function Main() {
   const [fetched, setFetched] = useState(false)
   const appContext = useContext(AppContext);
-  const {fetchTrips, user, setUserData} = appContext;
+  const {fetchTrips, user, setUserAuth, setUserData} = appContext;
   useEffect(() => {
     let timer;
+    if (user) {
+      (
+        async () => {
+          const data = await getUserData(user.id);
+          setUserData(data)
+        }
+      )()
+    }
+
     if (!fetched) {
       fetchTrips()
       if (!user) {
-        setUserData();
+        setUserAuth();
       }
       timer = setTimeout(() => setFetched(true), 2000)
     }
@@ -26,7 +36,7 @@ export default function Main() {
         clearTimeout(timer)
       }
     }
-  //  eslint-disable-next-line
+    //  eslint-disable-next-line
   }, [])
   if (!fetched) return <ShowLoader/>
   return (

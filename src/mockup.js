@@ -498,4 +498,3 @@ export const pieChart = [
   { "name": "Azja", "value": 3, "color": "#FF8042" },
   { "name": "Australia i Oceania", "value": 2, "color": "#ff3c42" }
 ]
-

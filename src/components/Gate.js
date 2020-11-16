@@ -6,11 +6,11 @@ import {ShowLoader} from "./Loader";
 function Gate(props) {
 
   const appContext = useContext(AppContext);
-  const {loading, user} = appContext;
+  const {loading, logged} = appContext;
   if(loading) {
     return <ShowLoader/>
   }
-  if (user) {
+  if (logged) {
     return <App/>
   }
   return props.children
