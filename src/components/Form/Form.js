@@ -1,4 +1,4 @@
-import React, {Fragment, useState, useEffect, useContext} from 'react';
+import React, {Fragment, useState, useContext} from 'react';
 import firebase from "../../firebase";
 import {Form, Input, Button, Checkbox} from 'semantic-ui-react';
 import {Formik, Field} from "formik";
@@ -12,10 +12,6 @@ const truncateDecimals = (value, digits) => {
     adjustedNum = number * multiplier,
     truncatedNum = Math[adjustedNum < 0 ? 'ceil' : 'floor'](adjustedNum);
   return truncatedNum / multiplier;
-};
-const resetErrors = (setErrors, errors, ...current) => {
-  const timeout = setTimeout(() => setErrors({...errors, current: ''}), 3000);
-
 };
 
 const TripForm = () => {

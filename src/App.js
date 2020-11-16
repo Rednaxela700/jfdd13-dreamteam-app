@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import About from "./components/pages/About";
-import Favorites from "./components/Favourites";
 import Search from "./components/Search";
 import UserPanel from './components/UserPanel';
 import Favicon from 'react-favicon';
@@ -31,7 +30,6 @@ function App() {
           )} />
           <Route exact path="/trip/:tripid" component={Trip}/>
           <Route exact strict path="/create" component={Create} />
-          <Route exact strict path="/favs" component={Favorites} />
           <Route component={() => <h1>404 -
                 <span role="img" aria-label="error emoji">🧐</span>
           </h1>} />

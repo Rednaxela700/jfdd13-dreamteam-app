@@ -19,7 +19,6 @@ const Search = () => {
   const [selectedContinent, setSelectedContinent] = useState('');
   const [selectedTrip, setSelectedTrip] = useState(null);
   const [favourites, setFavourites] = useState([]);
-  const [fetched, setFetched] = useState(false);
   const [favouriteTrip, setFavouriteTrip] = useState(false);
   useEffect(() => {
     (async () => {
@@ -31,7 +30,6 @@ const Search = () => {
       }
       await fetchFromFavorites(favourites => {
         setFavourites(favourites)
-        setFetched(true)
         // stopFetching()
       })
     })()

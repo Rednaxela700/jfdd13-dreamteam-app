@@ -1,9 +1,6 @@
 import React, {useContext} from 'react'
 import {Carousel} from 'react-responsive-carousel'
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
-import img1 from '../assets/Bergen.jpg'
-import img2 from '../assets/Madrid.jpg'
-import img3 from '../assets/Thailand.jpg'
 import AppContext from '../context/app/AppContext'
 
 const FunctionalCarousel = () => {
@@ -23,8 +20,6 @@ const FunctionalCarousel = () => {
       </div>
     </div>
   )
-
-  const mockImgs = [img1, img2, img3];
 
   return (
     <Carousel

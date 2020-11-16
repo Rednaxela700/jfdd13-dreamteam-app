@@ -4,14 +4,13 @@ import AppContext from './AppContext'
 import {
   SET_USER_AUTH,
   SET_USER_DATA,
-  GET_BARCHART_DATA,
   GET_PIECHART_DATA,
   FETCH_TRIPS,
   SET_ERROR,
   LOGOUT_USER,
 } from '../types'
 import firebase from "firebase";
-import {getUserByUID, signOut} from "../../services/AuthService";
+import {signOut} from "../../services/AuthService";
 
 const AppState = props => {
   const initialState = {

@@ -52,7 +52,7 @@ export default function Footer() {
         </div>
         <div className="footer__container">
           <p>&copy;All rights reserved</p>
-          <p>Made with ♥ by Lis studio.</p>
+          <p>Made with ♥ </p>
         </div>
       </div>
     </footer>
